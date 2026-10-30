@@ -3,6 +3,11 @@
 ## Branches
 Todo trabalho acontece em uma branch aberta a partir da `main` atualizada, de um assunto só. Abra a branch antes de começar a alterar arquivos.
 
+## Tokens
+Cores vivem em `tokens/`: fundações com os hexadecimais e semânticos com uma versão para Light e outra para Dark. `src/styles/tokens.css` é gerado: edite os JSON e rode `pnpm tokens`.
+
+Componentes usam somente semânticos (`bg-page`, `text-default`, `border-default`). Componente novo do `shadcn add` chega com os nomes originais: troque-os pelos semânticos de mesmo valor.
+
 ## Tamanho de PR
 A recomendação é de até **300 linhas por PR**, somando adições e remoções, sem contar o `pnpm-lock.yaml`. É uma recomendação: o usuário pode passar dela quando quiser.
 

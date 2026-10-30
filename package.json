@@ -5,13 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "tokens": "node scripts/build-tokens.mjs",
+    "build": "pnpm tokens && tsc -b && vite build",
     "lint": "eslint .",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "typecheck": "tsc --noEmit",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "pnpm tokens && storybook build"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",
@@ -52,6 +53,7 @@
     "prettier": "^3.9.10",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "storybook": "10.6.5",
+    "style-dictionary": "5.7.1",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8",
     "vite": "^8"

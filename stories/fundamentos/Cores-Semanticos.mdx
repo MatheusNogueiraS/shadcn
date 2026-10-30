@@ -1,0 +1,45 @@
+import { Meta, Unstyled } from "@storybook/addon-docs/blocks"
+
+import { Semanticos } from "./amostras"
+
+<Meta title="Fundamentos/Cores/Semânticos" />
+
+# Semânticos
+
+Os semânticos dizem para que cada cor serve e apontam para uma fundação diferente em Light e em Dark. Os componentes usam **somente semânticos**.
+
+Para mudar uma cor, edite os arquivos em `tokens/` e rode `pnpm tokens`: `src/styles/tokens.css` é gerado e não deve ser editado à mão.
+
+## Fundos
+
+<Unstyled>
+  <Semanticos grupo="bg" />
+</Unstyled>
+
+## Textos
+
+<Unstyled>
+  <Semanticos grupo="text" />
+</Unstyled>
+
+## Bordas e anéis
+
+Um `stroke` vale para qualquer contorno. No código, a classe diz onde ele é aplicado: `stroke-default` é usado como `border-default`, `ring-default` ou `outline-default`.
+
+<Unstyled>
+  <Semanticos grupo="stroke" />
+</Unstyled>
+
+## Gráficos
+
+No código, as séries são usadas como `var(--data-1)`, porque a biblioteca de gráficos recebe a cor como valor CSS.
+
+<Unstyled>
+  <Semanticos grupo="data" />
+</Unstyled>
+
+## Regras de uso
+
+- **Branco sobre laranja é uma decisão da marca.** O contraste de `orange-500` com branco fica abaixo do mínimo AA de 4,5:1. O painel de acessibilidade vai apontar isso no botão principal, e é uma exceção conhecida.
+- **Feedback ainda não está nos componentes.** `success`, `warning` e `info` existem como tokens para uso futuro.
+- **Nomes do shadcn continuam funcionando.** `bg-primary` e similares são apelidos em `src/styles/legacy-aliases.css`, para que `shadcn add` não traga componentes sem cor. Ao adicionar um componente, troque pelos semânticos.

@@ -131,10 +131,10 @@ const signups = [
   { m: "Jul", free: 138, pro: 52 }, { m: "Ago", free: 190, pro: 60 },
   { m: "Set", free: 210, pro: 77 }, { m: "Out", free: 245, pro: 91 },
 ]
-const revenueCfg = { v: { label: "Receita", color: "var(--chart-1)" } } satisfies ChartConfig
+const revenueCfg = { v: { label: "Receita", color: "var(--data-1)" } } satisfies ChartConfig
 const signupCfg = {
-  free: { label: "Free", color: "var(--chart-1)" },
-  pro: { label: "Pro", color: "var(--chart-2)" },
+  free: { label: "Free", color: "var(--data-1)" },
+  pro: { label: "Pro", color: "var(--data-2)" },
 } satisfies ChartConfig
 
 type Status = "Ativo" | "Trial" | "Inadimplente" | "Cancelado"
@@ -170,7 +170,7 @@ export function OverviewView() {
           <h1 className="text-4xl font-bold tracking-tight text-balance sm:text-5xl">
             Construa o seu produto com um design system que você é dono
           </h1>
-          <p className="text-muted-foreground text-balance">
+          <p className="text-muted text-balance">
             Cards de comportamentos reais e uma tabela de SaaS, todos usando os componentes da pasta ui.
           </p>
           <div className="flex justify-center gap-2">
@@ -220,7 +220,7 @@ function MetricCards() {
             <CardTitle className="text-3xl tabular-nums">{m.v}</CardTitle>
             <CardAction><Badge variant="outline">{m.d}</Badge></CardAction>
           </CardHeader>
-          <CardFooter className="text-sm text-muted-foreground">Comparado ao mês anterior</CardFooter>
+          <CardFooter className="text-sm text-muted">Comparado ao mês anterior</CardFooter>
         </Card>
       ))}
     </>
@@ -318,7 +318,7 @@ function SettingsCard() {
           <Switch id="sw-email" defaultChecked />
         </div>
         <div className="space-y-2">
-          <div className="flex justify-between text-sm"><Label>Volume</Label><span className="text-muted-foreground tabular-nums">{String(vol)}%</span></div>
+          <div className="flex justify-between text-sm"><Label>Volume</Label><span className="text-muted tabular-nums">{String(vol)}%</span></div>
           <Slider value={vol} onValueChange={setVol} />
         </div>
         <RadioGroup defaultValue="mensal">
@@ -399,7 +399,7 @@ function ProgressCard() {
       </CardHeader>
       <CardContent className="space-y-4">
         <Progress value={v} />
-        <p className="text-sm text-muted-foreground tabular-nums">{v}% concluído</p>
+        <p className="text-sm text-muted tabular-nums">{v}% concluído</p>
       </CardContent>
       <CardFooter className="gap-2">
         <Button variant="outline" size="sm" onClick={() => setV(Math.max(0, v - 15))}>-15</Button>
@@ -424,7 +424,7 @@ function ShareCard() {
           </InputGroupAddon>
         </InputGroup>
       </CardContent>
-      <CardFooter className="gap-1 text-sm text-muted-foreground">
+      <CardFooter className="gap-1 text-sm text-muted">
         Atalho: <KbdGroup><Kbd>Ctrl</Kbd><Kbd>K</Kbd></KbdGroup>
       </CardFooter>
     </Card>
@@ -544,7 +544,7 @@ function LoadingCard() {
         ) : (
           <div className="flex items-center gap-3">
             <Avatar><AvatarFallback>AS</AvatarFallback></Avatar>
-            <div><p className="text-sm font-medium">Ana Souza</p><p className="text-sm text-muted-foreground">ana@empresa.com</p></div>
+            <div><p className="text-sm font-medium">Ana Souza</p><p className="text-sm text-muted">ana@empresa.com</p></div>
           </div>
         )}
       </CardContent>
@@ -648,7 +648,7 @@ function CustomersTable() {
             </TableHeader>
             <TableBody>
               {visible.length === 0 && (
-                <TableRow><TableCell colSpan={6} className="h-24 text-center text-muted-foreground">Nenhum cliente encontrado.</TableCell></TableRow>
+                <TableRow><TableCell colSpan={6} className="h-24 text-center text-muted">Nenhum cliente encontrado.</TableCell></TableRow>
               )}
               {visible.map((c) => (
                 <TableRow key={c.id} data-state={sel.has(c.id) ? "selected" : undefined}>
@@ -656,7 +656,7 @@ function CustomersTable() {
                   <TableCell>
                     <div className="flex items-center gap-3">
                       <Avatar size="sm"><AvatarFallback>{initials(c.name)}</AvatarFallback></Avatar>
-                      <div><p className="font-bold">{c.name}</p><p className="text-xs text-muted-foreground">{c.email}</p></div>
+                      <div><p className="font-bold">{c.name}</p><p className="text-xs text-muted">{c.email}</p></div>
                     </div>
                   </TableCell>
                   <TableCell>{c.plan}</TableCell>
@@ -686,7 +686,7 @@ function CustomersTable() {
           </Table>
         </div>
 
-        <div className="flex items-center justify-between text-sm text-muted-foreground">
+        <div className="flex items-center justify-between text-sm text-muted">
           <span>{sel.size} de {rows.length} selecionado(s)</span>
           <Pagination aria-label="Paginação" className="mx-0 w-auto justify-end">
             <PaginationContent>
