@@ -1,0 +1,40 @@
+import { Meta, Unstyled } from "@storybook/addon-docs/blocks"
+
+import { Espacos, Raios } from "./amostras-medidas"
+
+<Meta title="Fundamentos/Medidas/Semânticos" />
+
+# Semânticos
+
+Os semânticos dão nome às medidas: raio para os cantos, padding para o espaço interno e gap para a distância entre elementos. Os componentes usam **somente estes nomes**.
+
+Para mudar uma medida, edite os arquivos em `tokens/` e rode `pnpm tokens`.
+
+## Raio
+
+<Unstyled>
+  <Raios />
+</Unstyled>
+
+## Padding
+
+A classe funciona com qualquer lado: `px-(--padding-lg)`, `pt-(--padding-sm)`, `pl-(--padding-md)`.
+
+<Unstyled>
+  <Espacos grupo="padding" />
+</Unstyled>
+
+## Gap
+
+Também vale para `gap-x-*`, `gap-y-*` e `space-y-*`: `space-y-(--gap-2xl)`.
+
+<Unstyled>
+  <Espacos grupo="gap" />
+</Unstyled>
+
+## Regras de uso
+
+- **Por que não `p-sm`.** O nome seria mais curto, mas uma variável `--spacing-sm` faz `max-w-sm` passar a valer 8 px em todo o sistema.
+- **Valores fora da escala são exceções conhecidas.** Nos componentes, em padding, 1, 3, 18, 38, 48 e 72 px; em gap, 28 px; em raio, 2 px. Os de 38 px reservam lugar para ícones em menus. Eles continuam como classes do Tailwind, como `pl-9.5`.
+- **Alturas, ícones e margens ainda não têm tokens.** Continuam como classes do Tailwind, como `h-9`, `size-4` e `mt-2`.
+- **Sidebar.** Os itens da sidebar usam `rounded-3xl`, que na altura deles forma uma pílula.

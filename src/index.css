@@ -13,22 +13,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-    --font-heading: var(--font-sans);
-    --font-sans: 'Poppins', sans-serif;
-    /* Não é monoespaçada: ocupa o slot mono porque tem algarismos de largura igual, que a Poppins não tem. Não tem peso 500. */
-    --font-mono: 'Lato', sans-serif;
     --font-serif: initial;
-    --radius-sm: calc(var(--radius) * 0.6);
-    --radius-md: calc(var(--radius) * 0.8);
-    --radius-lg: var(--radius);
-    --radius-xl: calc(var(--radius) * 1.4);
-    --radius-2xl: calc(var(--radius) * 1.8);
-    --radius-3xl: calc(var(--radius) * 2.2);
-    --radius-4xl: calc(var(--radius) * 2.6);
-}
-
-:root {
-    --radius: 0.625rem;
 }
 
 @layer base {

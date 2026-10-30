@@ -1,0 +1,68 @@
+import { Meta, Unstyled } from "@storybook/addon-docs/blocks"
+
+import { AlturasDeLinha, Espacamentos, Familias, Pesos, Tamanhos } from "./amostras-tipografia"
+
+<Meta title="Fundamentos/Tipografia/Fundações" />
+
+# Fundações
+
+As fundações guardam as famílias, os pesos, os tamanhos, as alturas de linha e o espaçamento entre letras. Os componentes não usam fundações diretamente: elas são a base dos estilos.
+
+## Famílias
+
+Para trocar a fonte do sistema, aponte os papéis de **Tipografia/Estilos** para outra família e carregue os arquivos da fonte em `src/index.css`.
+
+<Unstyled>
+  <Familias />
+</Unstyled>
+
+## Pesos
+
+<Unstyled>
+  <Pesos />
+</Unstyled>
+
+## Tamanhos
+
+<Unstyled>
+  <Tamanhos />
+</Unstyled>
+
+## Alturas de linha
+
+<Unstyled>
+  <AlturasDeLinha />
+</Unstyled>
+
+## Espaçamento entre letras
+
+<Unstyled>
+  <Espacamentos />
+</Unstyled>
+
+## Por que a Lato ocupa o `--font-mono`
+
+A Poppins não tem algarismos de largura igual, e `tabular-nums` não tem efeito nela. Em uma coluna, os valores não alinham. A Lato não é monoespaçada, mas todos os seus algarismos têm a mesma largura.
+
+<Unstyled>
+  <div className="grid max-w-xl grid-cols-2 gap-(--gap-3xl) text-right text-lg">
+    <div className="font-sans">
+      <p className="mb-2 text-left text-body-sm text-muted">Poppins</p>
+      <p>R$ 1.111,11</p>
+      <p>R$ 8.000,00</p>
+      <p>R$ 2.105,70</p>
+    </div>
+    <div className="font-mono">
+      <p className="mb-2 text-left font-sans text-body-sm text-muted">Lato</p>
+      <p>R$ 1.111,11</p>
+      <p>R$ 8.000,00</p>
+      <p>R$ 2.105,70</p>
+    </div>
+  </div>
+</Unstyled>
+
+## Regras de uso
+
+- **Dentro de uma tabela, destaque com `font-bold`.** A Lato não tem peso 500, então `font-medium` aparece como texto normal. É por isso que os badges ficam mais finos em uma tabela.
+- **Bloco de código precisa de fonte própria.** `font-mono` aqui significa Lato, e os elementos `<code>`, `<pre>` e `<kbd>` sem classe própria também a usam.
+- **Não há fonte serifada.** `--font-serif` foi removido do tema.

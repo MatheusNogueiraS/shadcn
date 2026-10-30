@@ -35,7 +35,7 @@ function ReceiptToasts() {
     <Toast key={item.id} toast={item}>
       <ToastContent>
         <ReceiptIcon className="size-4 shrink-0 text-brand" aria-hidden="true" />
-        <div className="flex min-w-0 flex-1 flex-col gap-1">
+        <div className="flex min-w-0 flex-1 flex-col gap-(--gap-2xs)">
           <ToastTitle />
           <ToastDescription />
         </div>
@@ -49,7 +49,7 @@ function ReceiptToasts() {
 export function StatusView() {
   return (
     <ToastProvider toastManager={receipts}>
-      <div className="grid items-start gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid items-start gap-(--gap-2xl) md:grid-cols-2 lg:grid-cols-3">
         <ToastsCard />
         <UploadCard />
         <AlertsCard />
@@ -84,7 +84,7 @@ function ToastsCard() {
         <CardTitle>Toasts</CardTitle>
         <CardDescription>Tipos, ação e toast personalizado</CardDescription>
       </CardHeader>
-      <CardContent className="flex flex-wrap gap-2">
+      <CardContent className="flex flex-wrap gap-(--gap-sm)">
         {types.map((t) => (
           <Button key={t.type} variant="outline" size="sm" onClick={() => disparar(t)}>{t.label}</Button>
         ))}
@@ -110,7 +110,7 @@ function UploadCard() {
         <CardTitle>Envio de arquivo</CardTitle>
         <CardDescription>Progress com rótulo e valor</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-(--gap-2xl)">
         <Progress value={value}>
           <ProgressLabel>{done ? "Concluído" : "extrato.pdf"}</ProgressLabel>
           <ProgressValue />
@@ -135,7 +135,7 @@ function AlertsCard() {
         <CardTitle>Alertas</CardTitle>
         <CardDescription>Com ação</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-3">
+      <CardContent className="space-y-(--gap-lg)">
         <Alert>
           <WifiOffIcon />
           <AlertTitle>Sem conexão</AlertTitle>
@@ -160,7 +160,7 @@ function SpinnersCard() {
         <CardTitle>Spinners</CardTitle>
         <CardDescription>Sozinho, em botão e em badge</CardDescription>
       </CardHeader>
-      <CardContent className="flex flex-wrap items-center gap-3">
+      <CardContent className="flex flex-wrap items-center gap-(--gap-lg)">
         <Spinner />
         <Spinner className="size-6 text-brand" />
         <Button disabled><Spinner /> Salvando</Button>
@@ -177,11 +177,11 @@ function SkeletonCard() {
         <CardTitle>Skeleton</CardTitle>
         <CardDescription>Lista carregando</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-3">
+      <CardContent className="space-y-(--gap-lg)">
         {[0, 1, 2].map((i) => (
-          <div key={i} className="flex items-center gap-3">
+          <div key={i} className="flex items-center gap-(--gap-lg)">
             <Skeleton className="size-9 rounded-full" />
-            <div className="flex-1 space-y-2">
+            <div className="flex-1 space-y-(--gap-sm)">
               <Skeleton className="h-3 w-2/3" />
               <Skeleton className="h-3 w-1/3" />
             </div>
@@ -204,7 +204,7 @@ function PresenceCard() {
         <CardTitle>Quem está online</CardTitle>
         <CardDescription>Avatar com imagem, reserva e selo</CardDescription>
       </CardHeader>
-      <CardContent className="flex items-center gap-4">
+      <CardContent className="flex items-center gap-(--gap-2xl)">
         <AvatarGroup>
           {team.map((t) => (
             <Avatar key={t.i}>
@@ -233,7 +233,7 @@ function EmptyState() {
         <EmptyDescription>Agende contas para não perder o vencimento. <a href="#pagamentos">Saiba mais</a></EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
-        <div className="flex gap-2">
+        <div className="flex gap-(--gap-sm)">
           <Button render={<a href="#pagamentos" />} nativeButton={false}><PlusIcon /> Agendar</Button>
           <Button variant="outline" onClick={() => toast.add({ title: "Lista atualizada" })}>Atualizar</Button>
         </div>

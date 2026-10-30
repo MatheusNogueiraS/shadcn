@@ -93,7 +93,7 @@ export function InboxView() {
   // No celular as colunas ficariam espremidas, então os painéis empilham.
   const orientation = useIsMobile() ? "vertical" : "horizontal"
   return (
-    <Card className="h-[calc(100svh-7rem)] min-h-[1100px] overflow-hidden p-0 md:min-h-[640px]">
+    <Card className="h-[calc(100svh-7rem)] min-h-[1100px] overflow-hidden p-(--padding-none) md:min-h-[640px]">
       <ResizablePanelGroup key={orientation} orientation={orientation}>
         <ResizablePanel defaultSize="32%" minSize="240px">
           <ConversationList selected={selected} onSelect={setSelected} />
@@ -114,12 +114,12 @@ export function InboxView() {
 function ConversationList({ selected, onSelect }: { selected: number; onSelect: (i: number) => void }) {
   return (
     <div className="flex h-full flex-col">
-      <div className="flex items-center justify-between p-4">
+      <div className="flex items-center justify-between p-(--padding-2xl)">
         <h2 className="font-medium">Conversas</h2>
         <Badge variant="secondary">4 novas</Badge>
       </div>
       <ScrollArea className="min-h-0 flex-1">
-        <ItemGroup className="gap-1 p-2">
+        <ItemGroup className="gap-(--gap-2xs) p-(--padding-sm)">
           {conversations.map((c, i) => (
             <React.Fragment key={c.id}>
               <RowMenu conversation={c}>
@@ -134,7 +134,7 @@ function ConversationList({ selected, onSelect }: { selected: number; onSelect: 
                     <ItemDescription className="line-clamp-1">{c.subject}</ItemDescription>
                   </ItemContent>
                   <ItemActions>
-                    <span className="text-xs text-muted tabular-nums">{c.time}</span>
+                    <span className="text-body-xs text-muted tabular-nums">{c.time}</span>
                     {c.unread && <span className="size-2 rounded-full bg-brand" aria-label="Não lida" />}
                   </ItemActions>
                 </Item>
@@ -144,7 +144,7 @@ function ConversationList({ selected, onSelect }: { selected: number; onSelect: 
           ))}
         </ItemGroup>
       </ScrollArea>
-      <div className="border-t p-3 text-xs text-muted">Clique com o botão direito em uma conversa</div>
+      <div className="border-t p-(--padding-lg) text-body-xs text-muted">Clique com o botão direito em uma conversa</div>
     </div>
   )
 }
@@ -161,7 +161,7 @@ function RowMenu({ conversation, children }: { conversation: Conversation; child
           <ContextMenuItem onClick={() => toast.add({ title: "Respondendo", description: conversation.subject })}><MailIcon /> Responder <ContextMenuShortcut>R</ContextMenuShortcut></ContextMenuItem>
           <ContextMenuItem onClick={() => void copiar(`2026${1000 + conversation.id}`, "Protocolo copiado")}><CopyIcon /> Copiar protocolo <ContextMenuShortcut>Ctrl+C</ContextMenuShortcut></ContextMenuItem>
           <ContextMenuSub>
-            <ContextMenuSubTrigger className="gap-2.5"><TagIcon /> Mover para</ContextMenuSubTrigger>
+            <ContextMenuSubTrigger className="gap-(--gap-md)"><TagIcon /> Mover para</ContextMenuSubTrigger>
             <ContextMenuSubContent>
               {tags.map((t) => <ContextMenuItem key={t}>{t}</ContextMenuItem>)}
             </ContextMenuSubContent>
@@ -190,15 +190,15 @@ function CustomerHoverCard({ conversation }: { conversation: Conversation }) {
     <HoverCard>
       <HoverCardTrigger render={<a href="#atendimento" className="font-medium underline-offset-4 hover:underline" />}>{conversation.name}</HoverCardTrigger>
       <HoverCardContent align="start" className="w-72">
-        <div className="flex gap-3">
+        <div className="flex gap-(--gap-lg)">
           <Avatar size="lg">
             <AvatarImage src={portrait(conversation.color, initials(conversation.name))} alt={conversation.name} />
             <AvatarFallback>{initials(conversation.name)}</AvatarFallback>
             <AvatarBadge />
           </Avatar>
-          <div className="space-y-1">
-            <p className="text-sm font-medium">{conversation.name}</p>
-            <p className="text-sm text-muted">Cliente desde 2019 · Conta corrente</p>
+          <div className="space-y-(--gap-2xs)">
+            <p className="text-label-sm">{conversation.name}</p>
+            <p className="text-body-sm text-muted">Cliente desde 2019 · Conta corrente</p>
             <Badge variant="outline">{conversation.tag}</Badge>
           </div>
         </div>
@@ -210,11 +210,11 @@ function CustomerHoverCard({ conversation }: { conversation: Conversation }) {
 function Thread({ conversation }: { conversation: Conversation }) {
   return (
     <div className="flex h-full flex-col">
-      <div className="border-b p-4">
-        <Item className="p-0">
+      <div className="border-b p-(--padding-2xl)">
+        <Item className="p-(--padding-none)">
           <ItemHeader>
-            <ItemTitle className="text-base">{conversation.subject}</ItemTitle>
-            <div className="flex gap-1">
+            <ItemTitle className="text-heading-sm">{conversation.subject}</ItemTitle>
+            <div className="flex gap-(--gap-2xs)">
               <Tooltip>
                 <TooltipTrigger render={<Button variant="ghost" size="icon-sm" aria-label="Arquivar" onClick={() => toast.add({ title: "Conversa arquivada" })} />}><ArchiveIcon /></TooltipTrigger>
                 <TooltipContent>Arquivar</TooltipContent>
@@ -228,10 +228,10 @@ function Thread({ conversation }: { conversation: Conversation }) {
         </Item>
       </div>
       <ScrollArea className="min-h-0 flex-1">
-        <div className="space-y-4 p-4 text-sm">
-          <div className="flex gap-3">
+        <div className="space-y-(--gap-2xl) p-(--padding-2xl) text-body-sm">
+          <div className="flex gap-(--gap-lg)">
             <Avatar size="sm"><AvatarFallback>{initials(conversation.name)}</AvatarFallback></Avatar>
-            <div className="max-w-md space-y-3 rounded-2xl bg-muted p-3">
+            <div className="max-w-md space-y-(--gap-lg) rounded-3xl bg-muted p-(--padding-lg)">
               <p>{conversation.preview}</p>
               <AttachmentGroup className="items-start">
                 <Attachment orientation="vertical">
@@ -256,11 +256,11 @@ function Thread({ conversation }: { conversation: Conversation }) {
               </AttachmentGroup>
             </div>
           </div>
-          <div className="flex flex-row-reverse gap-3">
+          <div className="flex flex-row-reverse gap-(--gap-lg)">
             <Avatar size="sm"><AvatarFallback>EU</AvatarFallback></Avatar>
-            <p className="max-w-md rounded-2xl bg-brand-secondary p-3 text-on-brand">Claro! Já estou analisando e retorno em instantes.</p>
+            <p className="max-w-md rounded-3xl bg-brand-secondary p-(--padding-lg) text-on-brand">Claro! Já estou analisando e retorno em instantes.</p>
           </div>
-          <div className="flex items-center gap-2 text-muted"><Spinner /> {conversation.name.split(" ")[0]} está digitando…</div>
+          <div className="flex items-center gap-(--gap-sm) text-muted"><Spinner /> {conversation.name.split(" ")[0]} está digitando…</div>
         </div>
         <ScrollBar orientation="horizontal" />
       </ScrollArea>
@@ -276,7 +276,7 @@ function Composer() {
     setText("")
   }
   return (
-    <div className="flex h-full flex-col gap-3 overflow-auto p-4">
+    <div className="flex h-full flex-col gap-(--gap-lg) overflow-auto p-(--padding-2xl)">
       <AttachmentGroup>
         <Attachment state="uploading" size="sm">
           <AttachmentMedia><Spinner /></AttachmentMedia>
@@ -306,7 +306,7 @@ function Composer() {
         <InputGroupTextarea value={text} onChange={(e) => setText(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send() } }} placeholder="Escreva uma resposta…" aria-label="Resposta" />
         <InputGroupAddon align="block-end">
           <InputGroupButton size="icon-xs" aria-label="Anexar arquivo"><PaperclipIcon /></InputGroupButton>
-          <span className="hidden text-xs font-normal sm:inline">Enviar com <Kbd>Enter</Kbd></span>
+          <span className="hidden text-body-xs sm:inline">Enviar com <Kbd>Enter</Kbd></span>
           <InputGroupButton variant="default" size="xs" className="ml-auto" onClick={send}><SendIcon /> Enviar</InputGroupButton>
         </InputGroupAddon>
       </InputGroup>

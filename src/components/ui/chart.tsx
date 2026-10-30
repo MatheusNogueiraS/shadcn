@@ -1,5 +1,5 @@
 import * as React from "react"
-import { cn } from "cn"
+import { cn } from "@/lib/utils"
 import * as RechartsPrimitive from "recharts"
 import type { TooltipValueType } from "recharts"
 
@@ -62,7 +62,7 @@ function ChartContainer({
         data-slot="chart"
         data-chart={chartId}
         className={cn(
-          "flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-(--text-muted) [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-(--stroke-default)/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-(--stroke-default) [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-hidden [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-(--stroke-default) [&_.recharts-radial-bar-background-sector]:fill-(--bg-muted) [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-(--bg-muted) [&_.recharts-reference-line_[stroke='#ccc']]:stroke-(--stroke-default) [&_.recharts-sector]:outline-hidden [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-surface]:outline-hidden",
+          "flex aspect-video justify-center text-body-xs [&_.recharts-cartesian-axis-tick_text]:fill-(--text-muted) [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-(--stroke-default)/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-(--stroke-default) [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-hidden [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-(--stroke-default) [&_.recharts-radial-bar-background-sector]:fill-(--bg-muted) [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-(--bg-muted) [&_.recharts-reference-line_[stroke='#ccc']]:stroke-(--stroke-default) [&_.recharts-sector]:outline-hidden [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-surface]:outline-hidden",
           className
         )}
         {...props}
@@ -188,12 +188,12 @@ function ChartTooltipContent({
   return (
     <div
       className={cn(
-        "grid min-w-32 items-start gap-1.5 rounded-xl bg-surface px-2.5 py-1.5 text-xs text-default shadow-lg ring-1 ring-subtle",
+        "grid min-w-32 items-start gap-(--gap-xs) rounded-2xl bg-surface px-(--padding-md) py-(--padding-xs) text-body-xs text-default shadow-lg ring-1 ring-subtle",
         className
       )}
     >
       {!nestLabel ? tooltipLabel : null}
-      <div className="grid gap-1.5">
+      <div className="grid gap-(--gap-xs)">
         {payload
           .filter((item) => item.type !== "none")
           .map((item, index) => {
@@ -205,7 +205,7 @@ function ChartTooltipContent({
               <div
                 key={index}
                 className={cn(
-                  "flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5 [&>svg]:text-muted",
+                  "flex w-full flex-wrap items-stretch gap-(--gap-sm) [&>svg]:h-2.5 [&>svg]:w-2.5 [&>svg]:text-muted",
                   indicator === "dot" && "items-center"
                 )}
               >
@@ -243,7 +243,7 @@ function ChartTooltipContent({
                         nestLabel ? "items-end" : "items-center"
                       )}
                     >
-                      <div className="grid gap-1.5">
+                      <div className="grid gap-(--gap-xs)">
                         {nestLabel ? tooltipLabel : null}
                         <span className="text-muted">
                           {itemConfig?.label ?? item.name}
@@ -288,8 +288,8 @@ function ChartLegendContent({
   return (
     <div
       className={cn(
-        "flex items-center justify-center gap-4",
-        verticalAlign === "top" ? "pb-3" : "pt-3",
+        "flex items-center justify-center gap-(--gap-2xl)",
+        verticalAlign === "top" ? "pb-(--padding-lg)" : "pt-(--padding-lg)",
         className
       )}
     >
@@ -303,7 +303,7 @@ function ChartLegendContent({
             <div
               key={index}
               className={cn(
-                "flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-muted"
+                "flex items-center gap-(--gap-xs) [&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-muted"
               )}
             >
               {itemConfig?.icon && !hideIcon ? (

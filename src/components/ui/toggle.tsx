@@ -1,9 +1,9 @@
 import { Toggle as TogglePrimitive } from "@base-ui/react/toggle"
 import { cva, type VariantProps } from "class-variance-authority"
-import { cn } from "cn"
+import { cn } from "@/lib/utils"
 
 const toggleVariants = cva(
-  "group/toggle inline-flex items-center justify-center gap-1 rounded-3xl text-sm font-medium whitespace-nowrap transition-colors outline-none hover:bg-muted hover:text-default focus-visible:border-focus focus-visible:ring-[3px] focus-visible:ring-focus-subtle disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-danger aria-invalid:ring-danger-subtle aria-pressed:bg-muted [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "group/toggle inline-flex items-center justify-center gap-(--gap-2xs) rounded-4xl text-label-sm whitespace-nowrap transition-colors outline-none hover:bg-muted hover:text-default focus-visible:border-focus focus-visible:ring-[3px] focus-visible:ring-focus-subtle disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-danger aria-invalid:ring-danger-subtle aria-pressed:bg-muted [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
@@ -12,9 +12,9 @@ const toggleVariants = cva(
       },
       size: {
         default:
-          "h-9 min-w-9 px-3 has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5",
-        sm: "h-8 min-w-8 px-3 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
-        lg: "h-10 min-w-10 px-4 has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3",
+          "h-9 min-w-9 px-(--padding-lg) has-data-[icon=inline-end]:pr-(--padding-md) has-data-[icon=inline-start]:pl-(--padding-md)",
+        sm: "h-8 min-w-8 px-(--padding-lg) has-data-[icon=inline-end]:pr-(--padding-sm) has-data-[icon=inline-start]:pl-(--padding-sm)",
+        lg: "h-10 min-w-10 px-(--padding-2xl) has-data-[icon=inline-end]:pr-(--padding-lg) has-data-[icon=inline-start]:pl-(--padding-lg)",
       },
     },
     defaultVariants: {

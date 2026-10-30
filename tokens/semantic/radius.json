@@ -1,0 +1,45 @@
+{
+  "radius": {
+    "$type": "dimension",
+    "none": {
+      "$value": "{unit.0}",
+      "$description": "Sem arredondamento"
+    },
+    "sm": {
+      "$value": "{unit.6}",
+      "$description": "Checkbox e indicador do menu de navegação"
+    },
+    "md": {
+      "$value": "{unit.8}",
+      "$description": "Disponível para novos componentes"
+    },
+    "lg": {
+      "$value": "{unit.10}",
+      "$description": "Kbd e alças de redimensionar"
+    },
+    "xl": {
+      "$value": "{unit.12}",
+      "$description": "Disponível para novos componentes"
+    },
+    "2xl": {
+      "$value": "{unit.16}",
+      "$description": "Tooltip, ícones de item e de empty, botões pequenos de campo"
+    },
+    "3xl": {
+      "$value": "{unit.18}",
+      "$description": "Alert, accordion, toast, itens de menu e sidebar"
+    },
+    "4xl": {
+      "$value": "{unit.20}",
+      "$description": "Campos e painéis flutuantes"
+    },
+    "5xl": {
+      "$value": "{unit.24}",
+      "$description": "Botão, card e dialog"
+    },
+    "full": {
+      "$value": "{unit.999}",
+      "$description": "Forma circular ou de pílula"
+    }
+  }
+}

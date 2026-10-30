@@ -1,0 +1,74 @@
+{
+  "padding": {
+    "$type": "dimension",
+    "none": {
+      "$value": "{unit.0}"
+    },
+    "3xs": {
+      "$value": "{unit.2}"
+    },
+    "2xs": {
+      "$value": "{unit.4}"
+    },
+    "xs": {
+      "$value": "{unit.6}"
+    },
+    "sm": {
+      "$value": "{unit.8}"
+    },
+    "md": {
+      "$value": "{unit.10}"
+    },
+    "lg": {
+      "$value": "{unit.12}"
+    },
+    "xl": {
+      "$value": "{unit.14}"
+    },
+    "2xl": {
+      "$value": "{unit.16}"
+    },
+    "3xl": {
+      "$value": "{unit.24}"
+    },
+    "4xl": {
+      "$value": "{unit.32}"
+    }
+  },
+  "gap": {
+    "$type": "dimension",
+    "none": {
+      "$value": "{unit.0}"
+    },
+    "3xs": {
+      "$value": "{unit.2}"
+    },
+    "2xs": {
+      "$value": "{unit.4}"
+    },
+    "xs": {
+      "$value": "{unit.6}"
+    },
+    "sm": {
+      "$value": "{unit.8}"
+    },
+    "md": {
+      "$value": "{unit.10}"
+    },
+    "lg": {
+      "$value": "{unit.12}"
+    },
+    "xl": {
+      "$value": "{unit.14}"
+    },
+    "2xl": {
+      "$value": "{unit.16}"
+    },
+    "3xl": {
+      "$value": "{unit.24}"
+    },
+    "4xl": {
+      "$value": "{unit.32}"
+    }
+  }
+}

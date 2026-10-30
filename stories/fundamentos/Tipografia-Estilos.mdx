@@ -1,0 +1,49 @@
+import { Meta, Unstyled } from "@storybook/addon-docs/blocks"
+
+import { Estilos, Papeis } from "./amostras-tipografia"
+
+<Meta title="Fundamentos/Tipografia/Estilos" />
+
+# Estilos
+
+Cada estilo reúne tamanho, altura de linha, peso e, quando existe, espaçamento entre letras em uma única classe. Os componentes usam **somente estes nomes**: `text-body-sm`, e não `text-sm`.
+
+Para mudar um estilo, edite os arquivos em `tokens/` e rode `pnpm tokens`.
+
+## Papéis das famílias
+
+<Unstyled>
+  <Papeis />
+</Unstyled>
+
+## Display
+
+<Unstyled>
+  <Estilos grupo="display" />
+</Unstyled>
+
+## Heading
+
+<Unstyled>
+  <Estilos grupo="heading" />
+</Unstyled>
+
+## Body
+
+<Unstyled>
+  <Estilos grupo="body" />
+</Unstyled>
+
+## Label
+
+<Unstyled>
+  <Estilos grupo="label" />
+</Unstyled>
+
+## Regras de uso
+
+- **`body` e `label` têm o mesmo tamanho e pesos diferentes.** `body` é texto corrido, com peso 400. `label` nomeia ações e campos, com peso 500. Para destacar um trecho de texto, use a versão em negrito: `text-body-sm-bold`.
+- **Títulos usam também `font-heading`.** O Tailwind não aceita família dentro do estilo: `text-heading-sm font-heading`. Hoje as duas famílias são a Poppins, mas isso permite separá-las depois.
+- **Importe `cn` de `@/lib/utils`.** Só ele conhece estes nomes. O `cn` original confunde `text-body-sm` com uma cor e apaga uma das duas classes.
+- **Ajustes pontuais continuam valendo.** `leading-none`, `tracking-widest` e `font-bold` podem acompanhar um estilo e têm prioridade sobre ele.
+- **Exceção conhecida.** O calendário usa `text-[0.8rem]`, fora da escala.

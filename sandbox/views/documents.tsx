@@ -1,5 +1,5 @@
 import * as React from "react"
-import { cn } from "cn"
+import { cn } from "@/lib/utils"
 import {
   AlignCenterIcon,
   AlignLeftIcon,
@@ -120,11 +120,11 @@ const tree = [
 
 export function DocumentsView() {
   return (
-    <div className="space-y-4">
+    <div className="space-y-(--gap-2xl)">
       <EditorMenu />
       <PathBar />
       <Toolbar />
-      <div className="grid items-start gap-4 lg:grid-cols-3">
+      <div className="grid items-start gap-(--gap-2xl) lg:grid-cols-3">
         <FileTree />
         <Preview />
       </div>
@@ -205,8 +205,8 @@ function PathBar() {
 
 function Toolbar() {
   return (
-    <div className="flex flex-wrap items-center gap-3">
-      <div className="flex gap-1" role="group" aria-label="Estilo do texto">
+    <div className="flex flex-wrap items-center gap-(--gap-lg)">
+      <div className="flex gap-(--gap-2xs)" role="group" aria-label="Estilo do texto">
         <Toggle aria-label="Negrito" defaultPressed><BoldIcon /></Toggle>
         <Toggle aria-label="Itálico"><ItalicIcon /></Toggle>
         <Toggle aria-label="Sublinhado" variant="outline"><UnderlineIcon /></Toggle>
@@ -241,7 +241,7 @@ function Toolbar() {
         <a href="#documentos" data-slot="button" className={cn(toggleVariants({ variant: "outline", size: "sm" }))}>Anterior</a>
       </nav>
 
-      <div className="ml-auto flex gap-2">
+      <div className="ml-auto flex gap-(--gap-sm)">
         <DetailsSheet />
         <ShareDrawer />
       </div>
@@ -297,10 +297,10 @@ function DetailsSheet() {
           <SheetTitle>outubro.pdf</SheetTitle>
           <SheetDescription>Extrato da conta corrente, gerado em 01/11/2026.</SheetDescription>
         </SheetHeader>
-        <div className="grid flex-1 content-start gap-3 px-6">
+        <div className="grid flex-1 content-start gap-(--gap-lg) px-(--padding-3xl)">
           <Label htmlFor="doc-name">Nome</Label>
           <Input id="doc-name" defaultValue="outubro.pdf" />
-          <div className="flex gap-2"><Badge variant="secondary">Extrato</Badge><Badge variant="outline">1,4 MB</Badge></div>
+          <div className="flex gap-(--gap-sm)"><Badge variant="secondary">Extrato</Badge><Badge variant="outline">1,4 MB</Badge></div>
         </div>
         <SheetFooter>
           <SheetClose render={<Button onClick={() => toast.add({ title: "Alterações salvas" })} />}>Salvar</SheetClose>
@@ -321,7 +321,7 @@ function ShareDrawer() {
             <DrawerTitle>Compartilhar documento</DrawerTitle>
             <DrawerDescription>Arraste para baixo para fechar.</DrawerDescription>
           </DrawerHeader>
-          <div className="p-4"><Input readOnly aria-label="Link do documento" value="https://exemplo.com/d/outubro" /></div>
+          <div className="p-(--padding-2xl)"><Input readOnly aria-label="Link do documento" value="https://exemplo.com/d/outubro" /></div>
           <DrawerFooter>
             <DrawerClose render={<Button onClick={() => void copiar("https://exemplo.com/d/outubro", "Link copiado")} />}>Copiar link</DrawerClose>
             <DrawerClose render={<Button variant="outline" />}>Fechar</DrawerClose>
@@ -339,7 +339,7 @@ function FileTree() {
         <CardTitle>Pastas</CardTitle>
         <CardDescription>Collapsible</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-1">
+      <CardContent className="space-y-(--gap-2xs)">
         {tree.map((t, i) => (
           <Collapsible key={t.folder} defaultOpen={i === 1}>
             <CollapsibleTrigger render={<Button variant="ghost" className="group/folder w-full justify-start" />}>
@@ -348,8 +348,8 @@ function FileTree() {
               <ChevronsUpDownIcon className="ml-auto opacity-40" />
             </CollapsibleTrigger>
             <CollapsibleContent>
-              <ul className="ml-6 space-y-1 border-l py-1 pl-3 text-sm">
-                {t.files.map((f) => <li key={f} className="flex items-center gap-2 py-1 text-muted"><FileTextIcon className="size-4" /> {f}</li>)}
+              <ul className="ml-6 space-y-(--gap-2xs) border-l py-(--padding-2xs) pl-(--padding-lg) text-body-sm">
+                {t.files.map((f) => <li key={f} className="flex items-center gap-(--gap-sm) py-(--padding-2xs) text-muted"><FileTextIcon className="size-4" /> {f}</li>)}
               </ul>
             </CollapsibleContent>
           </Collapsible>
@@ -368,7 +368,7 @@ function PageCounter() {
   }, [api])
   const current = React.useSyncExternalStore(subscribe, () => (api?.selectedScrollSnap() ?? 0) + 1)
   return (
-    <div className="mt-3 flex flex-wrap items-center justify-center gap-2 text-sm text-muted">
+    <div className="mt-3 flex flex-wrap items-center justify-center gap-(--gap-sm) text-body-sm text-muted">
       <Button variant="ghost" size="xs" disabled={!canScrollPrev} onClick={scrollPrev}>Anterior</Button>
       <span className="tabular-nums">Página {current} de {pages.length}</span>
       <Button variant="ghost" size="xs" disabled={!canScrollNext} onClick={scrollNext}>Próxima</Button>
@@ -388,7 +388,7 @@ function Preview() {
           <CarouselContent>
             {pages.map((p) => (
               <CarouselItem key={p.label}>
-                <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-2xl bg-muted">
+                <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-3xl bg-muted">
                   <img src={banner(p.from, p.to, p.label)} alt={`Página ${p.label}`} className="size-full object-cover" />
                 </AspectRatio>
               </CarouselItem>

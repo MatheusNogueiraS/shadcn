@@ -18,9 +18,9 @@ Date Picker is composed from Calendar and Popover. The Typography documentation
 now covers Typeset, which is configured separately rather than added as a UI
 component.
 
-## Tokens de cor
+## Tokens
 
-As cores ficam em `tokens/`, no formato DTCG. Depois de editar, rode `pnpm tokens` para gerar `src/styles/tokens.css`. Fundações guardam os valores, semânticos apontam para elas em Light e Dark, e os componentes usam só semânticos.
+Cores, medidas e tipografia ficam em `tokens/`, no formato DTCG. Depois de editar, rode `pnpm tokens` para gerar `src/styles/tokens.css`. Fundações guardam os valores, semânticos apontam para elas em Light e Dark, e os componentes usam só semânticos.
 
 ## Documentação dos componentes
 

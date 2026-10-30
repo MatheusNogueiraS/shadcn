@@ -121,9 +121,9 @@ export function PaymentsView() {
   const value = valido ? Number(amount.trim().replace(/\./g, "").replace(",", ".")) : 0
   const erro = value <= 0 ? "Informe um valor válido." : value > SALDO ? "O valor passa do saldo disponível." : ""
   return (
-    <div className="grid items-start gap-4 lg:grid-cols-3">
+    <div className="grid items-start gap-(--gap-2xl) lg:grid-cols-3">
       <div className="lg:col-span-2"><TransferForm amount={amount} setAmount={setAmount} erro={erro} tipo={tipo} setTipo={setTipo} /></div>
-      <div className="space-y-4">
+      <div className="space-y-(--gap-2xl)">
         <SummaryCard value={value} invalid={Boolean(erro)} tipo={tipo} />
         <AgendaCard />
       </div>
@@ -219,7 +219,7 @@ function TransferForm({ amount, setAmount, erro, tipo, setTipo }: { amount: stri
                     <CalendarIcon />
                     {date ? format(date, "PPP", { locale: ptBR }) : <span>Escolha uma data</span>}
                   </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
+                  <PopoverContent className="w-auto p-(--padding-none)" align="start">
                     <Calendar mode="single" locale={ptBR} selected={date} onSelect={setDate} defaultMonth={date} />
                   </PopoverContent>
                 </Popover>
@@ -299,7 +299,7 @@ function TransferForm({ amount, setAmount, erro, tipo, setTipo }: { amount: stri
           </FieldSet>
         </FieldGroup>
       </CardContent>
-      <CardFooter className="justify-end gap-2">
+      <CardFooter className="justify-end gap-(--gap-sm)">
         <Button variant="outline" onClick={() => toast.add({ title: "Rascunho salvo" })}>Salvar rascunho</Button>
         <ConfirmDialog disabled={invalid} />
       </CardFooter>
@@ -384,7 +384,7 @@ function SummaryCard({ value, invalid, tipo }: { value: number; invalid: boolean
           </Popover>
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-(--gap-2xl)">
         <ItemGroup>
           {lines.map((l) => (
             <Item key={l.title} size="xs" variant="muted">
@@ -434,7 +434,7 @@ function AgendaCard() {
           components={{ DayButton: DiaAgendado }}
         />
       </CardContent>
-      <CardFooter className="justify-between text-sm text-muted">3 pagamentos no mês <MonthPicker /></CardFooter>
+      <CardFooter className="justify-between text-body-sm text-muted">3 pagamentos no mês <MonthPicker /></CardFooter>
     </Card>
   )
 }

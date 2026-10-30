@@ -164,22 +164,22 @@ const initials = (n: string) => n.split(" ").map((p) => p[0]).join("")
 
 export function OverviewView() {
   return (
-    <div className="space-y-16 py-6">
-        <section className="mx-auto max-w-3xl space-y-4 text-center">
+    <div className="space-y-16 py-(--padding-3xl)">
+        <section className="mx-auto max-w-3xl space-y-(--gap-2xl) text-center">
           <Badge variant="outline">54 componentes em 6 visões</Badge>
-          <h1 className="text-4xl font-bold tracking-tight text-balance sm:text-5xl">
+          <h1 className="text-display-md text-balance sm:text-display-lg">
             Construa o seu produto com um design system que você é dono
           </h1>
           <p className="text-muted text-balance">
             Cards de comportamentos reais e uma tabela de SaaS, todos usando os componentes da pasta ui.
           </p>
-          <div className="flex justify-center gap-2">
+          <div className="flex justify-center gap-(--gap-sm)">
             <Button size="lg" onClick={() => document.getElementById("tabela")?.scrollIntoView({ behavior: "smooth" })}>Ver tabela</Button>
             <Button size="lg" variant="secondary" onClick={() => document.getElementById("cards")?.scrollIntoView({ behavior: "smooth" })}>Ver cards</Button>
           </div>
         </section>
 
-        <section id="cards" className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <section id="cards" className="grid gap-(--gap-2xl) md:grid-cols-2 lg:grid-cols-3">
           <MetricCards />
           <RevenueCard />
           <SignupsCard />
@@ -217,10 +217,10 @@ function MetricCards() {
         <Card key={m.t}>
           <CardHeader>
             <CardDescription>{m.t}</CardDescription>
-            <CardTitle className="text-3xl tabular-nums">{m.v}</CardTitle>
+            <CardTitle className="text-heading-xl tabular-nums">{m.v}</CardTitle>
             <CardAction><Badge variant="outline">{m.d}</Badge></CardAction>
           </CardHeader>
-          <CardFooter className="text-sm text-muted">Comparado ao mês anterior</CardFooter>
+          <CardFooter className="text-body-sm text-muted">Comparado ao mês anterior</CardFooter>
         </Card>
       ))}
     </>
@@ -287,13 +287,13 @@ function LoginCard() {
         <CardDescription>Validação de formulário</CardDescription>
       </CardHeader>
       <form onSubmit={submit}>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-(--gap-2xl)">
           <Field data-invalid={!!error}>
             <FieldLabel htmlFor="login-email">E-mail</FieldLabel>
             <Input id="login-email" value={email} aria-invalid={!!error} onChange={(e) => setEmail(e.target.value)} placeholder="voce@empresa.com" />
             {error ? <FieldError>{error}</FieldError> : <FieldDescription>Enviaremos um link mágico.</FieldDescription>}
           </Field>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-(--gap-sm)">
             <Checkbox id="remember" defaultChecked />
             <Label htmlFor="remember">Lembrar de mim</Label>
           </div>
@@ -317,13 +317,13 @@ function SettingsCard() {
           <Label htmlFor="sw-email">Notificações por e-mail</Label>
           <Switch id="sw-email" defaultChecked />
         </div>
-        <div className="space-y-2">
-          <div className="flex justify-between text-sm"><Label>Volume</Label><span className="text-muted tabular-nums">{String(vol)}%</span></div>
+        <div className="space-y-(--gap-sm)">
+          <div className="flex justify-between text-body-sm"><Label>Volume</Label><span className="text-muted tabular-nums">{String(vol)}%</span></div>
           <Slider value={vol} onValueChange={setVol} />
         </div>
         <RadioGroup defaultValue="mensal">
           {["mensal", "anual"].map((v) => (
-            <div key={v} className="flex items-center gap-2">
+            <div key={v} className="flex items-center gap-(--gap-sm)">
               <RadioGroupItem value={v} id={`r-${v}`} />
               <Label htmlFor={`r-${v}`} className="capitalize">Cobrança {v}</Label>
             </div>
@@ -341,12 +341,12 @@ function PaymentCard() {
         <CardTitle>Pagamento</CardTitle>
         <CardDescription>Input groups e select</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-3">
+      <CardContent className="space-y-(--gap-lg)">
         <InputGroup>
           <InputGroupAddon><CreditCardIcon /></InputGroupAddon>
           <InputGroupInput placeholder="0000 0000 0000 0000" inputMode="numeric" />
         </InputGroup>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-(--gap-lg)">
           <Input placeholder="MM/AA" />
           <Input placeholder="CVC" />
         </div>
@@ -370,7 +370,7 @@ function TeamCard() {
         <CardTitle>Time</CardTitle>
         <CardDescription>Avatares e tooltips</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-(--gap-2xl)">
         <AvatarGroup>
           {names.slice(0, 5).map((n) => (
             <Tooltip key={n}>
@@ -381,7 +381,7 @@ function TeamCard() {
           <AvatarGroupCount>+12</AvatarGroupCount>
         </AvatarGroup>
         <Separator />
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-(--gap-sm)">
           <Badge>Design</Badge><Badge variant="secondary">Eng</Badge><Badge variant="outline">Produto</Badge><Badge variant="destructive">Urgente</Badge>
         </div>
       </CardContent>
@@ -397,11 +397,11 @@ function ProgressCard() {
         <CardTitle>Onboarding</CardTitle>
         <CardDescription>Progresso interativo</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-(--gap-2xl)">
         <Progress value={v} />
-        <p className="text-sm text-muted tabular-nums">{v}% concluído</p>
+        <p className="text-body-sm text-muted tabular-nums">{v}% concluído</p>
       </CardContent>
-      <CardFooter className="gap-2">
+      <CardFooter className="gap-(--gap-sm)">
         <Button variant="outline" size="sm" onClick={() => setV(Math.max(0, v - 15))}>-15</Button>
         <Button size="sm" onClick={() => setV(Math.min(100, v + 15))}>+15</Button>
       </CardFooter>
@@ -424,7 +424,7 @@ function ShareCard() {
           </InputGroupAddon>
         </InputGroup>
       </CardContent>
-      <CardFooter className="gap-1 text-sm text-muted">
+      <CardFooter className="gap-(--gap-2xs) text-body-sm text-muted">
         Atalho: <KbdGroup><Kbd>Ctrl</Kbd><Kbd>K</Kbd></KbdGroup>
       </CardFooter>
     </Card>
@@ -441,8 +441,8 @@ function TabsCard() {
             <TabsTrigger value="perfil">Perfil</TabsTrigger>
             <TabsTrigger value="bio">Bio</TabsTrigger>
           </TabsList>
-          <TabsContent value="perfil" className="space-y-2 pt-2"><Input defaultValue="Matheus" /></TabsContent>
-          <TabsContent value="bio" className="pt-2"><Textarea placeholder="Conte sobre você" /></TabsContent>
+          <TabsContent value="perfil" className="space-y-(--gap-sm) pt-(--padding-sm)"><Input defaultValue="Matheus" /></TabsContent>
+          <TabsContent value="bio" className="pt-(--padding-sm)"><Textarea placeholder="Conte sobre você" /></TabsContent>
         </Tabs>
       </CardContent>
     </Card>
@@ -453,7 +453,7 @@ function AlertsCard() {
   return (
     <Card>
       <CardHeader><CardTitle>Alertas</CardTitle><CardDescription>Variantes</CardDescription></CardHeader>
-      <CardContent className="space-y-3">
+      <CardContent className="space-y-(--gap-lg)">
         <Alert><CheckCircle2Icon /><AlertTitle>Deploy concluído</AlertTitle><AlertDescription>Versão 2.4 no ar.</AlertDescription></Alert>
         <Alert variant="destructive"><TriangleAlertIcon /><AlertTitle>Falha na cobrança</AlertTitle><AlertDescription>Cartão recusado.</AlertDescription></Alert>
       </CardContent>
@@ -479,7 +479,7 @@ function ToolbarCard() {
   return (
     <Card>
       <CardHeader><CardTitle>Visualização</CardTitle><CardDescription>Toggle group e menu</CardDescription></CardHeader>
-      <CardContent className="flex flex-wrap items-center gap-3">
+      <CardContent className="flex flex-wrap items-center gap-(--gap-lg)">
         <ToggleGroup defaultValue={["lista"]} variant="outline">
           <ToggleGroupItem value="lista">Lista</ToggleGroupItem>
           <ToggleGroupItem value="grade">Grade</ToggleGroupItem>
@@ -537,14 +537,14 @@ function LoadingCard() {
       <CardHeader><CardTitle>Carregamento</CardTitle><CardDescription>Skeleton</CardDescription></CardHeader>
       <CardContent>
         {loading ? (
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-(--gap-lg)">
             <Skeleton className="size-10 rounded-full" />
-            <div className="flex-1 space-y-2"><Skeleton className="h-4 w-3/4" /><Skeleton className="h-4 w-1/2" /></div>
+            <div className="flex-1 space-y-(--gap-sm)"><Skeleton className="h-4 w-3/4" /><Skeleton className="h-4 w-1/2" /></div>
           </div>
         ) : (
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-(--gap-lg)">
             <Avatar><AvatarFallback>AS</AvatarFallback></Avatar>
-            <div><p className="text-sm font-medium">Ana Souza</p><p className="text-sm text-muted">ana@empresa.com</p></div>
+            <div><p className="text-label-sm">Ana Souza</p><p className="text-body-sm text-muted">ana@empresa.com</p></div>
           </div>
         )}
       </CardContent>
@@ -612,8 +612,8 @@ function CustomersTable() {
           <Button variant="outline" size="sm" onClick={() => toast.add({ title: "Exportação iniciada", description: `${rows.length} linhas` })}><DownloadIcon /> Exportar</Button>
         </CardAction>
       </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="flex flex-wrap gap-2">
+      <CardContent className="space-y-(--gap-2xl)">
+        <div className="flex flex-wrap gap-(--gap-sm)">
           <InputGroup className="max-w-xs">
             <InputGroupAddon><SearchIcon /></InputGroupAddon>
             <InputGroupInput placeholder="Buscar cliente…" value={q} onChange={(e) => { setQ(e.target.value); setPage(0); setSel(new Set()) }} />
@@ -633,7 +633,7 @@ function CustomersTable() {
 
         <div className="rounded-lg border">
           <Table>
-            <TableCaption className="pb-3">Assinaturas ordenadas por MRR.</TableCaption>
+            <TableCaption className="pb-(--padding-lg)">Assinaturas ordenadas por MRR.</TableCaption>
             <TableHeader>
               <TableRow>
                 <TableHead className="w-10"><Checkbox checked={allSel} onCheckedChange={(c) => toggleAll(!!c)} aria-label="Selecionar todos" /></TableHead>
@@ -654,9 +654,9 @@ function CustomersTable() {
                 <TableRow key={c.id} data-state={sel.has(c.id) ? "selected" : undefined}>
                   <TableCell><Checkbox checked={sel.has(c.id)} onCheckedChange={(v) => toggle(c.id, !!v)} aria-label={`Selecionar ${c.name}`} /></TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-(--gap-lg)">
                       <Avatar size="sm"><AvatarFallback>{initials(c.name)}</AvatarFallback></Avatar>
-                      <div><p className="font-bold">{c.name}</p><p className="text-xs text-muted">{c.email}</p></div>
+                      <div><p className="font-bold">{c.name}</p><p className="text-body-xs text-muted">{c.email}</p></div>
                     </div>
                   </TableCell>
                   <TableCell>{c.plan}</TableCell>
@@ -686,7 +686,7 @@ function CustomersTable() {
           </Table>
         </div>
 
-        <div className="flex items-center justify-between text-sm text-muted">
+        <div className="flex items-center justify-between text-body-sm text-muted">
           <span>{sel.size} de {rows.length} selecionado(s)</span>
           <Pagination aria-label="Paginação" className="mx-0 w-auto justify-end">
             <PaginationContent>
