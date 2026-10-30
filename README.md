@@ -18,6 +18,19 @@ Date Picker is composed from Calendar and Popover. The Typography documentation
 now covers Typeset, which is configured separately rather than added as a UI
 component.
 
+## Publicando no GitHub
+
+Este repositório traz a skill `github-flow`, em `.claude/skills/github-flow/`. Abra o Claude Code na raiz do projeto e diga que quer subir o trabalho: ela revisa os arquivos, procura segredos e dados pessoais, roda as verificações e abre um PR. O merge é sempre manual, no GitHub.
+
+Requisitos: [Git](https://git-scm.com/downloads), [Node.js](https://nodejs.org) e [GitHub CLI](https://cli.github.com) com `gh auth login` feito. Recomendado: [gitleaks](https://github.com/gitleaks/gitleaks#installing).
+
+Para confirmar o ambiente e, se quiser, ativar a varredura em todo commit e o bloqueio de push direto na `main` nesta máquina:
+
+```bash
+node .claude/skills/github-flow/scripts/guarda.mjs situacao
+node .claude/skills/github-flow/scripts/guarda.mjs instalar
+```
+
 ## Using components
 
 To use the components in your app, import them as follows:
