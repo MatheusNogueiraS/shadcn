@@ -1,0 +1,50 @@
+import { Meta, Unstyled } from "@storybook/addon-docs/blocks"
+
+<Meta title="Fundamentos/Tipografia" />
+
+# Tipografia
+
+O sistema usa os tokens de fonte do shadcn, sem criar novos. Tamanhos e pesos são as classes do Tailwind, como `text-sm` e `font-medium`.
+
+- **`--font-sans`, Poppins:** todo o sistema, aplicada na raiz da página.
+- **`--font-heading`, Poppins:** títulos de `Card`, `Dialog`, `AlertDialog`, `Drawer`, `Sheet` e `Empty`.
+- **`--font-mono`, Lato:** `Table` e valores do tooltip de gráficos.
+
+Não há fonte serifada: `--font-serif` foi removido do tema.
+
+## Por que a Lato ocupa o `--font-mono`
+
+A Poppins não tem algarismos de largura igual, e `tabular-nums` não tem efeito nela. Em uma coluna, os valores não alinham. A Lato não é monoespaçada, mas todos os seus algarismos têm a mesma largura, então o `Table` já a aplica por padrão.
+
+<Unstyled>
+  <div className="grid max-w-xl grid-cols-2 gap-6 text-right text-lg">
+    <div className="font-sans">
+      <p className="mb-2 text-left text-sm text-muted-foreground">Poppins</p>
+      <p>R$ 1.111,11</p>
+      <p>R$ 8.000,00</p>
+      <p>R$ 2.105,70</p>
+    </div>
+    <div className="font-mono">
+      <p className="mb-2 text-left font-sans text-sm text-muted-foreground">Lato</p>
+      <p>R$ 1.111,11</p>
+      <p>R$ 8.000,00</p>
+      <p>R$ 2.105,70</p>
+    </div>
+  </div>
+</Unstyled>
+
+## Regras de uso
+
+- **Dentro de uma tabela, destaque com `font-bold`.** A Lato não tem peso 500, então `font-medium` aparece como texto normal. É por isso que os badges ficam mais finos em uma tabela.
+- **Bloco de código precisa de fonte própria.** `font-mono` aqui significa Lato, e os elementos `<code>`, `<pre>` e `<kbd>` sem classe própria também a usam.
+
+## Pesos
+
+<Unstyled>
+  <div className="space-y-1 font-sans text-lg">
+    <p className="font-normal">font-normal: 400</p>
+    <p className="font-medium">font-medium: 500</p>
+    <p className="font-semibold">font-semibold: 600</p>
+    <p className="font-bold">font-bold: 700</p>
+  </div>
+</Unstyled>
