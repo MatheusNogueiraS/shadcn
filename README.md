@@ -18,6 +18,10 @@ Date Picker is composed from Calendar and Popover. The Typography documentation
 now covers Typeset, which is configured separately rather than added as a UI
 component.
 
+## Documentação dos componentes
+
+Rode `pnpm storybook` para abrir a documentação em `http://localhost:6006`, com os fundamentos da marca e cada componente em uso. `pnpm build-storybook` gera a versão estática.
+
 ## Publicando no GitHub
 
 Este repositório traz a skill `github-flow`, em `.claude/skills/github-flow/`. Abra o Claude Code na raiz do projeto e diga que quer subir o trabalho: ela revisa os arquivos, procura segredos e dados pessoais, roda as verificações e abre um PR. O merge é sempre manual, no GitHub.
