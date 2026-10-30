@@ -10,7 +10,7 @@ To add components to your app, run the following command:
 pnpm dlx shadcn@latest add button
 ```
 
-This project uses the `base-nova` style. UI components are placed in
+This project uses the `base-luma` style. UI components are placed in
 `src/components/ui`.
 
 The Data Table guide builds on the Table component and `@tanstack/react-table`.
