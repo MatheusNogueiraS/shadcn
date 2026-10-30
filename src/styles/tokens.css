@@ -1,0 +1,273 @@
+/* Gerado por scripts/build-tokens.mjs a partir de tokens/. Não edite à mão: rode `pnpm tokens`. */
+
+:root {
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-neutral-50: #f9fafb;
+  --color-neutral-100: #f4f5f6;
+  --color-neutral-200: #dee0e3;
+  --color-neutral-300: #c8cbd0;
+  --color-neutral-400: #9ca2ab;
+  --color-neutral-500: #6b737f;
+  --color-neutral-600: #5e646e;
+  --color-neutral-700: #37404e;
+  --color-neutral-800: #202631;
+  --color-neutral-900: #151a22;
+  --color-neutral-950: #080b10;
+  --color-orange-100: #ffece4;
+  --color-orange-200: #ffd3c2;
+  --color-orange-300: #ffae8c;
+  --color-orange-400: #ff8956;
+  --color-orange-500: #fa6300;
+  --color-orange-600: #ca5008;
+  --color-orange-700: #a43f04;
+  --color-orange-800: #7c2f05;
+  --color-orange-900: #5a2205;
+  --color-purple-100: #efedf6;
+  --color-purple-200: #d9d4e5;
+  --color-purple-300: #bbb2d1;
+  --color-purple-400: #9889b9;
+  --color-purple-500: #7c67a7;
+  --color-purple-600: #674c96;
+  --color-purple-700: #563b84;
+  --color-purple-800: #4d3179;
+  --color-purple-900: #462a71;
+  --color-purple-950: #2d194b;
+  --color-red-50: #fef2f2;
+  --color-red-100: #f8d7da;
+  --color-red-200: #ffc9c9;
+  --color-red-300: #ffa2a2;
+  --color-red-400: #ff6467;
+  --color-red-500: #fb2c36;
+  --color-red-600: #ce2f23;
+  --color-red-700: #b20007;
+  --color-red-800: #9f0712;
+  --color-red-900: #721c24;
+  --color-red-950: #460809;
+  --color-green-50: #f0fdf4;
+  --color-green-100: #dcfce7;
+  --color-green-200: #d4edda;
+  --color-green-300: #7bf1a8;
+  --color-green-400: #10daae;
+  --color-green-500: #05c39c;
+  --color-green-600: #0ba180;
+  --color-green-700: #147963;
+  --color-green-800: #016630;
+  --color-green-900: #0a4a3c;
+  --color-green-950: #032e15;
+  --color-yellow-50: #fefce8;
+  --color-yellow-100: #fff3cd;
+  --color-yellow-200: #fff085;
+  --color-yellow-300: #ffdf20;
+  --color-yellow-400: #ffd400;
+  --color-yellow-500: #f0b100;
+  --color-yellow-600: #d08700;
+  --color-yellow-700: #856404;
+  --color-yellow-800: #894b00;
+  --color-yellow-900: #733e0a;
+  --color-yellow-950: #432004;
+  --opacity-5: 5;
+  --opacity-10: 10;
+  --opacity-15: 15;
+  --opacity-20: 20;
+  --opacity-30: 30;
+  --opacity-40: 40;
+  --opacity-50: 50;
+  --opacity-7-5: 7.5;
+}
+
+:root {
+  --bg-page: var(--color-white); /** Fundo da página */
+  --bg-surface: var(--color-white); /** Cartões, menus e janelas */
+  --bg-subtle: var(--color-neutral-50); /** Áreas de apoio, como a barra lateral */
+  --bg-muted: var(--color-neutral-100); /** Fundos discretos e item em destaque */
+  --bg-control: var(--color-neutral-200); /** Trilho e fundo de controles */
+  --bg-field: color-mix(in oklab, var(--color-neutral-200) calc(var(--opacity-50) * 1%), transparent); /** Campos de formulário */
+  --bg-divider: var(--color-neutral-200); /** Linhas separadoras */
+  --bg-brand: var(--color-orange-500); /** Ação principal */
+  --bg-brand-hover: var(--color-orange-600); /** Ação principal com o mouse em cima */
+  --bg-brand-secondary: var(--color-purple-900); /** Ação de apoio */
+  --bg-brand-secondary-hover: var(--color-purple-950); /** Ação de apoio com o mouse em cima */
+  --bg-on-brand: var(--color-white); /** Elemento branco sobre a marca, como o marcador do switch */
+  --bg-danger: var(--color-red-600); /** Ação ou estado de erro */
+  --bg-danger-subtle: color-mix(in oklab, var(--color-red-600) calc(var(--opacity-10) * 1%), transparent); /** Fundo discreto de erro */
+  --bg-inverse: var(--color-neutral-950); /** Fundo invertido, como o tooltip */
+  --bg-overlay: color-mix(in oklab, var(--color-black) calc(var(--opacity-30) * 1%), transparent); /** Camada atrás de janelas */
+  --bg-success: var(--color-green-600); /** Sucesso */
+  --bg-success-subtle: color-mix(in oklab, var(--color-green-600) calc(var(--opacity-10) * 1%), transparent); /** Fundo discreto de sucesso */
+  --bg-warning: var(--color-yellow-500); /** Atenção */
+  --bg-warning-subtle: color-mix(in oklab, var(--color-yellow-500) calc(var(--opacity-10) * 1%), transparent); /** Fundo discreto de atenção */
+  --bg-info: var(--color-purple-600); /** Informação */
+  --bg-info-subtle: color-mix(in oklab, var(--color-purple-600) calc(var(--opacity-10) * 1%), transparent); /** Fundo discreto de informação */
+  --text-default: var(--color-neutral-950); /** Texto principal */
+  --text-muted: var(--color-neutral-500); /** Texto de apoio */
+  --text-on-muted: var(--color-neutral-900); /** Texto sobre fundo em destaque */
+  --text-on-brand: var(--color-white); /** Texto sobre a marca */
+  --text-brand: var(--color-orange-700); /** Texto e links na cor da marca */
+  --text-danger: var(--color-red-600); /** Texto de erro */
+  --text-inverse: var(--color-white); /** Texto sobre fundo invertido */
+  --text-success: var(--color-green-700); /** Texto de sucesso */
+  --text-warning: var(--color-yellow-700); /** Texto de atenção */
+  --text-info: var(--color-purple-700); /** Texto informativo */
+  --stroke-default: var(--color-neutral-200); /** Borda padrão */
+  --stroke-field: var(--color-neutral-200); /** Borda de campos */
+  --stroke-subtle: color-mix(in oklab, var(--color-neutral-950) calc(var(--opacity-5) * 1%), transparent); /** Contorno de menus e janelas */
+  --stroke-brand: var(--color-orange-500); /** Borda na cor da marca */
+  --stroke-surface: var(--color-white); /** Borda com a cor do cartão */
+  --stroke-page: var(--color-white); /** Borda com a cor da página */
+  --stroke-focus: var(--color-orange-500); /** Foco */
+  --stroke-focus-subtle: color-mix(in oklab, var(--color-orange-500) calc(var(--opacity-30) * 1%), transparent); /** Anel de foco */
+  --stroke-focus-neutral: var(--color-neutral-400); /** Foco na barra lateral */
+  --stroke-danger: var(--color-red-600); /** Borda de erro */
+  --stroke-danger-subtle: color-mix(in oklab, var(--color-red-600) calc(var(--opacity-20) * 1%), transparent); /** Anel de erro */
+  --stroke-invalid: var(--color-red-600); /** Campo inválido */
+  --stroke-success: var(--color-green-600); /** Borda de sucesso */
+  --stroke-warning: var(--color-yellow-500); /** Borda de atenção */
+  --stroke-info: var(--color-purple-600); /** Borda informativa */
+  --data-1: var(--color-orange-500); /** Série 1 */
+  --data-2: var(--color-purple-900); /** Série 2 */
+  --data-3: var(--color-orange-300); /** Série 3 */
+  --data-4: var(--color-purple-500); /** Série 4 */
+  --data-5: var(--color-orange-700); /** Série 5 */
+}
+
+.dark {
+  --bg-page: var(--color-neutral-950); /** Fundo da página */
+  --bg-surface: var(--color-neutral-900); /** Cartões, menus e janelas */
+  --bg-subtle: var(--color-neutral-900); /** Áreas de apoio, como a barra lateral */
+  --bg-muted: var(--color-neutral-800); /** Fundos discretos e item em destaque */
+  --bg-control: color-mix(in oklab, var(--color-white) calc(var(--opacity-15) * 1%), transparent); /** Trilho e fundo de controles */
+  --bg-field: color-mix(in oklab, var(--color-white) calc(var(--opacity-7-5) * 1%), transparent); /** Campos de formulário */
+  --bg-divider: color-mix(in oklab, var(--color-white) calc(var(--opacity-10) * 1%), transparent); /** Linhas separadoras */
+  --bg-brand: var(--color-orange-500); /** Ação principal */
+  --bg-brand-hover: var(--color-orange-600); /** Ação principal com o mouse em cima */
+  --bg-brand-secondary: var(--color-purple-600); /** Ação de apoio */
+  --bg-brand-secondary-hover: var(--color-purple-700); /** Ação de apoio com o mouse em cima */
+  --bg-on-brand: var(--color-white); /** Elemento branco sobre a marca, como o marcador do switch */
+  --bg-danger: var(--color-red-400); /** Ação ou estado de erro */
+  --bg-danger-subtle: color-mix(in oklab, var(--color-red-400) calc(var(--opacity-20) * 1%), transparent); /** Fundo discreto de erro */
+  --bg-inverse: var(--color-neutral-50); /** Fundo invertido, como o tooltip */
+  --bg-overlay: color-mix(in oklab, var(--color-black) calc(var(--opacity-30) * 1%), transparent); /** Camada atrás de janelas */
+  --bg-success: var(--color-green-400); /** Sucesso */
+  --bg-success-subtle: color-mix(in oklab, var(--color-green-400) calc(var(--opacity-20) * 1%), transparent); /** Fundo discreto de sucesso */
+  --bg-warning: var(--color-yellow-400); /** Atenção */
+  --bg-warning-subtle: color-mix(in oklab, var(--color-yellow-400) calc(var(--opacity-20) * 1%), transparent); /** Fundo discreto de atenção */
+  --bg-info: var(--color-purple-400); /** Informação */
+  --bg-info-subtle: color-mix(in oklab, var(--color-purple-400) calc(var(--opacity-20) * 1%), transparent); /** Fundo discreto de informação */
+  --text-default: var(--color-neutral-50); /** Texto principal */
+  --text-muted: var(--color-neutral-400); /** Texto de apoio */
+  --text-on-muted: var(--color-neutral-50); /** Texto sobre fundo em destaque */
+  --text-on-brand: var(--color-white); /** Texto sobre a marca */
+  --text-brand: var(--color-orange-400); /** Texto e links na cor da marca */
+  --text-danger: var(--color-red-400); /** Texto de erro */
+  --text-inverse: var(--color-neutral-950); /** Texto sobre fundo invertido */
+  --text-success: var(--color-green-400); /** Texto de sucesso */
+  --text-warning: var(--color-yellow-400); /** Texto de atenção */
+  --text-info: var(--color-purple-300); /** Texto informativo */
+  --stroke-default: color-mix(in oklab, var(--color-white) calc(var(--opacity-10) * 1%), transparent); /** Borda padrão */
+  --stroke-field: color-mix(in oklab, var(--color-white) calc(var(--opacity-15) * 1%), transparent); /** Borda de campos */
+  --stroke-subtle: color-mix(in oklab, var(--color-neutral-50) calc(var(--opacity-10) * 1%), transparent); /** Contorno de menus e janelas */
+  --stroke-brand: var(--color-orange-500); /** Borda na cor da marca */
+  --stroke-surface: var(--color-neutral-900); /** Borda com a cor do cartão */
+  --stroke-page: var(--color-neutral-950); /** Borda com a cor da página */
+  --stroke-focus: var(--color-orange-500); /** Foco */
+  --stroke-focus-subtle: color-mix(in oklab, var(--color-orange-500) calc(var(--opacity-30) * 1%), transparent); /** Anel de foco */
+  --stroke-focus-neutral: var(--color-neutral-500); /** Foco na barra lateral */
+  --stroke-danger: var(--color-red-400); /** Borda de erro */
+  --stroke-danger-subtle: color-mix(in oklab, var(--color-red-400) calc(var(--opacity-40) * 1%), transparent); /** Anel de erro */
+  --stroke-invalid: color-mix(in oklab, var(--color-red-400) calc(var(--opacity-50) * 1%), transparent); /** Campo inválido */
+  --stroke-success: var(--color-green-400); /** Borda de sucesso */
+  --stroke-warning: var(--color-yellow-400); /** Borda de atenção */
+  --stroke-info: var(--color-purple-400); /** Borda informativa */
+  --data-1: var(--color-orange-500); /** Série 1 */
+  --data-2: var(--color-purple-400); /** Série 2 */
+  --data-3: var(--color-orange-300); /** Série 3 */
+  --data-4: var(--color-purple-200); /** Série 4 */
+  --data-5: var(--color-orange-700); /** Série 5 */
+}
+
+@theme inline {
+  --background-color-page: var(--bg-page);
+  --background-color-surface: var(--bg-surface);
+  --background-color-subtle: var(--bg-subtle);
+  --background-color-muted: var(--bg-muted);
+  --background-color-control: var(--bg-control);
+  --background-color-field: var(--bg-field);
+  --background-color-divider: var(--bg-divider);
+  --background-color-brand: var(--bg-brand);
+  --background-color-brand-hover: var(--bg-brand-hover);
+  --background-color-brand-secondary: var(--bg-brand-secondary);
+  --background-color-brand-secondary-hover: var(--bg-brand-secondary-hover);
+  --background-color-on-brand: var(--bg-on-brand);
+  --background-color-danger: var(--bg-danger);
+  --background-color-danger-subtle: var(--bg-danger-subtle);
+  --background-color-inverse: var(--bg-inverse);
+  --background-color-overlay: var(--bg-overlay);
+  --background-color-success: var(--bg-success);
+  --background-color-success-subtle: var(--bg-success-subtle);
+  --background-color-warning: var(--bg-warning);
+  --background-color-warning-subtle: var(--bg-warning-subtle);
+  --background-color-info: var(--bg-info);
+  --background-color-info-subtle: var(--bg-info-subtle);
+  --text-color-default: var(--text-default);
+  --text-color-muted: var(--text-muted);
+  --text-color-on-muted: var(--text-on-muted);
+  --text-color-on-brand: var(--text-on-brand);
+  --text-color-brand: var(--text-brand);
+  --text-color-danger: var(--text-danger);
+  --text-color-inverse: var(--text-inverse);
+  --text-color-success: var(--text-success);
+  --text-color-warning: var(--text-warning);
+  --text-color-info: var(--text-info);
+  --border-color-default: var(--stroke-default);
+  --ring-color-default: var(--stroke-default);
+  --outline-color-default: var(--stroke-default);
+  --border-color-field: var(--stroke-field);
+  --ring-color-field: var(--stroke-field);
+  --outline-color-field: var(--stroke-field);
+  --border-color-subtle: var(--stroke-subtle);
+  --ring-color-subtle: var(--stroke-subtle);
+  --outline-color-subtle: var(--stroke-subtle);
+  --border-color-brand: var(--stroke-brand);
+  --ring-color-brand: var(--stroke-brand);
+  --outline-color-brand: var(--stroke-brand);
+  --border-color-surface: var(--stroke-surface);
+  --ring-color-surface: var(--stroke-surface);
+  --outline-color-surface: var(--stroke-surface);
+  --border-color-page: var(--stroke-page);
+  --ring-color-page: var(--stroke-page);
+  --outline-color-page: var(--stroke-page);
+  --border-color-focus: var(--stroke-focus);
+  --ring-color-focus: var(--stroke-focus);
+  --outline-color-focus: var(--stroke-focus);
+  --border-color-focus-subtle: var(--stroke-focus-subtle);
+  --ring-color-focus-subtle: var(--stroke-focus-subtle);
+  --outline-color-focus-subtle: var(--stroke-focus-subtle);
+  --border-color-focus-neutral: var(--stroke-focus-neutral);
+  --ring-color-focus-neutral: var(--stroke-focus-neutral);
+  --outline-color-focus-neutral: var(--stroke-focus-neutral);
+  --border-color-danger: var(--stroke-danger);
+  --ring-color-danger: var(--stroke-danger);
+  --outline-color-danger: var(--stroke-danger);
+  --border-color-danger-subtle: var(--stroke-danger-subtle);
+  --ring-color-danger-subtle: var(--stroke-danger-subtle);
+  --outline-color-danger-subtle: var(--stroke-danger-subtle);
+  --border-color-invalid: var(--stroke-invalid);
+  --ring-color-invalid: var(--stroke-invalid);
+  --outline-color-invalid: var(--stroke-invalid);
+  --border-color-success: var(--stroke-success);
+  --ring-color-success: var(--stroke-success);
+  --outline-color-success: var(--stroke-success);
+  --border-color-warning: var(--stroke-warning);
+  --ring-color-warning: var(--stroke-warning);
+  --outline-color-warning: var(--stroke-warning);
+  --border-color-info: var(--stroke-info);
+  --ring-color-info: var(--stroke-info);
+  --outline-color-info: var(--stroke-info);
+  --color-data-1: var(--data-1);
+  --color-data-2: var(--data-2);
+  --color-data-3: var(--data-3);
+  --color-data-4: var(--data-4);
+  --color-data-5: var(--data-5);
+}
+

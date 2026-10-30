@@ -1,0 +1,264 @@
+{
+  "bg": {
+    "$type": "color",
+    "page": {
+      "$value": "{color.neutral.950}",
+      "$description": "Fundo da página"
+    },
+    "surface": {
+      "$value": "{color.neutral.900}",
+      "$description": "Cartões, menus e janelas"
+    },
+    "subtle": {
+      "$value": "{color.neutral.900}",
+      "$description": "Áreas de apoio, como a barra lateral"
+    },
+    "muted": {
+      "$value": "{color.neutral.800}",
+      "$description": "Fundos discretos e item em destaque"
+    },
+    "control": {
+      "$value": "{color.white}",
+      "$description": "Trilho e fundo de controles",
+      "$extensions": {
+        "com.designsystem.opacity": "{opacity.15}"
+      }
+    },
+    "field": {
+      "$value": "{color.white}",
+      "$description": "Campos de formulário",
+      "$extensions": {
+        "com.designsystem.opacity": "{opacity.7-5}"
+      }
+    },
+    "divider": {
+      "$value": "{color.white}",
+      "$description": "Linhas separadoras",
+      "$extensions": {
+        "com.designsystem.opacity": "{opacity.10}"
+      }
+    },
+    "brand": {
+      "$value": "{color.orange.500}",
+      "$description": "Ação principal"
+    },
+    "brand-hover": {
+      "$value": "{color.orange.600}",
+      "$description": "Ação principal com o mouse em cima"
+    },
+    "brand-secondary": {
+      "$value": "{color.purple.600}",
+      "$description": "Ação de apoio"
+    },
+    "brand-secondary-hover": {
+      "$value": "{color.purple.700}",
+      "$description": "Ação de apoio com o mouse em cima"
+    },
+    "on-brand": {
+      "$value": "{color.white}",
+      "$description": "Elemento branco sobre a marca, como o marcador do switch"
+    },
+    "danger": {
+      "$value": "{color.red.400}",
+      "$description": "Ação ou estado de erro"
+    },
+    "danger-subtle": {
+      "$value": "{color.red.400}",
+      "$description": "Fundo discreto de erro",
+      "$extensions": {
+        "com.designsystem.opacity": "{opacity.20}"
+      }
+    },
+    "inverse": {
+      "$value": "{color.neutral.50}",
+      "$description": "Fundo invertido, como o tooltip"
+    },
+    "overlay": {
+      "$value": "{color.black}",
+      "$description": "Camada atrás de janelas",
+      "$extensions": {
+        "com.designsystem.opacity": "{opacity.30}"
+      }
+    },
+    "success": {
+      "$value": "{color.green.400}",
+      "$description": "Sucesso"
+    },
+    "success-subtle": {
+      "$value": "{color.green.400}",
+      "$description": "Fundo discreto de sucesso",
+      "$extensions": {
+        "com.designsystem.opacity": "{opacity.20}"
+      }
+    },
+    "warning": {
+      "$value": "{color.yellow.400}",
+      "$description": "Atenção"
+    },
+    "warning-subtle": {
+      "$value": "{color.yellow.400}",
+      "$description": "Fundo discreto de atenção",
+      "$extensions": {
+        "com.designsystem.opacity": "{opacity.20}"
+      }
+    },
+    "info": {
+      "$value": "{color.purple.400}",
+      "$description": "Informação"
+    },
+    "info-subtle": {
+      "$value": "{color.purple.400}",
+      "$description": "Fundo discreto de informação",
+      "$extensions": {
+        "com.designsystem.opacity": "{opacity.20}"
+      }
+    }
+  },
+  "text": {
+    "$type": "color",
+    "default": {
+      "$value": "{color.neutral.50}",
+      "$description": "Texto principal"
+    },
+    "muted": {
+      "$value": "{color.neutral.400}",
+      "$description": "Texto de apoio"
+    },
+    "on-muted": {
+      "$value": "{color.neutral.50}",
+      "$description": "Texto sobre fundo em destaque"
+    },
+    "on-brand": {
+      "$value": "{color.white}",
+      "$description": "Texto sobre a marca"
+    },
+    "brand": {
+      "$value": "{color.orange.400}",
+      "$description": "Texto e links na cor da marca"
+    },
+    "danger": {
+      "$value": "{color.red.400}",
+      "$description": "Texto de erro"
+    },
+    "inverse": {
+      "$value": "{color.neutral.950}",
+      "$description": "Texto sobre fundo invertido"
+    },
+    "success": {
+      "$value": "{color.green.400}",
+      "$description": "Texto de sucesso"
+    },
+    "warning": {
+      "$value": "{color.yellow.400}",
+      "$description": "Texto de atenção"
+    },
+    "info": {
+      "$value": "{color.purple.300}",
+      "$description": "Texto informativo"
+    }
+  },
+  "stroke": {
+    "$type": "color",
+    "default": {
+      "$value": "{color.white}",
+      "$description": "Borda padrão",
+      "$extensions": {
+        "com.designsystem.opacity": "{opacity.10}"
+      }
+    },
+    "field": {
+      "$value": "{color.white}",
+      "$description": "Borda de campos",
+      "$extensions": {
+        "com.designsystem.opacity": "{opacity.15}"
+      }
+    },
+    "subtle": {
+      "$value": "{color.neutral.50}",
+      "$description": "Contorno de menus e janelas",
+      "$extensions": {
+        "com.designsystem.opacity": "{opacity.10}"
+      }
+    },
+    "brand": {
+      "$value": "{color.orange.500}",
+      "$description": "Borda na cor da marca"
+    },
+    "surface": {
+      "$value": "{color.neutral.900}",
+      "$description": "Borda com a cor do cartão"
+    },
+    "page": {
+      "$value": "{color.neutral.950}",
+      "$description": "Borda com a cor da página"
+    },
+    "focus": {
+      "$value": "{color.orange.500}",
+      "$description": "Foco"
+    },
+    "focus-subtle": {
+      "$value": "{color.orange.500}",
+      "$description": "Anel de foco",
+      "$extensions": {
+        "com.designsystem.opacity": "{opacity.30}"
+      }
+    },
+    "focus-neutral": {
+      "$value": "{color.neutral.500}",
+      "$description": "Foco na barra lateral"
+    },
+    "danger": {
+      "$value": "{color.red.400}",
+      "$description": "Borda de erro"
+    },
+    "danger-subtle": {
+      "$value": "{color.red.400}",
+      "$description": "Anel de erro",
+      "$extensions": {
+        "com.designsystem.opacity": "{opacity.40}"
+      }
+    },
+    "invalid": {
+      "$value": "{color.red.400}",
+      "$description": "Campo inválido",
+      "$extensions": {
+        "com.designsystem.opacity": "{opacity.50}"
+      }
+    },
+    "success": {
+      "$value": "{color.green.400}",
+      "$description": "Borda de sucesso"
+    },
+    "warning": {
+      "$value": "{color.yellow.400}",
+      "$description": "Borda de atenção"
+    },
+    "info": {
+      "$value": "{color.purple.400}",
+      "$description": "Borda informativa"
+    }
+  },
+  "data": {
+    "1": {
+      "$value": "{color.orange.500}",
+      "$description": "Série 1"
+    },
+    "2": {
+      "$value": "{color.purple.400}",
+      "$description": "Série 2"
+    },
+    "3": {
+      "$value": "{color.orange.300}",
+      "$description": "Série 3"
+    },
+    "4": {
+      "$value": "{color.purple.200}",
+      "$description": "Série 4"
+    },
+    "5": {
+      "$value": "{color.orange.700}",
+      "$description": "Série 5"
+    },
+    "$type": "color"
+  }
+}

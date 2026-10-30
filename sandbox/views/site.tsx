@@ -66,7 +66,7 @@ function SiteNav() {
                       <p.icon className="mt-0.5 shrink-0" />
                       <span>
                         <span className="block font-medium">{p.title}</span>
-                        <span className="block text-muted-foreground">{p.text}</span>
+                        <span className="block text-muted">{p.text}</span>
                       </span>
                     </NavigationMenuLink>
                   </li>

@@ -349,7 +349,7 @@ function FileTree() {
             </CollapsibleTrigger>
             <CollapsibleContent>
               <ul className="ml-6 space-y-1 border-l py-1 pl-3 text-sm">
-                {t.files.map((f) => <li key={f} className="flex items-center gap-2 py-1 text-muted-foreground"><FileTextIcon className="size-4" /> {f}</li>)}
+                {t.files.map((f) => <li key={f} className="flex items-center gap-2 py-1 text-muted"><FileTextIcon className="size-4" /> {f}</li>)}
               </ul>
             </CollapsibleContent>
           </Collapsible>
@@ -368,7 +368,7 @@ function PageCounter() {
   }, [api])
   const current = React.useSyncExternalStore(subscribe, () => (api?.selectedScrollSnap() ?? 0) + 1)
   return (
-    <div className="mt-3 flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground">
+    <div className="mt-3 flex flex-wrap items-center justify-center gap-2 text-sm text-muted">
       <Button variant="ghost" size="xs" disabled={!canScrollPrev} onClick={scrollPrev}>Anterior</Button>
       <span className="tabular-nums">Página {current} de {pages.length}</span>
       <Button variant="ghost" size="xs" disabled={!canScrollNext} onClick={scrollNext}>Próxima</Button>

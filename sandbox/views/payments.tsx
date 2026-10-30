@@ -195,7 +195,7 @@ function TransferForm({ amount, setAmount, erro, tipo, setTipo }: { amount: stri
             </FieldGroup>
           </FieldSet>
 
-          <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">Valores</FieldSeparator>
+          <FieldSeparator className="*:data-[slot=field-separator-content]:bg-surface">Valores</FieldSeparator>
 
           <FieldSet>
             <FieldLegend>Pagamento</FieldLegend>
@@ -215,7 +215,7 @@ function TransferForm({ amount, setAmount, erro, tipo, setTipo }: { amount: stri
               <Field>
                 <FieldLabel>Data</FieldLabel>
                 <Popover>
-                  <PopoverTrigger render={<Button variant="outline" data-empty={!date} className="w-full justify-start text-left font-normal data-[empty=true]:text-muted-foreground" />}>
+                  <PopoverTrigger render={<Button variant="outline" data-empty={!date} className="w-full justify-start text-left font-normal data-[empty=true]:text-muted" />}>
                     <CalendarIcon />
                     {date ? format(date, "PPP", { locale: ptBR }) : <span>Escolha uma data</span>}
                   </PopoverTrigger>
@@ -390,7 +390,7 @@ function SummaryCard({ value, invalid, tipo }: { value: number; invalid: boolean
             <Item key={l.title} size="xs" variant="muted">
               <ItemMedia variant="icon"><l.icon /></ItemMedia>
               <ItemContent><ItemTitle>{l.title}</ItemTitle></ItemContent>
-              <ItemContent className="flex-none text-right"><ItemDescription className={invalid && l.title === "Valor" ? "text-destructive" : "text-foreground"}>{l.text}</ItemDescription></ItemContent>
+              <ItemContent className="flex-none text-right"><ItemDescription className={invalid && l.title === "Valor" ? "text-danger" : "text-default"}>{l.text}</ItemDescription></ItemContent>
             </Item>
           ))}
         </ItemGroup>
@@ -434,7 +434,7 @@ function AgendaCard() {
           components={{ DayButton: DiaAgendado }}
         />
       </CardContent>
-      <CardFooter className="justify-between text-sm text-muted-foreground">3 pagamentos no mês <MonthPicker /></CardFooter>
+      <CardFooter className="justify-between text-sm text-muted">3 pagamentos no mês <MonthPicker /></CardFooter>
     </Card>
   )
 }

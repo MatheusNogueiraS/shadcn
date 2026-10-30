@@ -134,8 +134,8 @@ function ConversationList({ selected, onSelect }: { selected: number; onSelect: 
                     <ItemDescription className="line-clamp-1">{c.subject}</ItemDescription>
                   </ItemContent>
                   <ItemActions>
-                    <span className="text-xs text-muted-foreground tabular-nums">{c.time}</span>
-                    {c.unread && <span className="size-2 rounded-full bg-primary" aria-label="Não lida" />}
+                    <span className="text-xs text-muted tabular-nums">{c.time}</span>
+                    {c.unread && <span className="size-2 rounded-full bg-brand" aria-label="Não lida" />}
                   </ItemActions>
                 </Item>
               </RowMenu>
@@ -144,7 +144,7 @@ function ConversationList({ selected, onSelect }: { selected: number; onSelect: 
           ))}
         </ItemGroup>
       </ScrollArea>
-      <div className="border-t p-3 text-xs text-muted-foreground">Clique com o botão direito em uma conversa</div>
+      <div className="border-t p-3 text-xs text-muted">Clique com o botão direito em uma conversa</div>
     </div>
   )
 }
@@ -198,7 +198,7 @@ function CustomerHoverCard({ conversation }: { conversation: Conversation }) {
           </Avatar>
           <div className="space-y-1">
             <p className="text-sm font-medium">{conversation.name}</p>
-            <p className="text-sm text-muted-foreground">Cliente desde 2019 · Conta corrente</p>
+            <p className="text-sm text-muted">Cliente desde 2019 · Conta corrente</p>
             <Badge variant="outline">{conversation.tag}</Badge>
           </div>
         </div>
@@ -258,9 +258,9 @@ function Thread({ conversation }: { conversation: Conversation }) {
           </div>
           <div className="flex flex-row-reverse gap-3">
             <Avatar size="sm"><AvatarFallback>EU</AvatarFallback></Avatar>
-            <p className="max-w-md rounded-2xl bg-secondary p-3 text-secondary-foreground">Claro! Já estou analisando e retorno em instantes.</p>
+            <p className="max-w-md rounded-2xl bg-brand-secondary p-3 text-on-brand">Claro! Já estou analisando e retorno em instantes.</p>
           </div>
-          <div className="flex items-center gap-2 text-muted-foreground"><Spinner /> {conversation.name.split(" ")[0]} está digitando…</div>
+          <div className="flex items-center gap-2 text-muted"><Spinner /> {conversation.name.split(" ")[0]} está digitando…</div>
         </div>
         <ScrollBar orientation="horizontal" />
       </ScrollArea>
