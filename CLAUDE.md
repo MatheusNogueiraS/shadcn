@@ -4,9 +4,9 @@
 Todo trabalho acontece em uma branch aberta a partir da `main` atualizada, de um assunto só. Abra a branch antes de começar a alterar arquivos.
 
 ## Tokens
-Cores vivem em `tokens/`: fundações com os hexadecimais e semânticos com uma versão para Light e outra para Dark. `src/styles/tokens.css` é gerado: edite os JSON e rode `pnpm tokens`.
+Cores, medidas e tipografia vivem em `tokens/`: fundações com os valores e semânticos com os nomes de uso. As cores têm uma versão para Light e outra para Dark. `src/styles/tokens.css` é gerado: edite os JSON e rode `pnpm tokens`.
 
-Componentes usam somente semânticos (`bg-page`, `text-default`, `border-default`). Componente novo do `shadcn add` chega com os nomes originais: troque-os pelos semânticos de mesmo valor.
+Componentes usam somente semânticos: `bg-page`, `text-default`, `border-default`, `rounded-2xl`, `px-(--padding-lg)`, `gap-(--gap-sm)`, `text-body-sm`. Valores fora da escala continuam como classes do Tailwind. Componente novo do `shadcn add` chega com os nomes originais: troque-os pelos semânticos de mesmo valor e importe `cn` de `@/lib/utils`, porque o `cn` original apaga `text-body-sm` ao lado de uma cor.
 
 ## Tamanho de PR
 A recomendação é de até **300 linhas por PR**, somando adições e remoções, sem contar o `pnpm-lock.yaml`. É uma recomendação: o usuário pode passar dela quando quiser.

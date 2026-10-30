@@ -37,17 +37,17 @@ function luminancia(hex: string) {
 
 export function Escala({ nome }: { nome: "neutral" | "orange" | "purple" | "red" | "green" | "yellow" }) {
   return (
-    <div className="grid grid-cols-2 gap-2 font-sans text-sm sm:grid-cols-4 lg:grid-cols-6">
+    <div className="grid grid-cols-2 gap-(--gap-sm) font-sans text-body-sm sm:grid-cols-4 lg:grid-cols-6">
       {Object.entries(foundations.color[nome]).map(([tom, cor]) => {
         const hex = (cor as Cor).$value.hex
         const contraste = 1.05 / (luminancia(hex) + 0.05)
         return (
-          <div key={tom} className="overflow-hidden rounded-2xl border bg-surface text-default">
+          <div key={tom} className="overflow-hidden rounded-3xl border bg-surface text-default">
             <div className="h-14" style={{ background: hex }} />
-            <div className="p-2.5">
+            <div className="p-(--padding-md)">
               <div className="font-medium">{nome}-{tom}</div>
-              <div className="text-xs text-muted">{hex}</div>
-              <div className="text-xs text-muted">
+              <div className="text-body-xs text-muted">{hex}</div>
+              <div className="text-body-xs text-muted">
                 Branco {contraste.toFixed(2).replace(".", ",")}:1{contraste >= 4.5 ? " · AA" : ""}
               </div>
             </div>
@@ -60,15 +60,15 @@ export function Escala({ nome }: { nome: "neutral" | "orange" | "purple" | "red"
 
 export function Percentuais() {
   return (
-    <div className="flex flex-wrap gap-2 font-sans text-sm">
+    <div className="flex flex-wrap gap-(--gap-sm) font-sans text-body-sm">
       {Object.entries(opacity.opacity).filter(([k]) => !k.startsWith("$")).map(([nome, token]) => {
         const valor = (token as { $value: number }).$value
         return (
-          <div key={nome} className="w-24 overflow-hidden rounded-2xl border bg-surface text-default">
+          <div key={nome} className="w-24 overflow-hidden rounded-3xl border bg-surface text-default">
             <div className="h-10 bg-white">
               <div className="size-full" style={{ background: `color-mix(in oklab, #000000 ${valor}%, transparent)` }} />
             </div>
-            <div className="p-2 font-medium">opacity-{nome}</div>
+            <div className="p-(--padding-sm) font-medium">opacity-{nome}</div>
           </div>
         )
       })}
@@ -82,16 +82,16 @@ function Celula({ token, grupo, fundo }: { token: Semantico; grupo: string; fund
   // Cor igual ao fundo da coluna, como branco sobre branco: sem um apoio neutro, a amostra some.
   const apoio = css === fundo ? foundations.color.neutral["500"].$value.hex : undefined
   return (
-    <td className="w-[30%] border-l p-3 align-middle" style={{ background: fundo, color: eClaro ? foundations.color.neutral["950"].$value.hex : foundations.color.neutral["50"].$value.hex }}>
-      <div className="flex items-center gap-2.5">
+    <td className="w-[30%] border-l p-(--padding-lg) align-middle" style={{ background: fundo, color: eClaro ? foundations.color.neutral["950"].$value.hex : foundations.color.neutral["50"].$value.hex }}>
+      <div className="flex items-center gap-(--gap-md)">
         {grupo === "text" ? (
-          <span className="w-9 shrink-0 rounded-lg text-center text-lg font-medium" style={{ color: css, background: apoio }}>Aa</span>
+          <span className="w-9 shrink-0 rounded-lg text-center text-heading-md" style={{ color: css, background: apoio }}>Aa</span>
         ) : grupo === "stroke" ? (
           <span className="size-9 shrink-0 rounded-lg border-2" style={{ borderColor: css, background: apoio }} />
         ) : (
           <span className="size-9 shrink-0 rounded-lg" style={{ background: css, boxShadow: `inset 0 0 0 1px ${eClaro ? "#0000001a" : "#ffffff1a"}` }} />
         )}
-        <span className="text-xs leading-snug">
+        <span className="text-body-xs leading-snug">
           {nome}
           {numero !== undefined && <span className="block opacity-70">{String(numero).replace(".", ",")}%</span>}
         </span>
@@ -105,21 +105,21 @@ export function Semanticos({ grupo }: { grupo: "bg" | "text" | "stroke" | "data"
   const escuro = (dark as unknown as Tema)[grupo]
   const nomes = Object.keys(claro).filter((k) => !k.startsWith("$"))
   return (
-    <div className="overflow-x-auto rounded-2xl border font-sans text-sm">
+    <div className="overflow-x-auto rounded-3xl border font-sans text-body-sm">
       <table className="w-full border-collapse font-sans">
         <thead>
           <tr className="border-b bg-muted text-left text-default">
-            <th className="p-3 font-medium">Token</th>
-            <th className="border-l p-3 font-medium">Light</th>
-            <th className="border-l p-3 font-medium">Dark</th>
+            <th className="p-(--padding-lg) font-medium">Token</th>
+            <th className="border-l p-(--padding-lg) font-medium">Light</th>
+            <th className="border-l p-(--padding-lg) font-medium">Dark</th>
           </tr>
         </thead>
         <tbody>
           {nomes.map((nome) => (
             <tr key={nome} className="border-b last:border-b-0">
-              <td className="bg-surface p-3 align-middle text-default">
+              <td className="bg-surface p-(--padding-lg) align-middle text-default">
                 <div className="font-medium">{grupo}-{nome}</div>
-                <div className="text-xs text-muted">{claro[nome].$description}</div>
+                <div className="text-body-xs text-muted">{claro[nome].$description}</div>
               </td>
               <Celula token={claro[nome]} grupo={grupo} fundo="#ffffff" />
               <Celula token={escuro[nome]} grupo={grupo} fundo={foundations.color.neutral["950"].$value.hex} />

@@ -12,9 +12,20 @@ const UTILIDADES = {
   stroke: ["--border-color", "--ring-color", "--outline-color"],
   data: ["--color-data"],
 }
+const FUNDACOES = ["color", "opacity", "unit", "font-family", "font-size", "font-weight", "line-height", "letter-spacing"]
+const ESPACOS = ["padding", "gap"]
+// rounded-none e rounded-full são do Tailwind: os valores destes dois no JSON servem ao Figma e à documentação.
+const RAIOS_NATIVOS = ["none", "full"]
 
 const referencia = (texto) => `var(--${String(texto).slice(1, -1).replaceAll(".", "-")})`
 const temOpacidade = (token) => token.original.$extensions?.[OPACITY] !== undefined
+
+// O nome é o caminho no JSON: name/kebab transformaria 2xl em 2-xl.
+StyleDictionary.registerTransform({
+  name: "name/caminho",
+  type: "name",
+  transform: (token) => token.path.join("-"),
+})
 
 StyleDictionary.registerTransform({
   name: "color/hex",
@@ -37,15 +48,33 @@ StyleDictionary.registerTransform({
   },
 })
 
-const eFundacao = (token) => ["color", "opacity"].includes(token.path[0])
+StyleDictionary.registerTransform({
+  name: "dimension/css",
+  type: "value",
+  transitive: true,
+  filter: (token) => token.$type === "dimension" && typeof token.$value === "object",
+  transform: (token) => `${token.$value.value}${token.$value.unit}`,
+})
+
+StyleDictionary.registerTransform({
+  name: "fontFamily/css",
+  type: "value",
+  transitive: true,
+  filter: (token) => token.$type === "fontFamily" && Array.isArray(token.$value),
+  transform: (token) => token.$value.map((f) => (f.includes(" ") ? `'${f}'` : f)).join(", "),
+})
+
+const eFundacao = (token) => FUNDACOES.includes(token.path[0])
+const eEspaco = (token) => ESPACOS.includes(token.path[0])
+const eCor = (token) => token.path[0] in UTILIDADES
 
 async function gerar(modo, seletor, filtro, comReferencias) {
   const dicionario = new StyleDictionary({
-    source: ["tokens/foundations/*.json", `tokens/semantic/color.${modo}.json`],
+    source: ["tokens/foundations/*.json", `tokens/semantic/color.${modo}.json`, "tokens/semantic/radius.json", "tokens/semantic/spacing.json", "tokens/semantic/typography.json"],
     log: { warnings: "disabled", verbosity: "silent" },
     platforms: {
       css: {
-        transforms: ["name/kebab", "color/hex", "color/opacity"],
+        transforms: ["name/caminho", "color/hex", "color/opacity", "dimension/css", "fontFamily/css"],
         files: [{
           destination: "saida.css",
           format: "css/variables",
@@ -61,15 +90,36 @@ async function gerar(modo, seletor, filtro, comReferencias) {
 }
 
 const fundacoes = await gerar("light", ":root", eFundacao, false)
-const claro = await gerar("light", ":root", (t) => !eFundacao(t), true)
-const escuro = await gerar("dark", ".dark", (t) => !eFundacao(t), true)
+const claro = await gerar("light", ":root", (t) => eCor(t) || eEspaco(t), true)
+const escuro = await gerar("dark", ".dark", eCor, true)
 
-const mapeamento = claro.tokens.allTokens
-  .filter((token) => !eFundacao(token))
+const todos = claro.tokens.allTokens
+const mapeamento = todos
+  .filter(eCor)
   .flatMap((token) => {
     const [grupo, ...resto] = token.path
     return UTILIDADES[grupo].map((prefixo) => `  ${prefixo}-${resto.join("-")}: var(--${token.name});`)
   })
+
+// A altura de linha sai como proporção, como no Tailwind, para continuar valendo em um filho com outro tamanho de fonte.
+const emRem = (alias) => todos.find((t) => t.path.join(".") === alias.slice(1, -1)).original.$value.value
+const linhasDoEstilo = (token) => {
+  const { fontSize, lineHeight, fontWeight, letterSpacing } = token.original.$value
+  const nome = `--text-${token.name}`
+  return [
+    `  ${nome}: ${referencia(fontSize)};`,
+    `  ${nome}--line-height: calc(${emRem(lineHeight)} / ${emRem(fontSize)});`,
+    `  ${nome}--font-weight: ${referencia(fontWeight)};`,
+    ...(letterSpacing ? [`  ${nome}--letter-spacing: ${referencia(letterSpacing)};`] : []),
+  ]
+}
+// static: estas variáveis também são lidas em valores arbitrários, como [--cell-radius:var(--radius-4xl)].
+const tema = [
+  ...todos.filter((t) => t.path[0] === "radius" && !RAIOS_NATIVOS.includes(t.path[1])).map((t) => `  --${t.name}: ${referencia(t.original.$value)};`),
+  ...todos.filter((t) => t.path[0] === "font").map((t) => `  --${t.name}: ${referencia(t.original.$value)};`),
+  ...todos.filter((t) => t.path[0] === "letter-spacing").map((t) => `  --tracking-${t.path[1]}: var(--${t.name});`),
+  ...todos.filter((t) => t.$type === "typography").flatMap(linhasDoEstilo),
+]
 
 const conteudo = [
   "/* Gerado por scripts/build-tokens.mjs a partir de tokens/. Não edite à mão: rode `pnpm tokens`. */",
@@ -77,9 +127,10 @@ const conteudo = [
   claro.css,
   escuro.css,
   `@theme inline {\n${mapeamento.join("\n")}\n}`,
+  `@theme static {\n${tema.join("\n")}\n}`,
   "",
 ].join("\n\n")
 
 mkdirSync("src/styles", { recursive: true })
 writeFileSync(SAIDA, conteudo)
-console.log(`${SAIDA}: ${claro.tokens.allTokens.filter((t) => !eFundacao(t)).length} semânticos`)
+console.log(`${SAIDA}: ${todos.filter((t) => !eFundacao(t)).length} semânticos`)

@@ -35,7 +35,7 @@ export const Padrao: Story = { name: "Padrão" }
 
 export const Variantes: Story = {
   render: (args) => (
-    <div className="flex flex-wrap items-center gap-3">
+    <div className="flex flex-wrap items-center gap-(--gap-lg)">
       {variantes.map((v) => <Button key={v} {...args} variant={v}>{v}</Button>)}
     </div>
   ),
@@ -43,7 +43,7 @@ export const Variantes: Story = {
 
 export const Tamanhos: Story = {
   render: (args) => (
-    <div className="flex flex-wrap items-center gap-3">
+    <div className="flex flex-wrap items-center gap-(--gap-lg)">
       {tamanhos.map((s) => <Button key={s} {...args} size={s}>{s}</Button>)}
     </div>
   ),
@@ -52,7 +52,7 @@ export const Tamanhos: Story = {
 export const ComIcone: Story = {
   name: "Com ícone",
   render: (args) => (
-    <div className="flex flex-wrap items-center gap-3">
+    <div className="flex flex-wrap items-center gap-(--gap-lg)">
       <Button {...args}><PlusIcon data-icon="inline-start" /> Adicionar</Button>
       <Button {...args} variant="secondary">Continuar <ArrowRightIcon data-icon="inline-end" /></Button>
     </div>
@@ -65,7 +65,7 @@ export const SoIcone: Story = {
     docs: { description: { story: "Sem texto visível, o `aria-label` é obrigatório: é o que o leitor de tela anuncia." } },
   },
   render: (args) => (
-    <div className="flex flex-wrap items-center gap-3">
+    <div className="flex flex-wrap items-center gap-(--gap-lg)">
       <Button {...args} size="icon-sm" variant="outline" aria-label="Adicionar"><PlusIcon /></Button>
       <Button {...args} size="icon" aria-label="Adicionar"><PlusIcon /></Button>
     </div>

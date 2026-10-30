@@ -1,4 +1,4 @@
-import { cn } from "cn"
+import { cn } from "@/lib/utils"
 import { CreditCardIcon, LandmarkIcon, PiggyBankIcon, ShieldCheckIcon, SmartphoneIcon, TrendingUpIcon, type LucideIcon } from "lucide-react"
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
@@ -51,7 +51,7 @@ export function SiteView() {
 
 function SiteNav() {
   return (
-    <div className="flex flex-wrap items-center justify-between gap-3 rounded-3xl border p-2">
+    <div className="flex flex-wrap items-center justify-between gap-(--gap-lg) rounded-4xl border p-(--padding-sm)">
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
@@ -59,7 +59,7 @@ function SiteNav() {
             {/* A doc do shadcn mostra o indicador fora dos itens, mas o Base UI quebra a página se ele não estiver dentro de um. */}
             <NavigationMenuIndicator className="absolute inset-x-0 opacity-0 data-popup-open:opacity-100" />
             <NavigationMenuContent>
-              <ul className="grid w-[min(32rem,calc(100vw-3rem))] gap-1 sm:grid-cols-2">
+              <ul className="grid w-[min(32rem,calc(100vw-3rem))] gap-(--gap-2xs) sm:grid-cols-2">
                 {products.map((p) => (
                   <li key={p.title}>
                     <NavigationMenuLink href="#institucional" className="items-start">
@@ -77,7 +77,7 @@ function SiteNav() {
           <NavigationMenuItem>
             <NavigationMenuTrigger>Segurança</NavigationMenuTrigger>
             <NavigationMenuContent>
-              <ul className="grid w-64 gap-1">
+              <ul className="grid w-64 gap-(--gap-2xs)">
                 <li><NavigationMenuLink href="#institucional"><ShieldCheckIcon /> Proteção de conta</NavigationMenuLink></li>
                 <li><NavigationMenuLink href="#institucional"><SmartphoneIcon /> Celular perdido</NavigationMenuLink></li>
               </ul>
@@ -89,7 +89,7 @@ function SiteNav() {
         </NavigationMenuList>
       </NavigationMenu>
       {/* buttonVariants e badgeVariants aplicam o visual em um link comum; sem cn() as classes de borda entram em conflito. */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-(--gap-sm)">
         <a href="#institucional" className={cn(badgeVariants({ variant: "outline" }))}>Novidades</a>
         <a href="#pagamentos" className={cn(buttonVariants({ size: "sm" }))}>Abrir conta</a>
       </div>
@@ -103,7 +103,7 @@ function Hero() {
       <CarouselContent>
         {slides.map((s) => (
           <CarouselItem key={s.label}>
-            <AspectRatio ratio={21 / 9} className="overflow-hidden rounded-3xl bg-muted">
+            <AspectRatio ratio={21 / 9} className="overflow-hidden rounded-4xl bg-muted">
               <img src={banner(s.from, s.to, s.label)} alt={s.label} className="size-full object-cover" />
             </AspectRatio>
           </CarouselItem>
@@ -117,23 +117,23 @@ function Hero() {
 
 function PlansTabs() {
   return (
-    <section className="space-y-4">
-      <h2 className="text-2xl font-semibold tracking-tight">Escolha o seu plano</h2>
+    <section className="space-y-(--gap-2xl)">
+      <h2 className="text-heading-lg">Escolha o seu plano</h2>
       <Tabs defaultValue="pf">
         <TabsList variant="line">
           <TabsTrigger value="pf">Para você</TabsTrigger>
           <TabsTrigger value="pj">Para empresas</TabsTrigger>
         </TabsList>
         {["pf", "pj"].map((tab) => (
-          <TabsContent key={tab} value={tab} className="pt-4">
-            <div className="grid gap-4 md:grid-cols-3">
+          <TabsContent key={tab} value={tab} className="pt-(--padding-2xl)">
+            <div className="grid gap-(--gap-2xl) md:grid-cols-3">
               {plans.map((p) => (
                 <Card key={p.name}>
                   <CardHeader>
                     <CardTitle>{p.name}</CardTitle>
                     <CardDescription>{p.text}</CardDescription>
                   </CardHeader>
-                  <CardContent className="text-2xl font-semibold tabular-nums">{p.price}</CardContent>
+                  <CardContent className="text-heading-lg tracking-normal tabular-nums">{p.price}</CardContent>
                   <CardFooter><Button variant={p.name === "Plus" ? "default" : "outline"} className="w-full">Escolher</Button></CardFooter>
                 </Card>
               ))}
@@ -143,8 +143,8 @@ function PlansTabs() {
       </Tabs>
       {/* tabsListVariants aplica o visual da lista de abas em um filtro feito de links. */}
       <nav aria-label="Atalhos de plano" className={cn(tabsListVariants())}>
-        <a href="#institucional" className="rounded-full px-3 py-1 text-sm">Comparar</a>
-        <a href="#institucional" className="rounded-full px-3 py-1 text-sm">Tarifas</a>
+        <a href="#institucional" className="rounded-full px-(--padding-lg) py-(--padding-2xs) text-body-sm">Comparar</a>
+        <a href="#institucional" className="rounded-full px-(--padding-lg) py-(--padding-2xs) text-body-sm">Tarifas</a>
       </nav>
     </section>
   )
@@ -152,9 +152,9 @@ function PlansTabs() {
 
 function Faq() {
   return (
-    <section className="space-y-4">
+    <section className="space-y-(--gap-2xl)">
       <Separator />
-      <h2 className="text-2xl font-semibold tracking-tight">Perguntas frequentes</h2>
+      <h2 className="text-heading-lg">Perguntas frequentes</h2>
       <Accordion>
         <AccordionItem value="a"><AccordionTrigger>Como abro minha conta?</AccordionTrigger><AccordionContent>Pelo app, em poucos minutos, com um documento e uma foto.</AccordionContent></AccordionItem>
         <AccordionItem value="b"><AccordionTrigger>Tem tarifa de manutenção?</AccordionTrigger><AccordionContent>Não no plano Essencial.</AccordionContent></AccordionItem>

@@ -1,0 +1,158 @@
+{
+  "font": {
+    "$type": "fontFamily",
+    "sans": {
+      "$value": "{font-family.poppins}",
+      "$description": "Todo o sistema"
+    },
+    "heading": {
+      "$value": "{font-family.poppins}",
+      "$description": "Títulos de componentes"
+    },
+    "mono": {
+      "$value": "{font-family.lato}",
+      "$description": "Valores em tabela. Não é monoespaçada: ocupa este lugar porque tem algarismos de largura igual, que a Poppins não tem."
+    }
+  },
+  "display": {
+    "$type": "typography",
+    "lg": {
+      "$value": {
+        "fontFamily": "{font.heading}",
+        "fontSize": "{font-size.48}",
+        "lineHeight": "{line-height.48}",
+        "fontWeight": "{font-weight.bold}",
+        "letterSpacing": "{letter-spacing.tight}"
+      },
+      "$description": "Título principal em telas grandes"
+    },
+    "md": {
+      "$value": {
+        "fontFamily": "{font.heading}",
+        "fontSize": "{font-size.36}",
+        "lineHeight": "{line-height.40}",
+        "fontWeight": "{font-weight.bold}",
+        "letterSpacing": "{letter-spacing.tight}"
+      },
+      "$description": "Título principal"
+    }
+  },
+  "heading": {
+    "$type": "typography",
+    "xl": {
+      "$value": {
+        "fontFamily": "{font.heading}",
+        "fontSize": "{font-size.30}",
+        "lineHeight": "{line-height.36}",
+        "fontWeight": "{font-weight.medium}"
+      },
+      "$description": "Números em destaque"
+    },
+    "lg": {
+      "$value": {
+        "fontFamily": "{font.heading}",
+        "fontSize": "{font-size.24}",
+        "lineHeight": "{line-height.32}",
+        "fontWeight": "{font-weight.semibold}",
+        "letterSpacing": "{letter-spacing.tight}"
+      },
+      "$description": "Títulos de seção"
+    },
+    "md": {
+      "$value": {
+        "fontFamily": "{font.heading}",
+        "fontSize": "{font-size.18}",
+        "lineHeight": "{line-height.28}",
+        "fontWeight": "{font-weight.medium}"
+      },
+      "$description": "Títulos de alert dialog e empty"
+    },
+    "sm": {
+      "$value": {
+        "fontFamily": "{font.heading}",
+        "fontSize": "{font-size.16}",
+        "lineHeight": "{line-height.24}",
+        "fontWeight": "{font-weight.medium}"
+      },
+      "$description": "Títulos de card, dialog, drawer e sheet"
+    }
+  },
+  "body": {
+    "$type": "typography",
+    "md": {
+      "$value": {
+        "fontFamily": "{font.sans}",
+        "fontSize": "{font-size.16}",
+        "lineHeight": "{line-height.24}",
+        "fontWeight": "{font-weight.normal}"
+      },
+      "$description": "Texto de campos no celular"
+    },
+    "md-bold": {
+      "$value": {
+        "fontFamily": "{font.sans}",
+        "fontSize": "{font-size.16}",
+        "lineHeight": "{line-height.24}",
+        "fontWeight": "{font-weight.bold}"
+      },
+      "$description": "Texto de campos no celular, em destaque"
+    },
+    "sm": {
+      "$value": {
+        "fontFamily": "{font.sans}",
+        "fontSize": "{font-size.14}",
+        "lineHeight": "{line-height.20}",
+        "fontWeight": "{font-weight.normal}"
+      },
+      "$description": "Texto padrão"
+    },
+    "sm-bold": {
+      "$value": {
+        "fontFamily": "{font.sans}",
+        "fontSize": "{font-size.14}",
+        "lineHeight": "{line-height.20}",
+        "fontWeight": "{font-weight.bold}"
+      },
+      "$description": "Texto padrão em destaque"
+    },
+    "xs": {
+      "$value": {
+        "fontFamily": "{font.sans}",
+        "fontSize": "{font-size.12}",
+        "lineHeight": "{line-height.16}",
+        "fontWeight": "{font-weight.normal}"
+      },
+      "$description": "Texto auxiliar"
+    },
+    "xs-bold": {
+      "$value": {
+        "fontFamily": "{font.sans}",
+        "fontSize": "{font-size.12}",
+        "lineHeight": "{line-height.16}",
+        "fontWeight": "{font-weight.bold}"
+      },
+      "$description": "Texto auxiliar em destaque"
+    }
+  },
+  "label": {
+    "$type": "typography",
+    "sm": {
+      "$value": {
+        "fontFamily": "{font.sans}",
+        "fontSize": "{font-size.14}",
+        "lineHeight": "{line-height.20}",
+        "fontWeight": "{font-weight.medium}"
+      },
+      "$description": "Botões, menus e abas"
+    },
+    "xs": {
+      "$value": {
+        "fontFamily": "{font.sans}",
+        "fontSize": "{font-size.12}",
+        "lineHeight": "{line-height.16}",
+        "fontWeight": "{font-weight.medium}"
+      },
+      "$description": "Badge e sidebar"
+    }
+  }
+}

@@ -1,7 +1,7 @@
 "use client"
 
 import { Progress as ProgressPrimitive } from "@base-ui/react/progress"
-import { cn } from "cn"
+import { cn } from "@/lib/utils"
 
 function Progress({
   className,
@@ -13,7 +13,7 @@ function Progress({
     <ProgressPrimitive.Root
       value={value}
       data-slot="progress"
-      className={cn("flex flex-wrap gap-3", className)}
+      className={cn("flex flex-wrap gap-(--gap-lg)", className)}
       {...props}
     >
       {children}
@@ -53,7 +53,7 @@ function ProgressIndicator({
 function ProgressLabel({ className, ...props }: ProgressPrimitive.Label.Props) {
   return (
     <ProgressPrimitive.Label
-      className={cn("text-sm font-medium", className)}
+      className={cn("text-label-sm", className)}
       data-slot="progress-label"
       {...props}
     />
@@ -64,7 +64,7 @@ function ProgressValue({ className, ...props }: ProgressPrimitive.Value.Props) {
   return (
     <ProgressPrimitive.Value
       className={cn(
-        "ml-auto text-sm text-muted tabular-nums",
+        "ml-auto text-body-sm text-muted tabular-nums",
         className
       )}
       data-slot="progress-value"

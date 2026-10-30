@@ -138,7 +138,7 @@ export function Page() {
       <AppSidebar current={view.id} />
       <SidebarInset>
         <AppHeader title={view.title} onSearch={() => setSearchOpen(true)} />
-        <div className="mx-auto w-full max-w-7xl flex-1 p-6">{view.render()}</div>
+        <div className="mx-auto w-full max-w-7xl flex-1 p-(--padding-3xl)">{view.render()}</div>
       </SidebarInset>
       <CommandMenu open={searchOpen} onOpenChange={setSearchOpen} />
     </SidebarProvider>
@@ -237,10 +237,10 @@ function AccountSwitcher() {
       <SidebarMenuItem>
         <DropdownMenu>
           <DropdownMenuTrigger render={<SidebarMenuButton size="lg" tooltip="Trocar perfil" />}>
-            <div className="flex size-8 shrink-0 items-center justify-center rounded-xl bg-brand text-on-brand"><LandmarkIcon className="size-4" /></div>
-            <div className="grid flex-1 text-left text-sm leading-tight">
+            <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-brand text-on-brand"><LandmarkIcon className="size-4" /></div>
+            <div className="grid flex-1 text-left text-body-sm leading-tight">
               <span className="truncate font-medium">Sandbox</span>
-              <span className="truncate text-xs text-muted">Design system</span>
+              <span className="truncate text-body-xs text-muted">Design system</span>
             </div>
             <ChevronsUpDownIcon className="ml-auto" />
           </DropdownMenuTrigger>
@@ -263,11 +263,11 @@ function UserMenu() {
     <SidebarMenu>
       <SidebarMenuItem>
         <DropdownMenu>
-          <DropdownMenuTrigger render={<SidebarMenuButton size="lg" tooltip="Conta" />}>
+          <DropdownMenuTrigger render={<SidebarMenuButton size="lg" tooltip="Conta" className="rounded-2xl" />}>
             <Avatar size="sm"><AvatarImage src={portrait("#fa6300", "AS")} alt="Ana Souza" /><AvatarFallback>AS</AvatarFallback></Avatar>
-            <div className="grid flex-1 text-left text-sm leading-tight">
+            <div className="grid flex-1 text-left text-body-sm leading-tight">
               <span className="truncate font-medium">Ana Souza</span>
-              <span className="truncate text-xs text-muted">ana@exemplo.com</span>
+              <span className="truncate text-body-xs text-muted">ana@exemplo.com</span>
             </div>
             <ChevronsUpDownIcon className="ml-auto" />
           </DropdownMenuTrigger>
@@ -288,7 +288,7 @@ function AppHeader({ title, onSearch }: { title: string; onSearch: () => void })
   const { theme, setTheme } = useTheme()
   const dark = theme === "dark" || (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches)
   return (
-    <header className="sticky top-0 z-10 flex h-14 shrink-0 items-center gap-2 border-b bg-page/80 px-4 backdrop-blur">
+    <header className="sticky top-0 z-10 flex h-14 shrink-0 items-center gap-(--gap-sm) border-b bg-page/80 px-(--padding-2xl) backdrop-blur">
       <SidebarTrigger />
       <Separator orientation="vertical" className="mx-1 h-4 self-center!" />
       <Breadcrumb>
@@ -298,7 +298,7 @@ function AppHeader({ title, onSearch }: { title: string; onSearch: () => void })
           <BreadcrumbItem><BreadcrumbPage>{title}</BreadcrumbPage></BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <div className="ml-auto flex items-center gap-2">
+      <div className="ml-auto flex items-center gap-(--gap-sm)">
         <Button variant="outline" size="sm" onClick={onSearch} className="hidden sm:inline-flex">
           <SearchIcon /> Buscar <KbdGroup><Kbd>Ctrl</Kbd><Kbd>K</Kbd></KbdGroup>
         </Button>

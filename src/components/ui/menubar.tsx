@@ -3,7 +3,7 @@
 import * as React from "react"
 import { Menu as MenuPrimitive } from "@base-ui/react/menu"
 import { Menubar as MenubarPrimitive } from "@base-ui/react/menubar"
-import { cn } from "cn"
+import { cn } from "@/lib/utils"
 
 import {
   DropdownMenu,
@@ -26,7 +26,7 @@ function Menubar({ className, ...props }: MenubarPrimitive.Props) {
   return (
     <MenubarPrimitive
       data-slot="menubar"
-      className={cn("flex h-9 items-center rounded-3xl border p-1", className)}
+      className={cn("flex h-9 items-center rounded-4xl border p-(--padding-2xs)", className)}
       {...props}
     />
   )
@@ -56,7 +56,7 @@ function MenubarTrigger({
     <DropdownMenuTrigger
       data-slot="menubar-trigger"
       className={cn(
-        "flex items-center rounded-2xl px-2 py-0.75 text-sm font-medium outline-hidden select-none hover:bg-muted aria-expanded:bg-muted",
+        "flex items-center rounded-3xl px-(--padding-sm) py-0.75 text-label-sm outline-hidden select-none hover:bg-muted aria-expanded:bg-muted",
         className
       )}
       {...props}
@@ -77,7 +77,7 @@ function MenubarContent({
       align={align}
       alignOffset={alignOffset}
       sideOffset={sideOffset}
-      className={cn("min-w-48 rounded-3xl bg-surface p-1.5 text-default shadow-lg ring-1 ring-subtle duration-100 data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2 data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95", className )}
+      className={cn("min-w-48 rounded-4xl bg-surface p-(--padding-xs) text-default shadow-lg ring-1 ring-subtle duration-100 data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2 data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95", className )}
       {...props}
     />
   )
@@ -95,7 +95,7 @@ function MenubarItem({
       data-inset={inset}
       data-variant={variant}
       className={cn(
-        "group/menubar-item gap-2.5 rounded-2xl px-3 py-2 text-sm font-medium focus:bg-muted focus:text-on-muted not-data-[variant=destructive]:focus:**:text-on-muted data-inset:pl-9.5 data-[variant=destructive]:text-danger data-[variant=destructive]:focus:bg-danger-subtle data-[variant=destructive]:focus:text-danger data-disabled:opacity-50 [&_svg:not([class*='size-'])]:size-4 data-[variant=destructive]:*:[svg]:text-danger!",
+        "group/menubar-item gap-(--gap-md) rounded-3xl px-(--padding-lg) py-(--padding-sm) text-label-sm focus:bg-muted focus:text-on-muted not-data-[variant=destructive]:focus:**:text-on-muted data-inset:pl-9.5 data-[variant=destructive]:text-danger data-[variant=destructive]:focus:bg-danger-subtle data-[variant=destructive]:focus:text-danger data-disabled:opacity-50 [&_svg:not([class*='size-'])]:size-4 data-[variant=destructive]:*:[svg]:text-danger!",
         className
       )}
       {...props}
@@ -117,7 +117,7 @@ function MenubarCheckboxItem({
       data-slot="menubar-checkbox-item"
       data-inset={inset}
       className={cn(
-        "relative flex cursor-default items-center gap-2.5 rounded-2xl py-2 pr-3 pl-9.5 text-sm font-medium outline-hidden select-none focus:bg-muted focus:text-on-muted focus:**:text-on-muted data-inset:pl-9.5 data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+        "relative flex cursor-default items-center gap-(--gap-md) rounded-3xl py-(--padding-sm) pr-(--padding-lg) pl-9.5 text-label-sm outline-hidden select-none focus:bg-muted focus:text-on-muted focus:**:text-on-muted data-inset:pl-9.5 data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
         className
       )}
       checked={checked}
@@ -153,7 +153,7 @@ function MenubarRadioItem({
       data-slot="menubar-radio-item"
       data-inset={inset}
       className={cn(
-        "relative flex cursor-default items-center gap-2.5 rounded-2xl py-2 pr-3 pl-9.5 text-sm font-medium outline-hidden select-none focus:bg-muted focus:text-on-muted focus:**:text-on-muted data-inset:pl-9.5 data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "relative flex cursor-default items-center gap-(--gap-md) rounded-3xl py-(--padding-sm) pr-(--padding-lg) pl-9.5 text-label-sm outline-hidden select-none focus:bg-muted focus:text-on-muted focus:**:text-on-muted data-inset:pl-9.5 data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className
       )}
       {...props}
@@ -181,7 +181,7 @@ function MenubarLabel({
       data-slot="menubar-label"
       data-inset={inset}
       className={cn(
-        "px-3.5 py-2.5 text-xs text-muted data-inset:pl-9.5",
+        "px-(--padding-xl) py-(--padding-md) text-body-xs text-muted data-inset:pl-9.5",
         className
       )}
       {...props}
@@ -210,7 +210,7 @@ function MenubarShortcut({
     <DropdownMenuShortcut
       data-slot="menubar-shortcut"
       className={cn(
-        "ml-auto text-xs tracking-widest text-muted group-focus/menubar-item:text-on-muted",
+        "ml-auto text-label-xs tracking-widest text-muted group-focus/menubar-item:text-on-muted",
         className
       )}
       {...props}
@@ -236,7 +236,7 @@ function MenubarSubTrigger({
       data-slot="menubar-sub-trigger"
       data-inset={inset}
       className={cn(
-        "gap-2 rounded-2xl px-3 py-2 text-sm font-medium focus:bg-muted focus:text-on-muted data-inset:pl-9.5 data-open:bg-muted data-open:text-on-muted [&_svg:not([class*='size-'])]:size-4",
+        "gap-(--gap-sm) rounded-3xl px-(--padding-lg) py-(--padding-sm) text-label-sm focus:bg-muted focus:text-on-muted data-inset:pl-9.5 data-open:bg-muted data-open:text-on-muted [&_svg:not([class*='size-'])]:size-4",
         className
       )}
       {...props}
@@ -251,7 +251,7 @@ function MenubarSubContent({
   return (
     <DropdownMenuSubContent
       data-slot="menubar-sub-content"
-      className={cn("min-w-32 rounded-3xl bg-surface p-1.5 text-default shadow-lg ring-1 ring-subtle duration-100 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95", className )}
+      className={cn("min-w-32 rounded-4xl bg-surface p-(--padding-xs) text-default shadow-lg ring-1 ring-subtle duration-100 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95", className )}
       {...props}
     />
   )

@@ -2,6 +2,7 @@
    um componente novo chega usando bg-primary e sem isto ficaria sem cor, sem nenhum erro.
    Fora do Figma e da documentação. Ao adicionar um componente, troque para os tokens novos. */
 :root {
+  --radius: var(--radius-lg);
   --background: var(--bg-page);
   --foreground: var(--text-default);
   --card: var(--bg-surface);
