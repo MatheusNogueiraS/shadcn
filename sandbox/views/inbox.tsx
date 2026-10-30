@@ -67,6 +67,7 @@ import { toast } from "@/components/ui/toast"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { banner, portrait } from "../art"
+import { copiar } from "../copiar"
 
 type Conversation = { id: number; name: string; subject: string; preview: string; time: string; color: string; unread: boolean; tag: string }
 
@@ -158,7 +159,7 @@ function RowMenu({ conversation, children }: { conversation: Conversation; child
         <ContextMenuGroup>
           <ContextMenuLabel>{conversation.name}</ContextMenuLabel>
           <ContextMenuItem onClick={() => toast.add({ title: "Respondendo", description: conversation.subject })}><MailIcon /> Responder <ContextMenuShortcut>R</ContextMenuShortcut></ContextMenuItem>
-          <ContextMenuItem onClick={() => toast.add({ title: "Protocolo copiado" })}><CopyIcon /> Copiar protocolo <ContextMenuShortcut>Ctrl+C</ContextMenuShortcut></ContextMenuItem>
+          <ContextMenuItem onClick={() => void copiar(`2026${1000 + conversation.id}`, "Protocolo copiado")}><CopyIcon /> Copiar protocolo <ContextMenuShortcut>Ctrl+C</ContextMenuShortcut></ContextMenuItem>
           <ContextMenuSub>
             <ContextMenuSubTrigger className="gap-2.5"><TagIcon /> Mover para</ContextMenuSubTrigger>
             <ContextMenuSubContent>
@@ -302,7 +303,7 @@ function Composer() {
         </Attachment>
       </AttachmentGroup>
       <InputGroup>
-        <InputGroupTextarea value={text} onChange={(e) => setText(e.target.value)} placeholder="Escreva uma resposta…" aria-label="Resposta" />
+        <InputGroupTextarea value={text} onChange={(e) => setText(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send() } }} placeholder="Escreva uma resposta…" aria-label="Resposta" />
         <InputGroupAddon align="block-end">
           <InputGroupButton size="icon-xs" aria-label="Anexar arquivo"><PaperclipIcon /></InputGroupButton>
           <span className="hidden text-xs font-normal sm:inline">Enviar com <Kbd>Enter</Kbd></span>

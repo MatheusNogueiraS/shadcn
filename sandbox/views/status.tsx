@@ -73,6 +73,11 @@ function ToastsCard() {
     { type: "error", label: "Erro", title: "Falha na cobrança" },
     { type: "loading", label: "Carregando", title: "Processando…" },
   ]
+  const disparar = (t: (typeof types)[number]) => {
+    const id = toast.add({ type: t.type, title: t.title, description: "Exemplo de toast." })
+    // Toast de carregamento não fecha sozinho: quem o abriu avisa quando o trabalho termina.
+    if (t.type === "loading") setTimeout(() => toast.update(id, { type: "success", title: "Processado", description: "Exemplo de toast." }), 3000)
+  }
   return (
     <Card>
       <CardHeader>
@@ -81,7 +86,7 @@ function ToastsCard() {
       </CardHeader>
       <CardContent className="flex flex-wrap gap-2">
         {types.map((t) => (
-          <Button key={t.type} variant="outline" size="sm" onClick={() => toast.add({ type: t.type, title: t.title, description: "Exemplo de toast.", timeout: t.type === "loading" ? 3000 : undefined })}>{t.label}</Button>
+          <Button key={t.type} variant="outline" size="sm" onClick={() => disparar(t)}>{t.label}</Button>
         ))}
         <Button variant="outline" size="sm" onClick={() => toast.add({ title: "Conversa arquivada", actionProps: { children: "Desfazer", onClick: () => toast.add({ type: "info", title: "Arquivamento desfeito" }) } })}>Com ação</Button>
         <Button variant="secondary" size="sm" onClick={() => receipts.add({ title: "Comprovante pronto", description: "Pix de R$ 1.250,00", actionProps: { children: "Abrir" } })}><ReceiptIcon /> Personalizado</Button>
@@ -93,12 +98,12 @@ function ToastsCard() {
 function UploadCard() {
   const [value, setValue] = React.useState(0)
   const [running, setRunning] = React.useState(false)
+  const done = value >= 100
   React.useEffect(() => {
-    if (!running) return
+    if (!running || done) return
     const t = setInterval(() => setValue((v) => Math.min(100, v + 10)), 300)
     return () => clearInterval(t)
-  }, [running])
-  const done = value >= 100
+  }, [running, done])
   return (
     <Card>
       <CardHeader>

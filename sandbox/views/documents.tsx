@@ -103,6 +103,7 @@ import { toast } from "@/components/ui/toast"
 import { Toggle, toggleVariants } from "@/components/ui/toggle"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { banner } from "../art"
+import { copiar } from "../copiar"
 
 const pages = [
   { label: "Capa", from: "#fa6300", to: "#a43f04" },
@@ -322,7 +323,7 @@ function ShareDrawer() {
           </DrawerHeader>
           <div className="p-4"><Input readOnly aria-label="Link do documento" value="https://exemplo.com/d/outubro" /></div>
           <DrawerFooter>
-            <DrawerClose render={<Button onClick={() => toast.add({ title: "Link copiado" })} />}>Copiar link</DrawerClose>
+            <DrawerClose render={<Button onClick={() => void copiar("https://exemplo.com/d/outubro", "Link copiado")} />}>Copiar link</DrawerClose>
             <DrawerClose render={<Button variant="outline" />}>Fechar</DrawerClose>
           </DrawerFooter>
         </div>

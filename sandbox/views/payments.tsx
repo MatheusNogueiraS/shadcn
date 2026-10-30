@@ -108,25 +108,31 @@ const otherBanks = ["Banrisul", "BRB", "BTG Pactual", "C6 Bank", "Inter", "Merca
 const toKey = (name: string) => name.toLowerCase().replace(/\s+/g, "-")
 const banks = Object.fromEntries([...mainBanks, ...otherBanks].map((b) => [toKey(b), b]))
 
+const SALDO = 12480
+// Formato brasileiro: 1250,50 ou 1.250,50.
+const VALOR = /^(\d+|\d{1,3}(\.\d{3})+)(,\d{1,2})?$/
 const brl = (n: number) => n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })
 const scheduled = [new Date(2026, 10, 5), new Date(2026, 10, 10), new Date(2026, 10, 20)]
 
 export function PaymentsView() {
   const [amount, setAmount] = React.useState("1250,00")
-  const value = Number(amount.replace(/\./g, "").replace(",", ".")) || 0
-  const invalid = value > 12480
+  const [tipo, setTipo] = React.useState("pix")
+  const valido = VALOR.test(amount.trim())
+  const value = valido ? Number(amount.trim().replace(/\./g, "").replace(",", ".")) : 0
+  const erro = value <= 0 ? "Informe um valor válido." : value > SALDO ? "O valor passa do saldo disponível." : ""
   return (
     <div className="grid items-start gap-4 lg:grid-cols-3">
-      <div className="lg:col-span-2"><TransferForm amount={amount} setAmount={setAmount} invalid={invalid} /></div>
+      <div className="lg:col-span-2"><TransferForm amount={amount} setAmount={setAmount} erro={erro} tipo={tipo} setTipo={setTipo} /></div>
       <div className="space-y-4">
-        <SummaryCard value={value} invalid={invalid} />
+        <SummaryCard value={value} invalid={Boolean(erro)} tipo={tipo} />
         <AgendaCard />
       </div>
     </div>
   )
 }
 
-function TransferForm({ amount, setAmount, invalid }: { amount: string; setAmount: (v: string) => void; invalid: boolean }) {
+function TransferForm({ amount, setAmount, erro, tipo, setTipo }: { amount: string; setAmount: (v: string) => void; erro: string; tipo: string; setTipo: (v: string) => void }) {
+  const invalid = Boolean(erro)
   const [date, setDate] = React.useState<Date | undefined>(new Date(2026, 10, 5))
   const [note, setNote] = React.useState("")
   const anchor = useComboboxAnchor()
@@ -203,7 +209,7 @@ function TransferForm({ amount, setAmount, invalid }: { amount: string; setAmoun
                     <InputGroupButton onClick={() => setAmount("12.480,00")}>Máximo</InputGroupButton>
                   </InputGroupAddon>
                 </InputGroup>
-                {invalid ? <FieldError>O valor passa do saldo disponível.</FieldError> : <FieldDescription>Saldo disponível: {brl(12480)}.</FieldDescription>}
+                {invalid ? <FieldError>{erro}</FieldError> : <FieldDescription>Saldo disponível: {brl(SALDO)}.</FieldDescription>}
               </Field>
 
               <Field>
@@ -219,7 +225,7 @@ function TransferForm({ amount, setAmount, invalid }: { amount: string; setAmoun
                 </Popover>
               </Field>
 
-              <RadioGroup defaultValue="pix">
+              <RadioGroup value={tipo} onValueChange={(v) => setTipo(String(v))}>
                 <FieldLabel htmlFor="tipo-pix">
                   <Field orientation="horizontal">
                     <RadioGroupItem value="pix" id="tipo-pix" />
@@ -305,12 +311,14 @@ function ConfirmDialog({ disabled }: { disabled: boolean }) {
   const [code, setCode] = React.useState("")
   const [sending, setSending] = React.useState(false)
   const [open, setOpen] = React.useState(false)
+  const timer = React.useRef<ReturnType<typeof setTimeout>>(undefined)
+  React.useEffect(() => () => clearTimeout(timer.current), [])
 
   const confirm = (e: React.MouseEvent) => {
     // Mantém o dialog aberto durante o envio; ele fecha quando o envio termina.
     e.preventDefault()
     setSending(true)
-    setTimeout(() => {
+    timer.current = setTimeout(() => {
       setSending(false)
       setOpen(false)
       setCode("")
@@ -319,7 +327,7 @@ function ConfirmDialog({ disabled }: { disabled: boolean }) {
   }
 
   return (
-    <AlertDialog open={open} onOpenChange={setOpen}>
+    <AlertDialog open={open} onOpenChange={(proximo) => { if (sending) return; setOpen(proximo); if (!proximo) setCode("") }}>
       <AlertDialogTrigger render={<Button disabled={disabled} />}>Continuar</AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
@@ -353,11 +361,11 @@ function ConfirmDialog({ disabled }: { disabled: boolean }) {
   )
 }
 
-function SummaryCard({ value, invalid }: { value: number; invalid: boolean }) {
+function SummaryCard({ value, invalid, tipo }: { value: number; invalid: boolean; tipo: string }) {
   const lines = [
     { icon: CircleDollarSignIcon, title: "Valor", text: brl(value) },
     { icon: WalletIcon, title: "Tarifa", text: brl(0) },
-    { icon: ZapIcon, title: "Chegada", text: "Na hora" },
+    { icon: ZapIcon, title: "Chegada", text: tipo === "pix" ? "Na hora" : "Até 17h em dias úteis" },
   ]
   return (
     <Card>
@@ -401,6 +409,15 @@ function SummaryCard({ value, invalid }: { value: number; invalid: boolean }) {
   )
 }
 
+function DiaAgendado({ children, modifiers, day, ...props }: React.ComponentProps<typeof CalendarDayButton>) {
+  return (
+    <CalendarDayButton day={day} modifiers={modifiers} {...props}>
+      {children}
+      {modifiers.selected && <span className="sr-only">com pagamento agendado</span>}
+    </CalendarDayButton>
+  )
+}
+
 function AgendaCard() {
   return (
     <Card>
@@ -414,14 +431,7 @@ function AgendaCard() {
           locale={ptBR}
           selected={scheduled}
           defaultMonth={new Date(2026, 10, 1)}
-          components={{
-            DayButton: ({ children, modifiers, day, ...props }) => (
-              <CalendarDayButton day={day} modifiers={modifiers} {...props}>
-                {children}
-                {modifiers.selected && <span className="sr-only">com pagamento agendado</span>}
-              </CalendarDayButton>
-            ),
-          }}
+          components={{ DayButton: DiaAgendado }}
         />
       </CardContent>
       <CardFooter className="justify-between text-sm text-muted-foreground">3 pagamentos no mês <MonthPicker /></CardFooter>

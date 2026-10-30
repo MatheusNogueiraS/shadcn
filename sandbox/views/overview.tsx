@@ -118,6 +118,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/toast"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+import { copiar } from "../copiar"
 
 /* ---------- dados ---------- */
 
@@ -419,7 +420,7 @@ function ShareCard() {
         <InputGroup>
           <InputGroupInput readOnly value="https://app.exemplo.com/p/abc123" />
           <InputGroupAddon align="inline-end">
-            <Button size="xs" onClick={() => { void navigator.clipboard?.writeText("https://app.exemplo.com/p/abc123"); toast.add({ title: "Link copiado" }) }}>Copiar</Button>
+            <Button size="xs" onClick={() => void copiar("https://app.exemplo.com/p/abc123", "Link copiado")}>Copiar</Button>
           </InputGroupAddon>
         </InputGroup>
       </CardContent>
@@ -615,9 +616,9 @@ function CustomersTable() {
         <div className="flex flex-wrap gap-2">
           <InputGroup className="max-w-xs">
             <InputGroupAddon><SearchIcon /></InputGroupAddon>
-            <InputGroupInput placeholder="Buscar cliente…" value={q} onChange={(e) => { setQ(e.target.value); setPage(0) }} />
+            <InputGroupInput placeholder="Buscar cliente…" value={q} onChange={(e) => { setQ(e.target.value); setPage(0); setSel(new Set()) }} />
           </InputGroup>
-          <Select value={status} items={statusFilters} onValueChange={(v) => { setStatus(v ?? "todos"); setPage(0) }}>
+          <Select value={status} items={statusFilters} onValueChange={(v) => { setStatus(v ?? "todos"); setPage(0); setSel(new Set()) }}>
             <SelectTrigger className="w-44"><SelectValue /></SelectTrigger>
             <SelectContent>
               <SelectGroup>
@@ -666,7 +667,7 @@ function CustomersTable() {
                       <DropdownMenuTrigger render={<Button variant="ghost" size="icon-sm" aria-label="Ações" />}><MoreHorizontalIcon /></DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
                         <DropdownMenuItem onClick={() => toast.add({ title: "Abrindo perfil", description: c.name })}>Ver perfil</DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => { void navigator.clipboard?.writeText(c.email); toast.add({ title: "E-mail copiado" }) }}>Copiar e-mail</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => void copiar(c.email, "E-mail copiado")}>Copiar e-mail</DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem variant="destructive">Cancelar assinatura</DropdownMenuItem>
                       </DropdownMenuContent>
@@ -690,7 +691,7 @@ function CustomersTable() {
           <Pagination aria-label="Paginação" className="mx-0 w-auto justify-end">
             <PaginationContent>
               <PaginationItem>
-                <PaginationPrevious text="Anterior" aria-label="Página anterior" href="#visao-geral" aria-disabled={cur === 0} className={cur === 0 ? "pointer-events-none opacity-50" : undefined} onClick={stay(() => setPage(cur - 1))} />
+                <PaginationPrevious text="Anterior" aria-label="Página anterior" href="#visao-geral" aria-disabled={cur === 0} tabIndex={cur === 0 ? -1 : undefined} className={cur === 0 ? "pointer-events-none opacity-50" : undefined} onClick={stay(() => setPage(Math.max(0, cur - 1)))} />
               </PaginationItem>
               {shown.map((i, n) => (
                 <React.Fragment key={i}>
@@ -701,7 +702,7 @@ function CustomersTable() {
                 </React.Fragment>
               ))}
               <PaginationItem>
-                <PaginationNext text="Próxima" aria-label="Próxima página" href="#visao-geral" aria-disabled={cur >= pages - 1} className={cur >= pages - 1 ? "pointer-events-none opacity-50" : undefined} onClick={stay(() => setPage(cur + 1))} />
+                <PaginationNext text="Próxima" aria-label="Próxima página" href="#visao-geral" aria-disabled={cur >= pages - 1} tabIndex={cur >= pages - 1 ? -1 : undefined} className={cur >= pages - 1 ? "pointer-events-none opacity-50" : undefined} onClick={stay(() => setPage(Math.min(pages - 1, cur + 1)))} />
               </PaginationItem>
             </PaginationContent>
           </Pagination>
