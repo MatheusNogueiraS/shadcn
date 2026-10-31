@@ -78,6 +78,14 @@ import {
   InputGroupAddon,
   InputGroupInput,
 } from "@/components/ui/input-group"
+import {
+  Item,
+  ItemContent,
+  ItemDescription,
+  ItemGroup,
+  ItemSeparator,
+  ItemTitle,
+} from "@/components/ui/item"
 import { Kbd, KbdGroup } from "@/components/ui/kbd"
 import { Label } from "@/components/ui/label"
 import {
@@ -183,6 +191,7 @@ export function OverviewView() {
           <MetricCards />
           <RevenueCard />
           <SignupsCard />
+          <ProposalSummaryCard />
           <LoginCard />
           <SettingsCard />
           <PaymentCard />
@@ -243,6 +252,45 @@ function RevenueCard() {
             <Area dataKey="v" type="monotone" fill="var(--color-v)" fillOpacity={0.2} stroke="var(--color-v)" />
           </AreaChart>
         </ChartContainer>
+      </CardContent>
+    </Card>
+  )
+}
+
+function ProposalSummaryCard() {
+  const lines = [
+    { label: "Valor solicitado", context: "Antes dos descontos", value: "R$ 1.035,24", support: "(100,00%)", description: "Em 84 parcelas" },
+    { label: "Valor liberado", context: "Líquido ao cliente", value: "R$ 1.000,00", support: "(96,60%)", description: "Crédito em conta" },
+    { label: "Seguro", context: "Opcional", value: "R$ 25,24", support: "(2,44%)", description: "Incluso nas parcelas" },
+    { label: "Tarifa de cadastro", context: "Cobrada uma vez", value: "R$ 10,00", support: "(0,97%)", description: "Paga na contratação" },
+    { label: "Parcelas", context: "Débito mensal", value: "84x de R$ 42,38", support: "(3,93% a.m.)", description: "Total de R$ 3.559,92" },
+  ]
+  return (
+    <Card className="lg:col-span-2 xl:col-span-1">
+      <CardHeader>
+        <CardTitle>Resumo da proposta</CardTitle>
+        <CardDescription>Nº 000000000</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <ItemGroup>
+          {lines.map((l, i) => (
+            <React.Fragment key={l.label}>
+              {i > 0 && <ItemSeparator aria-hidden />}
+              <Item role="listitem" size="xs" className="p-(--padding-none)">
+                <ItemContent>
+                  <ItemDescription>{l.label}</ItemDescription>
+                  <ItemDescription className="text-body-xs">{l.context}</ItemDescription>
+                </ItemContent>
+                <ItemContent className="items-end">
+                  <ItemTitle className="gap-(--gap-3xs) font-mono text-body-sm-bold">
+                    {l.value}<span className="text-body-xs text-muted">{l.support}</span>
+                  </ItemTitle>
+                  <ItemDescription className="text-right font-mono text-body-xs">{l.description}</ItemDescription>
+                </ItemContent>
+              </Item>
+            </React.Fragment>
+          ))}
+        </ItemGroup>
       </CardContent>
     </Card>
   )
