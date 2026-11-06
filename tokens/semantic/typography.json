@@ -1,19 +1,4 @@
 {
-  "font": {
-    "$type": "fontFamily",
-    "sans": {
-      "$value": "{font-family.poppins}",
-      "$description": "Todo o sistema"
-    },
-    "heading": {
-      "$value": "{font-family.poppins}",
-      "$description": "Títulos de componentes"
-    },
-    "mono": {
-      "$value": "{font-family.lato}",
-      "$description": "Valores em tabela. Não é monoespaçada: ocupa este lugar porque tem algarismos de largura igual, que a Poppins não tem."
-    }
-  },
   "display": {
     "$type": "typography",
     "lg": {
@@ -65,7 +50,17 @@
         "lineHeight": "{line-height.28}",
         "fontWeight": "{font-weight.medium}"
       },
-      "$description": "Títulos de alert dialog e empty"
+      "$description": "Título do alert dialog"
+    },
+    "md-tight": {
+      "$value": {
+        "fontFamily": "{font.heading}",
+        "fontSize": "{font-size.18}",
+        "lineHeight": "{line-height.28}",
+        "fontWeight": "{font-weight.medium}",
+        "letterSpacing": "{letter-spacing.tight}"
+      },
+      "$description": "Título do empty"
     },
     "sm": {
       "$value": {
@@ -74,7 +69,16 @@
         "lineHeight": "{line-height.24}",
         "fontWeight": "{font-weight.medium}"
       },
-      "$description": "Títulos de card, dialog, drawer e sheet"
+      "$description": "Títulos de card, drawer e sheet"
+    },
+    "sm-compact": {
+      "$value": {
+        "fontFamily": "{font.heading}",
+        "fontSize": "{font-size.16}",
+        "lineHeight": "{line-height.16}",
+        "fontWeight": "{font-weight.medium}"
+      },
+      "$description": "Título do dialog, em uma linha"
     }
   },
   "body": {
@@ -132,6 +136,15 @@
         "fontWeight": "{font-weight.bold}"
       },
       "$description": "Texto auxiliar em destaque"
+    },
+    "xs-compact": {
+      "$value": {
+        "fontFamily": "{font.sans}",
+        "fontSize": "{font-size.12}",
+        "lineHeight": "{line-height.12}",
+        "fontWeight": "{font-weight.normal}"
+      },
+      "$description": "Nome da série no tooltip do gráfico"
     }
   },
   "label": {
@@ -145,6 +158,15 @@
       },
       "$description": "Botões, menus e abas"
     },
+    "sm-compact": {
+      "$value": {
+        "fontFamily": "{font.sans}",
+        "fontSize": "{font-size.14}",
+        "lineHeight": "{line-height.14}",
+        "fontWeight": "{font-weight.medium}"
+      },
+      "$description": "Label de formulário, em uma linha"
+    },
     "xs": {
       "$value": {
         "fontFamily": "{font.sans}",
@@ -153,6 +175,55 @@
         "fontWeight": "{font-weight.medium}"
       },
       "$description": "Badge e sidebar"
+    },
+    "xs-compact": {
+      "$value": {
+        "fontFamily": "{font.sans}",
+        "fontSize": "{font-size.12}",
+        "lineHeight": "{line-height.12}",
+        "fontWeight": "{font-weight.medium}"
+      },
+      "$description": "Rótulo do tooltip do gráfico dentro da série, em uma linha"
+    },
+    "xs-wide": {
+      "$value": {
+        "fontFamily": "{font.sans}",
+        "fontSize": "{font-size.12}",
+        "lineHeight": "{line-height.16}",
+        "fontWeight": "{font-weight.medium}",
+        "letterSpacing": "{letter-spacing.widest}"
+      },
+      "$description": "Atalhos de teclado nos menus"
+    }
+  },
+  "mono": {
+    "$type": "typography",
+    "sm": {
+      "$value": {
+        "fontFamily": "{font.mono}",
+        "fontSize": "{font-size.14}",
+        "lineHeight": "{line-height.20}",
+        "fontWeight": "{font-weight.normal}"
+      },
+      "$description": "Células e legenda da tabela"
+    },
+    "sm-bold": {
+      "$value": {
+        "fontFamily": "{font.mono}",
+        "fontSize": "{font-size.14}",
+        "lineHeight": "{line-height.20}",
+        "fontWeight": "{font-weight.bold}"
+      },
+      "$description": "Cabeçalho e rodapé da tabela"
+    },
+    "xs-compact": {
+      "$value": {
+        "fontFamily": "{font.mono}",
+        "fontSize": "{font-size.12}",
+        "lineHeight": "{line-height.12}",
+        "fontWeight": "{font-weight.normal}"
+      },
+      "$description": "Valor da série no tooltip do gráfico"
     }
   }
 }

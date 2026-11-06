@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "group/button inline-flex shrink-0 items-center justify-center rounded-5xl border border-transparent bg-clip-padding text-label-sm whitespace-nowrap transition-all outline-none select-none focus-visible:border-focus focus-visible:ring-3 focus-visible:ring-focus-subtle active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-invalid aria-invalid:ring-3 aria-invalid:ring-danger-subtle [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "group/button inline-flex shrink-0 items-center justify-center rounded-5xl border-sm border-transparent bg-clip-padding text-label-sm whitespace-nowrap transition-all outline-none select-none focus-visible:border-focus focus-visible:ring-xl focus-visible:ring-focus-subtle active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-invalid aria-invalid:ring-xl aria-invalid:ring-danger-subtle [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-(--size-md)",
   {
     variants: {
       variant: {
@@ -21,13 +21,13 @@ const buttonVariants = cva(
       size: {
         default:
           "h-9 gap-(--gap-xs) px-(--padding-lg) has-data-[icon=inline-end]:pr-(--padding-md) has-data-[icon=inline-start]:pl-(--padding-md)",
-        xs: "h-6 gap-(--gap-2xs) px-(--padding-md) text-label-xs has-data-[icon=inline-end]:pr-(--padding-sm) has-data-[icon=inline-start]:pl-(--padding-sm) [&_svg:not([class*='size-'])]:size-3",
+        xs: "h-6 gap-(--gap-2xs) px-(--padding-md) text-label-xs has-data-[icon=inline-end]:pr-(--padding-sm) has-data-[icon=inline-start]:pl-(--padding-sm) [&_svg:not([class*='size-'])]:size-(--size-xs)",
         sm: "h-8 gap-(--gap-2xs) px-(--padding-lg) has-data-[icon=inline-end]:pr-(--padding-sm) has-data-[icon=inline-start]:pl-(--padding-sm)",
         lg: "h-10 gap-(--gap-xs) px-(--padding-2xl) has-data-[icon=inline-end]:pr-(--padding-lg) has-data-[icon=inline-start]:pl-(--padding-lg)",
-        icon: "size-9",
-        "icon-xs": "size-6 [&_svg:not([class*='size-'])]:size-3",
-        "icon-sm": "size-8",
-        "icon-lg": "size-10",
+        icon: "size-(--size-3xl)",
+        "icon-xs": "size-(--size-xl) [&_svg:not([class*='size-'])]:size-(--size-xs)",
+        "icon-sm": "size-(--size-2xl)",
+        "icon-lg": "size-(--size-4xl)",
       },
     },
     defaultVariants: {

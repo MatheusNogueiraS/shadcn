@@ -33,6 +33,9 @@
     },
     "4xl": {
       "$value": "{unit.32}"
+    },
+    "5xl": {
+      "$value": "{unit.48}"
     }
   },
   "gap": {
@@ -69,6 +72,53 @@
     },
     "4xl": {
       "$value": "{unit.32}"
+    }
+  },
+  "size": {
+    "$type": "dimension",
+    "3xs": {
+      "$value": "{unit.8}",
+      "$description": "Ponto do radio e ícone do selo do avatar"
+    },
+    "2xs": {
+      "$value": "{unit.10}",
+      "$description": "Selo do avatar e seta do tooltip"
+    },
+    "xs": {
+      "$value": "{unit.12}",
+      "$description": "Ícones pequenos: badge, kbd e botão xs"
+    },
+    "sm": {
+      "$value": "{unit.14}",
+      "$description": "Ícones de checkbox, breadcrumb, calendário e campos"
+    },
+    "md": {
+      "$value": "{unit.16}",
+      "$description": "Ícone padrão, checkbox e radio"
+    },
+    "lg": {
+      "$value": "{unit.20}",
+      "$description": "Ícone do Empty e reticências do breadcrumb"
+    },
+    "xl": {
+      "$value": "{unit.24}",
+      "$description": "Avatar pequeno e botão só com ícone xs, da altura de h-6"
+    },
+    "2xl": {
+      "$value": "{unit.32}",
+      "$description": "Avatar e botão só com ícone sm, da altura de h-8"
+    },
+    "3xl": {
+      "$value": "{unit.36}",
+      "$description": "Botão só com ícone, slot do OTP e paginação, da altura de h-9"
+    },
+    "4xl": {
+      "$value": "{unit.40}",
+      "$description": "Avatar grande, botão só com ícone lg e mídia do Empty"
+    },
+    "5xl": {
+      "$value": "{unit.64}",
+      "$description": "Mídia do AlertDialog"
     }
   }
 }

@@ -14,7 +14,7 @@ function Avatar({
       data-slot="avatar"
       data-size={size}
       className={cn(
-        "group/avatar relative flex size-8 shrink-0 rounded-full select-none after:absolute after:inset-0 after:rounded-full after:border after:border-default after:mix-blend-darken data-[size=lg]:size-10 data-[size=sm]:size-6 dark:after:mix-blend-lighten",
+        "group/avatar relative flex size-(--size-2xl) shrink-0 rounded-full select-none after:absolute after:inset-0 after:rounded-full after:border-sm after:border-default after:mix-blend-darken data-[size=lg]:size-(--size-4xl) data-[size=sm]:size-(--size-xl) dark:after:mix-blend-lighten",
         className
       )}
       {...props}
@@ -56,10 +56,10 @@ function AvatarBadge({ className, ...props }: React.ComponentProps<"span">) {
     <span
       data-slot="avatar-badge"
       className={cn(
-        "absolute right-0 bottom-0 z-10 inline-flex items-center justify-center rounded-full bg-brand text-on-brand bg-blend-color ring-2 ring-page select-none",
-        "group-data-[size=sm]/avatar:size-2 group-data-[size=sm]/avatar:[&>svg]:hidden",
-        "group-data-[size=default]/avatar:size-2.5 group-data-[size=default]/avatar:[&>svg]:size-2",
-        "group-data-[size=lg]/avatar:size-3 group-data-[size=lg]/avatar:[&>svg]:size-2",
+        "absolute right-0 bottom-0 z-10 inline-flex items-center justify-center rounded-full bg-brand text-on-brand bg-blend-color ring-lg ring-page select-none",
+        "group-data-[size=sm]/avatar:size-(--size-3xs) group-data-[size=sm]/avatar:[&>svg]:hidden",
+        "group-data-[size=default]/avatar:size-(--size-2xs) group-data-[size=default]/avatar:[&>svg]:size-(--size-3xs)",
+        "group-data-[size=lg]/avatar:size-(--size-xs) group-data-[size=lg]/avatar:[&>svg]:size-(--size-3xs)",
         className
       )}
       {...props}
@@ -72,7 +72,7 @@ function AvatarGroup({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="avatar-group"
       className={cn(
-        "group/avatar-group flex -space-x-2 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-page",
+        "group/avatar-group flex -space-x-2 *:data-[slot=avatar]:ring-lg *:data-[slot=avatar]:ring-page",
         className
       )}
       {...props}
@@ -88,7 +88,7 @@ function AvatarGroupCount({
     <div
       data-slot="avatar-group-count"
       className={cn(
-        "relative flex size-8 shrink-0 items-center justify-center rounded-full bg-muted text-body-sm text-muted ring-2 ring-page group-has-data-[size=lg]/avatar-group:size-10 group-has-data-[size=sm]/avatar-group:size-6 [&>svg]:size-4 group-has-data-[size=lg]/avatar-group:[&>svg]:size-5 group-has-data-[size=sm]/avatar-group:[&>svg]:size-3",
+        "relative flex size-(--size-2xl) shrink-0 items-center justify-center rounded-full bg-muted text-body-sm text-muted ring-lg ring-page group-has-data-[size=lg]/avatar-group:size-(--size-4xl) group-has-data-[size=sm]/avatar-group:size-(--size-xl) [&>svg]:size-(--size-md) group-has-data-[size=lg]/avatar-group:[&>svg]:size-(--size-lg) group-has-data-[size=sm]/avatar-group:[&>svg]:size-(--size-xs)",
         className
       )}
       {...props}

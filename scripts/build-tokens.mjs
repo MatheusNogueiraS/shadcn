@@ -12,8 +12,10 @@ const UTILIDADES = {
   stroke: ["--border-color", "--ring-color", "--outline-color"],
   data: ["--color-data"],
 }
+// A espessura também é stroke: stroke-sm vira border-sm, ring-sm e outline-sm.
+const ESPESSURAS = ["--border-width", "--ring-width", "--outline-width"]
 const FUNDACOES = ["color", "opacity", "unit", "font-family", "font-size", "font-weight", "line-height", "letter-spacing"]
-const ESPACOS = ["padding", "gap"]
+const ESPACOS = ["padding", "gap", "size"]
 // rounded-none e rounded-full são do Tailwind: os valores destes dois no JSON servem ao Figma e à documentação.
 const RAIOS_NATIVOS = ["none", "full"]
 
@@ -66,11 +68,13 @@ StyleDictionary.registerTransform({
 
 const eFundacao = (token) => FUNDACOES.includes(token.path[0])
 const eEspaco = (token) => ESPACOS.includes(token.path[0])
-const eCor = (token) => token.path[0] in UTILIDADES
+// stroke guarda cores e espessuras: o tipo separa uma da outra.
+const eCor = (token) => token.path[0] in UTILIDADES && token.$type === "color"
+const eEspessura = (token) => token.path[0] === "stroke" && token.$type === "dimension"
 
 async function gerar(modo, seletor, filtro, comReferencias) {
   const dicionario = new StyleDictionary({
-    source: ["tokens/foundations/*.json", `tokens/semantic/color.${modo}.json`, "tokens/semantic/radius.json", "tokens/semantic/spacing.json", "tokens/semantic/typography.json"],
+    source: ["tokens/foundations/*.json", `tokens/semantic/color.${modo}.json`, "tokens/semantic/radius.json", "tokens/semantic/spacing.json", "tokens/semantic/stroke.json", "tokens/semantic/typography.json"],
     log: { warnings: "disabled", verbosity: "silent" },
     platforms: {
       css: {
@@ -90,7 +94,7 @@ async function gerar(modo, seletor, filtro, comReferencias) {
 }
 
 const fundacoes = await gerar("light", ":root", eFundacao, false)
-const claro = await gerar("light", ":root", (t) => eCor(t) || eEspaco(t), true)
+const claro = await gerar("light", ":root", (t) => eCor(t) || eEspaco(t) || eEspessura(t), true)
 const escuro = await gerar("dark", ".dark", eCor, true)
 
 const todos = claro.tokens.allTokens
@@ -100,25 +104,31 @@ const mapeamento = todos
     const [grupo, ...resto] = token.path
     return UTILIDADES[grupo].map((prefixo) => `  ${prefixo}-${resto.join("-")}: var(--${token.name});`)
   })
+// O none fica no JSON para o Figma: registrado, ele mudaria o border-none e o outline-none do Tailwind.
+const espessuras = todos
+  .filter((t) => eEspessura(t) && t.path[1] !== "none")
+  .flatMap((t) => ESPESSURAS.map((prefixo) => `  ${prefixo}-${t.path[1]}: var(--${t.name});`))
 
 // A altura de linha sai como proporção, como no Tailwind, para continuar valendo em um filho com outro tamanho de fonte.
 const emRem = (alias) => todos.find((t) => t.path.join(".") === alias.slice(1, -1)).original.$value.value
-const linhasDoEstilo = (token) => {
-  const { fontSize, lineHeight, fontWeight, letterSpacing } = token.original.$value
-  const nome = `--text-${token.name}`
+// Cada estilo é uma classe só, com a família dentro: o text-* do Tailwind não aceita família.
+const utilidadeDoEstilo = (token) => {
+  const { fontFamily, fontSize, lineHeight, fontWeight, letterSpacing } = token.original.$value
   return [
-    `  ${nome}: ${referencia(fontSize)};`,
-    `  ${nome}--line-height: calc(${emRem(lineHeight)} / ${emRem(fontSize)});`,
-    `  ${nome}--font-weight: ${referencia(fontWeight)};`,
-    ...(letterSpacing ? [`  ${nome}--letter-spacing: ${referencia(letterSpacing)};`] : []),
-  ]
+    `@utility text-${token.name} {`,
+    `  font-family: ${referencia(fontFamily)};`,
+    `  font-size: ${referencia(fontSize)};`,
+    `  line-height: calc(${emRem(lineHeight)} / ${emRem(fontSize)});`,
+    `  font-weight: ${referencia(fontWeight)};`,
+    ...(letterSpacing ? [`  letter-spacing: ${referencia(letterSpacing)};`] : []),
+    "}",
+  ].join("\n")
 }
 // static: estas variáveis também são lidas em valores arbitrários, como [--cell-radius:var(--radius-4xl)].
 const tema = [
   ...todos.filter((t) => t.path[0] === "radius" && !RAIOS_NATIVOS.includes(t.path[1])).map((t) => `  --${t.name}: ${referencia(t.original.$value)};`),
   ...todos.filter((t) => t.path[0] === "font").map((t) => `  --${t.name}: ${referencia(t.original.$value)};`),
   ...todos.filter((t) => t.path[0] === "letter-spacing").map((t) => `  --tracking-${t.path[1]}: var(--${t.name});`),
-  ...todos.filter((t) => t.$type === "typography").flatMap(linhasDoEstilo),
 ]
 
 const conteudo = [
@@ -126,8 +136,9 @@ const conteudo = [
   fundacoes.css,
   claro.css,
   escuro.css,
-  `@theme inline {\n${mapeamento.join("\n")}\n}`,
+  `@theme inline {\n${[...mapeamento, ...espessuras].join("\n")}\n}`,
   `@theme static {\n${tema.join("\n")}\n}`,
+  ...todos.filter((t) => t.$type === "typography").map(utilidadeDoEstilo),
   "",
 ].join("\n\n")
 

@@ -1,6 +1,7 @@
 import { Meta, Unstyled } from "@storybook/addon-docs/blocks"
 
 import { Semanticos } from "./amostras"
+import { Tailwind } from "./amostras-tailwind"
 
 <Meta title="Fundamentos/Cores/Semânticos" />
 
@@ -36,6 +37,30 @@ No código, as séries são usadas como `var(--data-1)`, porque a biblioteca de 
 
 <Unstyled>
   <Semanticos grupo="data" />
+</Unstyled>
+
+## Tailwind
+
+Opacidades, cores e sombras que os componentes usam direto do Tailwind. As tabelas leem o código dos componentes e se atualizam sozinhas.
+
+### Opacidade
+
+A opacidade vem depois da barra, como em `bg-control/90`. Quando o valor também existe na escala de opacidade, a coluna Valor mostra o nome dele.
+
+<Unstyled>
+  <Tailwind familia="opacidade" />
+</Unstyled>
+
+### Cores da paleta do Tailwind
+
+<Unstyled>
+  <Tailwind familia="cor" />
+</Unstyled>
+
+### Sombras
+
+<Unstyled>
+  <Tailwind familia="sombra" />
 </Unstyled>
 
 ## Regras de uso

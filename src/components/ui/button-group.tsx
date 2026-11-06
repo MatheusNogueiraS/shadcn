@@ -48,7 +48,7 @@ function ButtonGroupText({
     props: mergeProps<"div">(
       {
         className: cn(
-          "flex items-center gap-(--gap-sm) rounded-5xl border bg-muted px-(--padding-md) text-label-sm [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
+          "flex items-center gap-(--gap-sm) rounded-5xl border-sm bg-muted px-(--padding-md) text-label-sm [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-(--size-md)",
           className
         ),
       },

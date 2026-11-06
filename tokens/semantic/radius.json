@@ -5,6 +5,10 @@
       "$value": "{unit.0}",
       "$description": "Sem arredondamento"
     },
+    "xs": {
+      "$value": "{unit.2}",
+      "$description": "Marcador de cor do gráfico e seta do tooltip"
+    },
     "sm": {
       "$value": "{unit.6}",
       "$description": "Checkbox e indicador do menu de navegação"

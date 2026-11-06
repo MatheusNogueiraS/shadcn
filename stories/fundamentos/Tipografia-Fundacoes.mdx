@@ -1,19 +1,25 @@
 import { Meta, Unstyled } from "@storybook/addon-docs/blocks"
 
-import { AlturasDeLinha, Espacamentos, Familias, Pesos, Tamanhos } from "./amostras-tipografia"
+import { AlturasDeLinha, Espacamentos, Familias, Papeis, Pesos, Tamanhos } from "./amostras-tipografia"
 
 <Meta title="Fundamentos/Tipografia/Fundações" />
 
 # Fundações
 
-As fundações guardam as famílias, os pesos, os tamanhos, as alturas de linha e o espaçamento entre letras. Os componentes não usam fundações diretamente: elas são a base dos estilos.
+As fundações guardam as famílias, os pesos, os tamanhos, as alturas de linha e o espaçamento entre letras. Elas são a base dos estilos. Os componentes não usam fundações diretamente: cada estilo já leva a sua família, o seu tamanho, a sua altura de linha e o seu peso.
 
 ## Famílias
 
-Para trocar a fonte do sistema, aponte os papéis de **Tipografia/Estilos** para outra família e carregue os arquivos da fonte em `src/index.css`.
-
 <Unstyled>
   <Familias />
+</Unstyled>
+
+### Papéis
+
+Cada papel aponta para uma família, e os estilos usam o papel. Para trocar a fonte do sistema, aponte o papel para outra família e carregue os arquivos da fonte em `src/index.css`.
+
+<Unstyled>
+  <Papeis />
 </Unstyled>
 
 ## Pesos
@@ -63,6 +69,6 @@ A Poppins não tem algarismos de largura igual, e `tabular-nums` não tem efeito
 
 ## Regras de uso
 
-- **Dentro de uma tabela, destaque com `font-bold`.** A Lato não tem peso 500, então `font-medium` aparece como texto normal. É por isso que os badges ficam mais finos em uma tabela.
+- **Dentro de uma tabela, destaque com `text-mono-sm-bold`.** A Lato não tem peso 500, então o grupo `mono` só tem 400 e 700.
 - **Bloco de código precisa de fonte própria.** `font-mono` aqui significa Lato, e os elementos `<code>`, `<pre>` e `<kbd>` sem classe própria também a usam.
 - **Não há fonte serifada.** `--font-serif` foi removido do tema.

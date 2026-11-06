@@ -33,11 +33,10 @@ export function Familias() {
 export function Pesos() {
   return (
     <Tabela
-      colunas={["Token", "Valor", "Classe", "Amostra"]}
+      colunas={["Token", "Valor", "Amostra"]}
       linhas={entradas<{ $value: number }>(PESOS).map(([nome, token]) => [
         <span className="text-label-sm">font-weight-{nome}</span>,
         token.$value,
-        <code>font-{nome}</code>,
         <span className="text-heading-md" style={{ fontWeight: token.$value }}>Saldo disponível</span>,
       ])}
     />
@@ -69,11 +68,10 @@ export function AlturasDeLinha() {
 export function Espacamentos() {
   return (
     <Tabela
-      colunas={["Token", "Valor", "Classe", "Amostra"]}
+      colunas={["Token", "Valor", "Amostra"]}
       linhas={entradas<Medida>(ESPACAMENTOS).map(([nome, token]) => [
         <span className="text-label-sm">letter-spacing-{nome}</span>,
         `${token.$value.value}em`,
-        <code>tracking-{nome}</code>,
         <span className="text-heading-md" style={{ letterSpacing: `var(--letter-spacing-${nome})` }}>Saldo disponível</span>,
       ])}
     />
@@ -83,40 +81,49 @@ export function Espacamentos() {
 export function Papeis() {
   return (
     <Tabela
-      colunas={["Token", "Aponta para", "Classe", "Amostra"]}
-      linhas={entradas<{ $value: string; $description: string }>(semanticos.font).map(([nome, token]) => [
+      colunas={["Token", "Aponta para", "Amostra"]}
+      linhas={entradas<{ $value: string; $description: string }>(fundacoes.font).map(([nome, token]) => [
         <>
           <div className="text-label-sm">font-{nome}</div>
           <div className="text-body-xs text-muted">{token.$description}</div>
         </>,
         <span className="whitespace-nowrap">font-family-{fim(token.$value)}</span>,
-        <code className="whitespace-nowrap">font-{nome}</code>,
         <span className="whitespace-nowrap text-heading-md" style={{ fontFamily: `var(--font-${nome})` }}>R$ 1.234,56</span>,
       ])}
     />
   )
 }
 
-export function Estilos({ grupo }: { grupo: "display" | "heading" | "body" | "label" }) {
+// {font-size.14} vira font-size-14, o nome da variável da fundação.
+const token = (alias: string) => alias.slice(1, -1).replace(".", "-")
+
+export function Estilos({ grupo }: { grupo: "display" | "heading" | "body" | "label" | "mono" }) {
   return (
     <Tabela
-      colunas={["Token", "Medidas", "Classe", "Amostra"]}
-      linhas={entradas<Estilo>(semanticos[grupo]).map(([nome, token]) => {
-        const { fontSize, lineHeight, fontWeight, letterSpacing } = token.$value
+      colunas={["Estilo", "Tokens", "Medidas", "Classe", "Amostra"]}
+      linhas={entradas<Estilo>(semanticos[grupo]).map(([nome, estilo]) => {
+        const { fontFamily, fontSize, lineHeight, fontWeight, letterSpacing } = estilo.$value
         const id = `${grupo}-${nome}`
         return [
           <>
             <div className="text-label-sm">{id}</div>
-            <div className="text-body-xs text-muted">{token.$description}</div>
+            <div className="text-body-xs text-muted">{estilo.$description}</div>
           </>,
+          <div className="whitespace-nowrap text-body-xs">
+            {[fontFamily, fontSize, lineHeight, fontWeight, letterSpacing].filter((a) => a !== undefined).map((a) => (
+              <div key={a}>{token(a)}</div>
+            ))}
+          </div>,
           `${fim(fontSize)}/${fim(lineHeight)} · ${PESOS[fim(fontWeight)].$value}${letterSpacing ? ` · ${fim(letterSpacing)}` : ""}`,
-          <code>text-{id}</code>,
+          <code className="whitespace-nowrap">text-{id}</code>,
+          // A amostra lê as fundações: o Tailwind só gera as classes que algum componente usa.
           <span
             style={{
-              fontSize: `var(--text-${id})`,
-              lineHeight: `var(--text-${id}--line-height)`,
-              fontWeight: `var(--text-${id}--font-weight)`,
-              letterSpacing: `var(--text-${id}--letter-spacing, normal)`,
+              fontFamily: `var(--${token(fontFamily)})`,
+              fontSize: `var(--${token(fontSize)})`,
+              lineHeight: `var(--${token(lineHeight)})`,
+              fontWeight: `var(--${token(fontWeight)})`,
+              letterSpacing: letterSpacing ? `var(--${token(letterSpacing)})` : "normal",
             }}
           >
             Saldo disponível

@@ -88,6 +88,8 @@
   --font-size-30: 1.875rem;
   --font-size-36: 2.25rem;
   --font-size-48: 3rem;
+  --line-height-12: 0.75rem;
+  --line-height-14: 0.875rem;
   --line-height-16: 1rem;
   --line-height-20: 1.25rem;
   --line-height-24: 1.5rem;
@@ -201,6 +203,7 @@
   --unit-164: 10.25rem;
   --unit-256: 16rem;
   --unit-999: 62.4375rem;
+  --unit-1-5: 0.09375rem;
 }
 
 :root {
@@ -251,6 +254,12 @@
   --stroke-success: var(--color-green-600); /** Borda de sucesso */
   --stroke-warning: var(--color-yellow-500); /** Borda de atenção */
   --stroke-info: var(--color-purple-600); /** Borda informativa */
+  --stroke-none: var(--unit-0); /** Sem contorno. No código, border-0 e ring-0 */
+  --stroke-sm: var(--unit-1); /** Bordas, linhas e contorno de menus e janelas */
+  --stroke-md: var(--unit-1-5); /** Marcador tracejado do tooltip do gráfico */
+  --stroke-lg: var(--unit-2); /** Recorte do avatar, borda do switch e foco na barra lateral */
+  --stroke-xl: var(--unit-3); /** Anel de foco e de campo inválido */
+  --stroke-2xl: var(--unit-4); /** Anel do controle do slider */
   --data-1: var(--color-orange-500); /** Série 1 */
   --data-2: var(--color-purple-900); /** Série 2 */
   --data-3: var(--color-orange-300); /** Série 3 */
@@ -267,6 +276,7 @@
   --padding-2xl: var(--unit-16);
   --padding-3xl: var(--unit-24);
   --padding-4xl: var(--unit-32);
+  --padding-5xl: var(--unit-48);
   --gap-none: var(--unit-0);
   --gap-3xs: var(--unit-2);
   --gap-2xs: var(--unit-4);
@@ -278,6 +288,17 @@
   --gap-2xl: var(--unit-16);
   --gap-3xl: var(--unit-24);
   --gap-4xl: var(--unit-32);
+  --size-3xs: var(--unit-8); /** Ponto do radio e ícone do selo do avatar */
+  --size-2xs: var(--unit-10); /** Selo do avatar e seta do tooltip */
+  --size-xs: var(--unit-12); /** Ícones pequenos: badge, kbd e botão xs */
+  --size-sm: var(--unit-14); /** Ícones de checkbox, breadcrumb, calendário e campos */
+  --size-md: var(--unit-16); /** Ícone padrão, checkbox e radio */
+  --size-lg: var(--unit-20); /** Ícone do Empty e reticências do breadcrumb */
+  --size-xl: var(--unit-24); /** Avatar pequeno e botão só com ícone xs, da altura de h-6 */
+  --size-2xl: var(--unit-32); /** Avatar e botão só com ícone sm, da altura de h-8 */
+  --size-3xl: var(--unit-36); /** Botão só com ícone, slot do OTP e paginação, da altura de h-9 */
+  --size-4xl: var(--unit-40); /** Avatar grande, botão só com ícone lg e mídia do Empty */
+  --size-5xl: var(--unit-64); /** Mídia do AlertDialog */
 }
 
 .dark {
@@ -418,9 +439,25 @@
   --color-data-3: var(--data-3);
   --color-data-4: var(--data-4);
   --color-data-5: var(--data-5);
+  --border-width-sm: var(--stroke-sm);
+  --ring-width-sm: var(--stroke-sm);
+  --outline-width-sm: var(--stroke-sm);
+  --border-width-md: var(--stroke-md);
+  --ring-width-md: var(--stroke-md);
+  --outline-width-md: var(--stroke-md);
+  --border-width-lg: var(--stroke-lg);
+  --ring-width-lg: var(--stroke-lg);
+  --outline-width-lg: var(--stroke-lg);
+  --border-width-xl: var(--stroke-xl);
+  --ring-width-xl: var(--stroke-xl);
+  --outline-width-xl: var(--stroke-xl);
+  --border-width-2xl: var(--stroke-2xl);
+  --ring-width-2xl: var(--stroke-2xl);
+  --outline-width-2xl: var(--stroke-2xl);
 }
 
 @theme static {
+  --radius-xs: var(--unit-2);
   --radius-sm: var(--unit-6);
   --radius-md: var(--unit-8);
   --radius-lg: var(--unit-10);
@@ -434,50 +471,171 @@
   --font-mono: var(--font-family-lato);
   --tracking-tight: var(--letter-spacing-tight);
   --tracking-widest: var(--letter-spacing-widest);
-  --text-display-lg: var(--font-size-48);
-  --text-display-lg--line-height: calc(3 / 3);
-  --text-display-lg--font-weight: var(--font-weight-bold);
-  --text-display-lg--letter-spacing: var(--letter-spacing-tight);
-  --text-display-md: var(--font-size-36);
-  --text-display-md--line-height: calc(2.5 / 2.25);
-  --text-display-md--font-weight: var(--font-weight-bold);
-  --text-display-md--letter-spacing: var(--letter-spacing-tight);
-  --text-heading-xl: var(--font-size-30);
-  --text-heading-xl--line-height: calc(2.25 / 1.875);
-  --text-heading-xl--font-weight: var(--font-weight-medium);
-  --text-heading-lg: var(--font-size-24);
-  --text-heading-lg--line-height: calc(2 / 1.5);
-  --text-heading-lg--font-weight: var(--font-weight-semibold);
-  --text-heading-lg--letter-spacing: var(--letter-spacing-tight);
-  --text-heading-md: var(--font-size-18);
-  --text-heading-md--line-height: calc(1.75 / 1.125);
-  --text-heading-md--font-weight: var(--font-weight-medium);
-  --text-heading-sm: var(--font-size-16);
-  --text-heading-sm--line-height: calc(1.5 / 1);
-  --text-heading-sm--font-weight: var(--font-weight-medium);
-  --text-body-md: var(--font-size-16);
-  --text-body-md--line-height: calc(1.5 / 1);
-  --text-body-md--font-weight: var(--font-weight-normal);
-  --text-body-md-bold: var(--font-size-16);
-  --text-body-md-bold--line-height: calc(1.5 / 1);
-  --text-body-md-bold--font-weight: var(--font-weight-bold);
-  --text-body-sm: var(--font-size-14);
-  --text-body-sm--line-height: calc(1.25 / 0.875);
-  --text-body-sm--font-weight: var(--font-weight-normal);
-  --text-body-sm-bold: var(--font-size-14);
-  --text-body-sm-bold--line-height: calc(1.25 / 0.875);
-  --text-body-sm-bold--font-weight: var(--font-weight-bold);
-  --text-body-xs: var(--font-size-12);
-  --text-body-xs--line-height: calc(1 / 0.75);
-  --text-body-xs--font-weight: var(--font-weight-normal);
-  --text-body-xs-bold: var(--font-size-12);
-  --text-body-xs-bold--line-height: calc(1 / 0.75);
-  --text-body-xs-bold--font-weight: var(--font-weight-bold);
-  --text-label-sm: var(--font-size-14);
-  --text-label-sm--line-height: calc(1.25 / 0.875);
-  --text-label-sm--font-weight: var(--font-weight-medium);
-  --text-label-xs: var(--font-size-12);
-  --text-label-xs--line-height: calc(1 / 0.75);
-  --text-label-xs--font-weight: var(--font-weight-medium);
+}
+
+@utility text-display-lg {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-48);
+  line-height: calc(3 / 3);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+@utility text-display-md {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-36);
+  line-height: calc(2.5 / 2.25);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+@utility text-heading-xl {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-30);
+  line-height: calc(2.25 / 1.875);
+  font-weight: var(--font-weight-medium);
+}
+
+@utility text-heading-lg {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-24);
+  line-height: calc(2 / 1.5);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+@utility text-heading-md {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-18);
+  line-height: calc(1.75 / 1.125);
+  font-weight: var(--font-weight-medium);
+}
+
+@utility text-heading-md-tight {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-18);
+  line-height: calc(1.75 / 1.125);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+@utility text-heading-sm {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-16);
+  line-height: calc(1.5 / 1);
+  font-weight: var(--font-weight-medium);
+}
+
+@utility text-heading-sm-compact {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-16);
+  line-height: calc(1 / 1);
+  font-weight: var(--font-weight-medium);
+}
+
+@utility text-body-md {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-16);
+  line-height: calc(1.5 / 1);
+  font-weight: var(--font-weight-normal);
+}
+
+@utility text-body-md-bold {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-16);
+  line-height: calc(1.5 / 1);
+  font-weight: var(--font-weight-bold);
+}
+
+@utility text-body-sm {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-14);
+  line-height: calc(1.25 / 0.875);
+  font-weight: var(--font-weight-normal);
+}
+
+@utility text-body-sm-bold {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-14);
+  line-height: calc(1.25 / 0.875);
+  font-weight: var(--font-weight-bold);
+}
+
+@utility text-body-xs {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-12);
+  line-height: calc(1 / 0.75);
+  font-weight: var(--font-weight-normal);
+}
+
+@utility text-body-xs-bold {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-12);
+  line-height: calc(1 / 0.75);
+  font-weight: var(--font-weight-bold);
+}
+
+@utility text-body-xs-compact {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-12);
+  line-height: calc(0.75 / 0.75);
+  font-weight: var(--font-weight-normal);
+}
+
+@utility text-label-sm {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-14);
+  line-height: calc(1.25 / 0.875);
+  font-weight: var(--font-weight-medium);
+}
+
+@utility text-label-sm-compact {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-14);
+  line-height: calc(0.875 / 0.875);
+  font-weight: var(--font-weight-medium);
+}
+
+@utility text-label-xs {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-12);
+  line-height: calc(1 / 0.75);
+  font-weight: var(--font-weight-medium);
+}
+
+@utility text-label-xs-compact {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-12);
+  line-height: calc(0.75 / 0.75);
+  font-weight: var(--font-weight-medium);
+}
+
+@utility text-label-xs-wide {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-12);
+  line-height: calc(1 / 0.75);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-widest);
+}
+
+@utility text-mono-sm {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-14);
+  line-height: calc(1.25 / 0.875);
+  font-weight: var(--font-weight-normal);
+}
+
+@utility text-mono-sm-bold {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-14);
+  line-height: calc(1.25 / 0.875);
+  font-weight: var(--font-weight-bold);
+}
+
+@utility text-mono-xs-compact {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-12);
+  line-height: calc(0.75 / 0.75);
+  font-weight: var(--font-weight-normal);
 }
 
