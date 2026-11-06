@@ -2,6 +2,8 @@ import foundations from "../../tokens/foundations/color.json"
 import opacity from "../../tokens/foundations/opacity.json"
 import dark from "../../tokens/semantic/color.dark.json"
 import light from "../../tokens/semantic/color.light.json"
+import sombras from "../../tokens/semantic/shadow.json"
+import { Tabela } from "./amostras-medidas"
 
 // Lê os JSON em vez de repetir valores: a documentação mostra exatamente o que o gerador recebe.
 const OPACITY = "com.designsystem.opacity"
@@ -100,7 +102,30 @@ function Celula({ token, grupo, fundo }: { token: Semantico; grupo: string; fund
   )
 }
 
-export function Semanticos({ grupo }: { grupo: "bg" | "text" | "stroke" | "data" }) {
+type Camada = Record<"offsetY" | "blur" | "spread", { value: number }>
+
+// As camadas aparecem como no Figma, e a amostra usa o próprio token.
+export function Sombras() {
+  return (
+    <Tabela
+      colunas={["Token", "Camadas (Y · Blur · Spread)", "Amostra"]}
+      linhas={Object.entries(sombras.shadow).map(([nome, token]) => [
+        <>
+          <div className="text-label-sm">shadow-{nome}</div>
+          <div className="text-body-xs text-muted">{token.$description}</div>
+        </>,
+        <div className="whitespace-nowrap text-body-xs">
+          {(token.$value as Camada[]).map((c, i) => (
+            <div key={i}>{[c.offsetY, c.blur, c.spread].map((m) => String(m.value).replace("-", "−")).join(" · ")}</div>
+          ))}
+        </div>,
+        <div className="m-(--padding-lg) h-14 w-24 rounded-2xl bg-surface" style={{ boxShadow: `var(--shadow-${nome})` }} />,
+      ])}
+    />
+  )
+}
+
+export function Semanticos({ grupo }: { grupo: "bg" | "text" | "stroke" | "data" | "shadow" }) {
   const claro = (light as unknown as Tema)[grupo]
   const escuro = (dark as unknown as Tema)[grupo]
   const nomes = Object.keys(claro).filter((k) => !k.startsWith("$"))

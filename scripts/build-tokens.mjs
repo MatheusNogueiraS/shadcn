@@ -11,6 +11,8 @@ const UTILIDADES = {
   text: ["--text-color"],
   stroke: ["--border-color", "--ring-color", "--outline-color"],
   data: ["--color-data"],
+  // A cor da sombra não vira classe: as sombras e o contorno do slider a leem como var(--shadow-color).
+  shadow: [],
 }
 // A espessura também é stroke: stroke-sm vira border-sm, ring-sm e outline-sm.
 const ESPESSURAS = ["--border-width", "--ring-width", "--outline-width"]
@@ -46,7 +48,7 @@ StyleDictionary.registerTransform({
   transform: (token) => {
     const cor = referencia(token.original.$value)
     const percentual = referencia(token.original.$extensions[OPACITY])
-    return `color-mix(in oklab, ${cor} calc(${percentual} * 1%), transparent)`
+    return `color-mix(in oklab, ${cor} ${percentual}, transparent)`
   },
 })
 
@@ -71,10 +73,12 @@ const eEspaco = (token) => ESPACOS.includes(token.path[0])
 // stroke guarda cores e espessuras: o tipo separa uma da outra.
 const eCor = (token) => token.path[0] in UTILIDADES && token.$type === "color"
 const eEspessura = (token) => token.path[0] === "stroke" && token.$type === "dimension"
+const eOpacidade = (token) => token.path[0] === "opacity"
+const eSombra = (token) => token.$type === "shadow"
 
 async function gerar(modo, seletor, filtro, comReferencias) {
   const dicionario = new StyleDictionary({
-    source: ["tokens/foundations/*.json", `tokens/semantic/color.${modo}.json`, "tokens/semantic/radius.json", "tokens/semantic/spacing.json", "tokens/semantic/stroke.json", "tokens/semantic/typography.json"],
+    source: ["tokens/foundations/*.json", `tokens/semantic/color.${modo}.json`, "tokens/semantic/radius.json", "tokens/semantic/spacing.json", "tokens/semantic/stroke.json", "tokens/semantic/shadow.json", "tokens/semantic/typography.json"],
     log: { warnings: "disabled", verbosity: "silent" },
     platforms: {
       css: {
@@ -93,7 +97,8 @@ async function gerar(modo, seletor, filtro, comReferencias) {
   return { css: arquivo.output.trim(), tokens: await dicionario.getPlatformTokens("css") }
 }
 
-const fundacoes = await gerar("light", ":root", eFundacao, false)
+// A opacidade sai no @theme, em percentual: é dali que o Tailwind lê bg-muted/50 e opacity-50.
+const fundacoes = await gerar("light", ":root", (t) => eFundacao(t) && !eOpacidade(t), false)
 const claro = await gerar("light", ":root", (t) => eCor(t) || eEspaco(t) || eEspessura(t), true)
 const escuro = await gerar("dark", ".dark", eCor, true)
 
@@ -124,11 +129,19 @@ const utilidadeDoEstilo = (token) => {
     "}",
   ].join("\n")
 }
+// Cada camada da sombra em CSS: x y desfoque expansão cor.
+const medida = ({ value, unit }) => (value === 0 ? "0" : `${value}${unit}`)
+const camadas = (token) =>
+  token.original.$value.map((c) => [c.offsetX, c.offsetY, c.blur, c.spread].map(medida).concat(referencia(c.color)).join(" ")).join(", ")
 // static: estas variáveis também são lidas em valores arbitrários, como [--cell-radius:var(--radius-4xl)].
 const tema = [
   ...todos.filter((t) => t.path[0] === "radius" && !RAIOS_NATIVOS.includes(t.path[1])).map((t) => `  --${t.name}: ${referencia(t.original.$value)};`),
   ...todos.filter((t) => t.path[0] === "font").map((t) => `  --${t.name}: ${referencia(t.original.$value)};`),
   ...todos.filter((t) => t.path[0] === "letter-spacing").map((t) => `  --tracking-${t.path[1]}: var(--${t.name});`),
+  ...todos.filter(eOpacidade).map((t) => `  --${t.name}: ${t.original.$value}%;`),
+  // Só a escala do JSON: as outras sombras do Tailwind (2xs, xs, 2xl) deixam de existir.
+  "  --shadow-*: initial;",
+  ...todos.filter(eSombra).map((t) => `  --${t.name}: ${camadas(t)};`),
 ]
 
 const conteudo = [

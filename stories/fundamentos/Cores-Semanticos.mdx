@@ -1,6 +1,6 @@
 import { Meta, Unstyled } from "@storybook/addon-docs/blocks"
 
-import { Semanticos } from "./amostras"
+import { Semanticos, Sombras } from "./amostras"
 import { Tailwind } from "./amostras-tailwind"
 
 <Meta title="Fundamentos/Cores/Semânticos" />
@@ -39,17 +39,35 @@ No código, as séries são usadas como `var(--data-1)`, porque a biblioteca de 
   <Semanticos grupo="data" />
 </Unstyled>
 
-## Tailwind
+## Sombras
 
-Opacidades, cores e sombras que os componentes usam direto do Tailwind. As tabelas leem o código dos componentes e se atualizam sozinhas.
+As sombras vão da mais fraca, `shadow-sm`, à mais forte, `shadow-xl`. Para escolher a força, troque a classe, que tem o nome do token: `shadow-lg`. As outras sombras do Tailwind, como `shadow-2xl`, não existem neste projeto.
 
-### Opacidade
+Todas usam a mesma cor, `shadow-color`. Para deixar todas as sombras de um tema mais fortes ou mais fracas, mude só ela. No Figma, cada sombra é um estilo de efeito com o mesmo nome. A posição, o desfoque e a expansão ficam como número, porque uma expansão negativa não se liga a uma variável.
 
-A opacidade vem depois da barra, como em `bg-control/90`. Quando o valor também existe na escala de opacidade, a coluna Valor mostra o nome dele.
+### Cor
+
+<Unstyled>
+  <Semanticos grupo="shadow" />
+</Unstyled>
+
+### Escala
+
+<Unstyled>
+  <Sombras />
+</Unstyled>
+
+## Opacidade nos componentes
+
+A opacidade vem depois da barra, como em `bg-control/90`, e lê a escala de opacidade das fundações: `/90` é o `opacity-90`. Use só valores que existem na escala. A tabela lê o código dos componentes e se atualiza sozinha.
 
 <Unstyled>
   <Tailwind familia="opacidade" />
 </Unstyled>
+
+## Escrito na classe
+
+Cores da paleta do Tailwind e sombras escritas na própria classe. Um componente novo do `shadcn add` que trouxer um desses valores aparece aqui.
 
 ### Cores da paleta do Tailwind
 
@@ -57,7 +75,7 @@ A opacidade vem depois da barra, como em `bg-control/90`. Quando o valor também
   <Tailwind familia="cor" />
 </Unstyled>
 
-### Sombras
+### Sombras escritas na classe
 
 <Unstyled>
   <Tailwind familia="sombra" />

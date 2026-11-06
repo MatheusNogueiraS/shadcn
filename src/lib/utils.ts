@@ -11,6 +11,8 @@ export const cn = createCn({
       ...Object.fromEntries(lados.map((lado) => [`border-w${lado}`, [{ [`border${lado}`]: espessura }]])),
       "ring-w": [{ ring: espessura }],
       "outline-w": [{ outline: espessura }],
+      // A escala de sombras tem um nome fora dos tamanhos: shadow-xl-up, do Drawer empilhado.
+      shadow: [{ shadow: ["xl-up"] }],
     },
   },
 })

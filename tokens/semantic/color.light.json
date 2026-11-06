@@ -245,5 +245,15 @@
       "$description": "Série 5"
     },
     "$type": "color"
+  },
+  "shadow": {
+    "color": {
+      "$value": "{color.black}",
+      "$description": "Cor das sombras e do contorno do controle do slider",
+      "$extensions": {
+        "com.designsystem.opacity": "{opacity.10}"
+      }
+    },
+    "$type": "color"
   }
 }
