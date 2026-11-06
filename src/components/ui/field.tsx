@@ -28,7 +28,7 @@ function FieldLegend({
       data-slot="field-legend"
       data-variant={variant}
       className={cn(
-        "mb-3 font-medium data-[variant=label]:text-label-sm data-[variant=legend]:text-heading-sm",
+        "mb-(--gap-lg) data-[variant=label]:text-label-sm data-[variant=legend]:text-heading-sm",
         className
       )}
       {...props}
@@ -41,7 +41,7 @@ function FieldGroup({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="field-group"
       className={cn(
-        "group/field-group @container/field-group flex w-full flex-col gap-7 data-[slot=checkbox-group]:gap-(--gap-lg) *:data-[slot=field-group]:gap-(--gap-2xl)",
+        "group/field-group @container/field-group flex w-full flex-col gap-(--gap-3xl) data-[slot=checkbox-group]:gap-(--gap-lg) *:data-[slot=field-group]:gap-(--gap-2xl)",
         className
       )}
       {...props}
@@ -88,7 +88,7 @@ function FieldContent({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="field-content"
       className={cn(
-        "group/field-content flex flex-1 flex-col gap-(--gap-2xs) leading-snug",
+        "group/field-content flex flex-1 flex-col gap-(--gap-2xs)",
         className
       )}
       {...props}
@@ -104,7 +104,7 @@ function FieldLabel({
     <Label
       data-slot="field-label"
       className={cn(
-        "group/field-label peer/field-label flex w-fit gap-(--gap-sm) leading-snug group-data-[disabled=true]/field:opacity-50 has-data-checked:bg-control/30 has-[>[data-slot=field]]:rounded-3xl has-[>[data-slot=field]]:border has-[>[data-slot=field]]:not-has-[:disabled,[data-disabled]]:hover:bg-control/40 has-[>[data-slot=field]]:has-[:focus-visible]:border-focus has-[>[data-slot=field]]:has-[:focus-visible]:ring-3 has-[>[data-slot=field]]:has-[:focus-visible]:ring-focus/50 *:data-[slot=field]:p-(--padding-2xl)",
+        "group/field-label peer/field-label flex w-fit gap-(--gap-sm) text-label-sm group-data-[disabled=true]/field:opacity-50 has-data-checked:bg-control/30 has-[>[data-slot=field]]:rounded-3xl has-[>[data-slot=field]]:border-sm has-[>[data-slot=field]]:not-has-[:disabled,[data-disabled]]:hover:bg-control/40 has-[>[data-slot=field]]:has-[:focus-visible]:border-focus has-[>[data-slot=field]]:has-[:focus-visible]:ring-xl has-[>[data-slot=field]]:has-[:focus-visible]:ring-focus/50 *:data-[slot=field]:p-(--padding-2xl)",
         "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col",
         className
       )}
@@ -131,8 +131,8 @@ function FieldDescription({ className, ...props }: React.ComponentProps<"p">) {
     <p
       data-slot="field-description"
       className={cn(
-        "text-left text-body-sm leading-normal text-muted group-has-data-horizontal/field:text-balance [[data-variant=legend]+&]:-mt-1.5",
-        "last:mt-0 nth-last-2:-mt-1",
+        "text-left text-body-sm text-muted group-has-data-horizontal/field:text-balance [[data-variant=legend]+&]:-mt-(--gap-xs)",
+        "last:mt-(--gap-none) nth-last-2:-mt-(--gap-2xs)",
         "[&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-brand",
         className
       )}
@@ -153,7 +153,7 @@ function FieldSeparator({
       data-slot="field-separator"
       data-content={!!children}
       className={cn(
-        "relative -my-2 h-5 text-body-sm group-data-[variant=outline]/field-group:-mb-2",
+        "relative -my-(--gap-sm) h-5 text-body-sm group-data-[variant=outline]/field-group:-mb-(--gap-sm)",
         className
       )}
       {...props}
@@ -197,7 +197,7 @@ function FieldError({
     }
 
     return (
-      <ul className="ml-4 flex list-disc flex-col gap-(--gap-2xs)">
+      <ul className="ml-(--gap-2xl) flex list-disc flex-col gap-(--gap-2xs)">
         {uniqueErrors.map(
           (error, index) =>
             error?.message && <li key={index}>{error.message}</li>

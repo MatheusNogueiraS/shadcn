@@ -7,7 +7,7 @@ function Accordion({ className, ...props }: AccordionPrimitive.Root.Props) {
     <AccordionPrimitive.Root
       data-slot="accordion"
       className={cn(
-        "flex w-full flex-col overflow-hidden rounded-3xl border",
+        "flex w-full flex-col overflow-hidden rounded-3xl border-sm",
         className
       )}
       {...props}
@@ -19,7 +19,7 @@ function AccordionItem({ className, ...props }: AccordionPrimitive.Item.Props) {
   return (
     <AccordionPrimitive.Item
       data-slot="accordion-item"
-      className={cn("not-last:border-b data-open:bg-muted/50", className)}
+      className={cn("not-last:border-b-sm data-open:bg-muted/50", className)}
       {...props}
     />
   )
@@ -35,7 +35,7 @@ function AccordionTrigger({
       <AccordionPrimitive.Trigger
         data-slot="accordion-trigger"
         className={cn(
-          "group/accordion-trigger relative flex flex-1 items-start justify-between gap-(--gap-3xl) border border-transparent p-(--padding-2xl) text-left text-label-sm transition-all outline-none hover:underline aria-disabled:pointer-events-none aria-disabled:opacity-50 **:data-[slot=accordion-trigger-icon]:ml-auto **:data-[slot=accordion-trigger-icon]:size-4 **:data-[slot=accordion-trigger-icon]:text-muted",
+          "group/accordion-trigger relative flex flex-1 items-start justify-between gap-(--gap-3xl) border-sm border-transparent p-(--padding-2xl) text-left text-label-sm transition-all outline-none hover:underline aria-disabled:pointer-events-none aria-disabled:opacity-50 **:data-[slot=accordion-trigger-icon]:ml-auto **:data-[slot=accordion-trigger-icon]:size-(--size-md) **:data-[slot=accordion-trigger-icon]:text-muted",
           className
         )}
         {...props}
@@ -61,7 +61,7 @@ function AccordionContent({
     >
       <div
         className={cn(
-          "h-(--accordion-panel-height) pt-(--padding-none) pb-(--padding-2xl) data-ending-style:h-0 data-starting-style:h-0 [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-default [&_p:not(:last-child)]:mb-4",
+          "h-(--accordion-panel-height) pt-(--padding-none) pb-(--padding-2xl) data-ending-style:h-0 data-starting-style:h-0 [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-default [&_p:not(:last-child)]:mb-(--gap-2xl)",
           className
         )}
       >

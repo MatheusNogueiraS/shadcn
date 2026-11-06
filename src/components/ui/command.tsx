@@ -23,7 +23,7 @@ function Command({
     <CommandPrimitive
       data-slot="command"
       className={cn(
-        "flex size-full flex-col overflow-hidden rounded-5xl bg-surface p-(--padding-2xs) text-default",
+        "flex size-full flex-col overflow-hidden rounded-5xl bg-surface p-(--padding-2xs) text-body-sm text-default",
         className
       )}
       {...props}
@@ -80,7 +80,7 @@ function CommandInput({
           {...props}
         />
         <InputGroupAddon>
-          <SearchIcon className="size-4 shrink-0 opacity-50" />
+          <SearchIcon className="size-(--size-md) shrink-0 opacity-50" />
         </InputGroupAddon>
       </InputGroup>
     </div>
@@ -139,7 +139,7 @@ function CommandSeparator({
   return (
     <CommandPrimitive.Separator
       data-slot="command-separator"
-      className={cn("my-1.5 h-px bg-divider/50", className)}
+      className={cn("my-(--gap-xs) h-px bg-divider/50", className)}
       {...props}
     />
   )
@@ -154,7 +154,7 @@ function CommandItem({
     <CommandPrimitive.Item
       data-slot="command-item"
       className={cn(
-        "group/command-item relative flex cursor-default items-center gap-(--gap-sm) rounded-3xl px-(--padding-lg) py-(--padding-sm) text-label-sm outline-hidden select-none data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 data-selected:bg-muted data-selected:text-default [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 data-selected:*:[svg]:text-default",
+        "group/command-item relative flex cursor-default items-center gap-(--gap-sm) rounded-3xl px-(--padding-lg) py-(--padding-sm) text-label-sm outline-hidden select-none data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 data-selected:bg-muted data-selected:text-default [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-(--size-md) data-selected:*:[svg]:text-default",
         className
       )}
       {...props}
@@ -173,7 +173,7 @@ function CommandShortcut({
     <span
       data-slot="command-shortcut"
       className={cn(
-        "ml-auto text-label-xs tracking-widest text-muted group-data-selected/command-item:text-default",
+        "ml-auto text-label-xs-wide text-muted group-data-selected/command-item:text-default",
         className
       )}
       {...props}

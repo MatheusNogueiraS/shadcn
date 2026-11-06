@@ -29,7 +29,7 @@ function InputOTPGroup({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="input-otp-group"
       className={cn(
-        "flex items-center rounded-4xl has-aria-invalid:border-danger has-aria-invalid:ring-3 has-aria-invalid:ring-danger-subtle",
+        "flex items-center rounded-4xl has-aria-invalid:border-danger has-aria-invalid:ring-xl has-aria-invalid:ring-danger-subtle",
         className
       )}
       {...props}
@@ -52,7 +52,7 @@ function InputOTPSlot({
       data-slot="input-otp-slot"
       data-active={isActive}
       className={cn(
-        "relative flex size-9 items-center justify-center border-y border-r border-field bg-control/50 text-body-sm transition-all outline-none first:rounded-l-4xl first:border-l last:rounded-r-4xl aria-invalid:border-danger data-[active=true]:z-10 data-[active=true]:border-focus data-[active=true]:ring-3 data-[active=true]:ring-focus-subtle data-[active=true]:aria-invalid:ring-danger-subtle",
+        "relative flex size-(--size-3xl) items-center justify-center border-y-sm border-r-sm border-field bg-control/50 text-body-sm transition-all outline-none first:rounded-l-4xl first:border-l-sm last:rounded-r-4xl aria-invalid:border-danger data-[active=true]:z-10 data-[active=true]:border-focus data-[active=true]:ring-xl data-[active=true]:ring-focus-subtle data-[active=true]:aria-invalid:ring-danger-subtle",
         className
       )}
       {...props}
@@ -71,7 +71,7 @@ function InputOTPSeparator({ ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="input-otp-separator"
-      className="flex items-center [&_svg:not([class*='size-'])]:size-4"
+      className="flex items-center [&_svg:not([class*='size-'])]:size-(--size-md)"
       role="separator"
       {...props}
     >

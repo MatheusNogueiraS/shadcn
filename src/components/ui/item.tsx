@@ -28,14 +28,14 @@ function ItemSeparator({
     <Separator
       data-slot="item-separator"
       orientation="horizontal"
-      className={cn("my-2", className)}
+      className={cn("my-(--gap-sm)", className)}
       {...props}
     />
   )
 }
 
 const itemVariants = cva(
-  "group/item flex w-full flex-wrap items-center rounded-3xl border text-body-sm transition-colors duration-100 outline-none focus-visible:border-focus focus-visible:ring-[3px] focus-visible:ring-focus/50 [a]:transition-colors [a]:hover:bg-muted",
+  "group/item flex w-full flex-wrap items-center rounded-3xl border-sm text-body-sm transition-colors duration-100 outline-none focus-visible:border-focus focus-visible:ring-xl focus-visible:ring-focus/50 [a]:transition-colors [a]:hover:bg-muted",
   {
     variants: {
       variant: {
@@ -86,9 +86,9 @@ const itemMediaVariants = cva(
     variants: {
       variant: {
         default: "bg-transparent",
-        icon: "[&_svg:not([class*='size-'])]:size-4",
+        icon: "[&_svg:not([class*='size-'])]:size-(--size-md)",
         image:
-          "size-10 overflow-hidden rounded-2xl group-data-[size=sm]/item:size-8 group-data-[size=xs]/item:size-6 group-data-[size=xs]/item:rounded-lg [&_img]:size-full [&_img]:object-cover",
+          "size-(--size-4xl) overflow-hidden rounded-2xl group-data-[size=sm]/item:size-(--size-2xl) group-data-[size=xs]/item:size-(--size-xl) group-data-[size=xs]/item:rounded-lg [&_img]:size-full [&_img]:object-cover",
       },
     },
     defaultVariants: {
@@ -130,7 +130,7 @@ function ItemTitle({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="item-title"
       className={cn(
-        "line-clamp-1 flex w-fit items-center gap-(--gap-sm) text-label-sm leading-snug underline-offset-4",
+        "line-clamp-1 flex w-fit items-center gap-(--gap-sm) text-label-sm underline-offset-4",
         className
       )}
       {...props}

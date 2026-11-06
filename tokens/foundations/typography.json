@@ -15,6 +15,21 @@
       "$description": "Não tem peso 500."
     }
   },
+  "font": {
+    "$type": "fontFamily",
+    "sans": {
+      "$value": "{font-family.poppins}",
+      "$description": "Todo o sistema"
+    },
+    "heading": {
+      "$value": "{font-family.poppins}",
+      "$description": "Títulos de componentes"
+    },
+    "mono": {
+      "$value": "{font-family.lato}",
+      "$description": "Valores em tabela. Não é monoespaçada: ocupa este lugar porque tem algarismos de largura igual, que a Poppins não tem."
+    }
+  },
   "font-weight": {
     "$type": "fontWeight",
     "normal": {
@@ -82,6 +97,18 @@
     "$type": "dimension"
   },
   "line-height": {
+    "12": {
+      "$value": {
+        "value": 0.75,
+        "unit": "rem"
+      }
+    },
+    "14": {
+      "$value": {
+        "value": 0.875,
+        "unit": "rem"
+      }
+    },
     "16": {
       "$value": {
         "value": 1,

@@ -21,9 +21,6 @@
     @apply border-default outline-focus/50;
     }
   body {
-    @apply bg-page text-default;
-    }
-  html {
-    @apply font-sans;
+    @apply bg-page text-default text-body-md;
     }
 }

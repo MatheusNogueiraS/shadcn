@@ -1,20 +1,14 @@
 import { Meta, Unstyled } from "@storybook/addon-docs/blocks"
 
-import { Estilos, Papeis } from "./amostras-tipografia"
+import { Estilos } from "./amostras-tipografia"
 
 <Meta title="Fundamentos/Tipografia/Estilos" />
 
 # Estilos
 
-Cada estilo reúne tamanho, altura de linha, peso e, quando existe, espaçamento entre letras em uma única classe. Os componentes usam **somente estes nomes**: `text-body-sm`, e não `text-sm`.
+Cada estilo é **uma classe só** e reúne família, tamanho, altura de linha, peso e, quando existe, espaçamento entre letras. A coluna Tokens mostra de qual fundação vem cada um. Os componentes usam **somente estes nomes**: `text-heading-sm`, e não `text-base font-heading font-medium`.
 
 Para mudar um estilo, edite os arquivos em `tokens/` e rode `pnpm tokens`.
-
-## Papéis das famílias
-
-<Unstyled>
-  <Papeis />
-</Unstyled>
 
 ## Display
 
@@ -40,10 +34,18 @@ Para mudar um estilo, edite os arquivos em `tokens/` e rode `pnpm tokens`.
   <Estilos grupo="label" />
 </Unstyled>
 
+## Mono
+
+Valores em tabela e no gráfico, com a família do papel `font-mono`. A Lato não tem peso 500, então o grupo só tem 400 e 700.
+
+<Unstyled>
+  <Estilos grupo="mono" />
+</Unstyled>
+
 ## Regras de uso
 
 - **`body` e `label` têm o mesmo tamanho e pesos diferentes.** `body` é texto corrido, com peso 400. `label` nomeia ações e campos, com peso 500. Para destacar um trecho de texto, use a versão em negrito: `text-body-sm-bold`.
-- **Títulos usam também `font-heading`.** O Tailwind não aceita família dentro do estilo: `text-heading-sm font-heading`. Hoje as duas famílias são a Poppins, mas isso permite separá-las depois.
+- **Uma classe por texto.** O estilo já traz família, peso, altura de linha e espaçamento: não acrescente `font-heading`, `font-mono`, `font-medium`, `leading-none`, `tracking-widest` nem outra classe de fonte ao lado. Se nenhum estilo servir, crie um novo em `tokens/`.
+- **Todo texto tem estilo, inclusive o que chega de fora.** As partes que recebem conteúdo, como menus, janelas, Sidebar, Calendar e Command, têm o seu estilo, quase sempre `text-body-sm`. Um texto solto dentro delas nunca depende da página. A área da página usa `text-body-md`, no `body` e no `SidebarInset`. As partes de dentro de um componente, como `TableCell` e `CardContent`, herdam o estilo dele.
 - **Importe `cn` de `@/lib/utils`.** Só ele conhece estes nomes. O `cn` original confunde `text-body-sm` com uma cor e apaga uma das duas classes.
-- **Ajustes pontuais continuam valendo.** `leading-none`, `tracking-widest` e `font-bold` podem acompanhar um estilo e têm prioridade sobre ele.
-- **Exceção conhecida.** O calendário usa `text-[0.8rem]`, fora da escala.
+- **A variação diz o que muda.** `-bold` muda o peso. `-compact` deixa a altura de linha igual ao tamanho, para texto de uma linha só, como o `label-sm-compact` do Label. `-wide` e `-tight` mudam o espaçamento entre letras.

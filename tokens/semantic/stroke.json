@@ -1,0 +1,34 @@
+{
+  "stroke": {
+    "none": {
+      "$type": "dimension",
+      "$value": "{unit.0}",
+      "$description": "Sem contorno. No código, border-0 e ring-0"
+    },
+    "sm": {
+      "$type": "dimension",
+      "$value": "{unit.1}",
+      "$description": "Bordas, linhas e contorno de menus e janelas"
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": "{unit.1-5}",
+      "$description": "Marcador tracejado do tooltip do gráfico"
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": "{unit.2}",
+      "$description": "Recorte do avatar, borda do switch e foco na barra lateral"
+    },
+    "xl": {
+      "$type": "dimension",
+      "$value": "{unit.3}",
+      "$description": "Anel de foco e de campo inválido"
+    },
+    "2xl": {
+      "$type": "dimension",
+      "$value": "{unit.4}",
+      "$description": "Anel do controle do slider"
+    }
+  }
+}

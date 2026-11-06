@@ -142,6 +142,9 @@ function ChartTooltipContent({
     "accessibilityLayer"
   >) {
   const { config } = useChart()
+  const nestLabel = payload?.length === 1 && indicator !== "dot"
+  // Dentro da série, o rótulo fica em uma linha só, como o nome e o valor ao lado.
+  const estiloDoRotulo = nestLabel ? "text-label-xs-compact" : "text-label-xs"
 
   const tooltipLabel = React.useMemo(() => {
     if (hideLabel || !payload?.length) {
@@ -158,7 +161,7 @@ function ChartTooltipContent({
 
     if (labelFormatter) {
       return (
-        <div className={cn("font-medium", labelClassName)}>
+        <div className={cn(estiloDoRotulo, labelClassName)}>
           {labelFormatter(value, payload)}
         </div>
       )
@@ -168,7 +171,7 @@ function ChartTooltipContent({
       return null
     }
 
-    return <div className={cn("font-medium", labelClassName)}>{value}</div>
+    return <div className={cn(estiloDoRotulo, labelClassName)}>{value}</div>
   }, [
     label,
     labelFormatter,
@@ -177,18 +180,17 @@ function ChartTooltipContent({
     labelClassName,
     config,
     labelKey,
+    estiloDoRotulo,
   ])
 
   if (!active || !payload?.length) {
     return null
   }
 
-  const nestLabel = payload.length === 1 && indicator !== "dot"
-
   return (
     <div
       className={cn(
-        "grid min-w-32 items-start gap-(--gap-xs) rounded-2xl bg-surface px-(--padding-md) py-(--padding-xs) text-body-xs text-default shadow-lg ring-1 ring-subtle",
+        "grid min-w-32 items-start gap-(--gap-xs) rounded-2xl bg-surface px-(--padding-md) py-(--padding-xs) text-body-xs text-default shadow-lg ring-sm ring-subtle",
         className
       )}
     >
@@ -219,13 +221,13 @@ function ChartTooltipContent({
                       !hideIndicator && (
                         <div
                           className={cn(
-                            "shrink-0 rounded-[2px] border-(--color-border) bg-(--color-bg)",
+                            "shrink-0 rounded-xs border-(--color-border) bg-(--color-bg)",
                             {
                               "h-2.5 w-2.5": indicator === "dot",
                               "w-1": indicator === "line",
-                              "w-0 border-[1.5px] border-dashed bg-transparent":
+                              "w-0 border-md border-dashed bg-transparent":
                                 indicator === "dashed",
-                              "my-0.5": nestLabel && indicator === "dashed",
+                              "my-(--gap-3xs)": nestLabel && indicator === "dashed",
                             }
                           )}
                           style={
@@ -239,18 +241,18 @@ function ChartTooltipContent({
                     )}
                     <div
                       className={cn(
-                        "flex flex-1 justify-between leading-none",
+                        "flex flex-1 justify-between",
                         nestLabel ? "items-end" : "items-center"
                       )}
                     >
                       <div className="grid gap-(--gap-xs)">
                         {nestLabel ? tooltipLabel : null}
-                        <span className="text-muted">
+                        <span className="text-body-xs-compact text-muted">
                           {itemConfig?.label ?? item.name}
                         </span>
                       </div>
                       {item.value != null && (
-                        <span className="font-mono font-medium text-default tabular-nums">
+                        <span className="text-mono-xs-compact text-default">
                           {typeof item.value === "number"
                             ? item.value.toLocaleString()
                             : String(item.value)}
@@ -310,7 +312,7 @@ function ChartLegendContent({
                 <itemConfig.icon />
               ) : (
                 <div
-                  className="h-2 w-2 shrink-0 rounded-[2px]"
+                  className="h-2 w-2 shrink-0 rounded-xs"
                   style={{
                     backgroundColor: item.color,
                   }}
