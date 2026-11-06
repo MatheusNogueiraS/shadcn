@@ -482,7 +482,7 @@ const sidebarMenuButtonVariants = cva(
       variant: {
         default: "hover:bg-muted hover:text-on-muted",
         outline:
-          "bg-page shadow-[0_0_0_1px_var(--stroke-default)] hover:bg-muted hover:text-on-muted hover:shadow-[0_0_0_1px_var(--bg-muted)]",
+          "bg-page shadow-[0_0_0_var(--stroke-sm)_var(--stroke-default)] hover:bg-muted hover:text-on-muted hover:shadow-[0_0_0_var(--stroke-sm)_var(--bg-muted)]",
       },
       size: {
         default: "h-9 text-body-sm",

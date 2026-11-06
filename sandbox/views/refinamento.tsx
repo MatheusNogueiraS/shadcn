@@ -44,6 +44,9 @@ const decisoes = [
   ["Altura de linha e espaçamento entre letras", "leading-* e tracking-* em 12 componentes", "line-height-12 e 14 nas fundações e 6 estilos: label-sm-compact, label-xs-compact, label-xs-wide, body-xs-compact, heading-sm-compact, heading-md-tight. Field, Item, Attachment, o dia do Calendar e a descrição do Empty usam o estilo base.", "Aplicado"],
   ["Família", "font-heading e font-mono ao lado do estilo em 8 componentes", "O estilo é uma classe só, com a família dentro. Tabela e valor do gráfico ganharam o grupo mono: mono-sm, mono-sm-bold, mono-xs-compact.", "Aplicado"],
   ["Texto sem estilo", "Conteúdo de menus, janelas, Sidebar, Calendar, Command, Empty, KbdGroup e Toast", "Cada superfície que recebe texto tem estilo (quase sempre body-sm) e as partes de dentro herdam dela; SidebarInset usa body-md, como o body.", "Aplicado"],
+  ["Sombras", "Menus, janelas, Card, Sidebar, Switch, Slider, Drawer", "Escala shadow-sm (fraca) a shadow-xl (forte), mais shadow-xl-up no Drawer empilhado, com a cor shadow-color (preto, opacity-10). As outras sombras do Tailwind saíram.", "Aplicado"],
+  ["Opacidade 60 a 90", "Tabs, Sidebar, Calendar, Attachment, Alert, Checkbox, Radio, Switch, Slider, Combobox", "opacity-60, 70, 80 e 90 nas fundações. bg-muted/50 e opacity-50 leem a escala.", "Aplicado"],
+  ["Contorno do Slider", "slider.tsx", "ring-black/10 virou ring-(--shadow-color), mesmo valor.", "Aplicado"],
 ]
 
 export function RefinamentoView() {

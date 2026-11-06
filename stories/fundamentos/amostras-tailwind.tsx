@@ -1,5 +1,4 @@
 import type { CSSProperties, ReactNode } from "react"
-import temaTailwind from "tailwindcss/theme.css?raw"
 
 import opacidades from "../../tokens/foundations/opacity.json"
 import { Tabela } from "./amostras-medidas"
@@ -10,10 +9,6 @@ const fontes = import.meta.glob("../../src/components/ui/*.tsx", { query: "?raw"
 const ARB = String.raw`\[[^\]\s"'\x60]+\]`
 const PALETA = "black|white|slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose"
 
-// O Tailwind só publica na página as variáveis que alguma classe referencia; as outras, como as sombras, vêm do tema dele.
-const css = (nome: string) =>
-  getComputedStyle(document.documentElement).getPropertyValue(nome).trim() || (temaTailwind.match(new RegExp(`${nome}:\\s*([^;]+);`))?.[1].trim() ?? "")
-const sufixo = (c: string) => c.split("-").pop() ?? ""
 const colchetes = (c: string) => c.slice(c.indexOf("[") + 1, c.lastIndexOf("]")).replaceAll("_", " ")
 
 const quadro = (estilo: CSSProperties) => <div className="size-8 rounded-sm bg-surface" style={estilo} />
@@ -37,9 +32,10 @@ const familias = {
     amostra: (c) => quadro({ background: `color-mix(in oklab, var(--color-${c.split("-").slice(1).join("-").split("/")[0]}) ${opacidade(c) || 100}%, transparent)` }),
   },
   sombra: {
-    padrao: String.raw`shadow-(?:2xs|xs|sm|md|lg|xl|2xl)|shadow-${ARB}|\[--[a-z-]*shadow[a-z-]*:[^\]\s"'\x60]+\]`,
-    valor: (c) => (c.includes("[") ? colchetes(c).replace(/^--[a-z-]+:/, "") : css(`--shadow-${sufixo(c)}`)),
-    amostra: (c) => quadro({ boxShadow: c.includes("[") ? colchetes(c).replace(/^--[a-z-]+:/, "") : css(`--shadow-${sufixo(c)}`) }),
+    // shadow-sm a shadow-xl são tokens: aqui entram só as sombras escritas entre colchetes.
+    padrao: String.raw`shadow-${ARB}|\[--[a-z-]*shadow[a-z-]*:[^\]\s"'\x60]+\]`,
+    valor: (c) => colchetes(c).replace(/^--[a-z-]+:/, ""),
+    amostra: (c) => quadro({ boxShadow: colchetes(c).replace(/^--[a-z-]+:/, "") }),
   },
 } satisfies Record<string, Familia>
 

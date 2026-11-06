@@ -1,0 +1,44 @@
+{
+  "shadow": {
+    "sm": {
+      "$type": "shadow",
+      "$value": [
+        { "color": "{shadow.color}", "offsetX": { "value": 0, "unit": "px" }, "offsetY": { "value": 1, "unit": "px" }, "blur": { "value": 3, "unit": "px" }, "spread": { "value": 0, "unit": "px" } },
+        { "color": "{shadow.color}", "offsetX": { "value": 0, "unit": "px" }, "offsetY": { "value": 1, "unit": "px" }, "blur": { "value": 2, "unit": "px" }, "spread": { "value": -1, "unit": "px" } }
+      ],
+      "$description": "Fraca. Sidebar flutuante, área da página no modo inset e bolinha do switch"
+    },
+    "md": {
+      "$type": "shadow",
+      "$value": [
+        { "color": "{shadow.color}", "offsetX": { "value": 0, "unit": "px" }, "offsetY": { "value": 4, "unit": "px" }, "blur": { "value": 6, "unit": "px" }, "spread": { "value": -1, "unit": "px" } },
+        { "color": "{shadow.color}", "offsetX": { "value": 0, "unit": "px" }, "offsetY": { "value": 2, "unit": "px" }, "blur": { "value": 4, "unit": "px" }, "spread": { "value": -2, "unit": "px" } }
+      ],
+      "$description": "Média. Card, controle do slider e seta do menu de navegação"
+    },
+    "lg": {
+      "$type": "shadow",
+      "$value": [
+        { "color": "{shadow.color}", "offsetX": { "value": 0, "unit": "px" }, "offsetY": { "value": 10, "unit": "px" }, "blur": { "value": 15, "unit": "px" }, "spread": { "value": -3, "unit": "px" } },
+        { "color": "{shadow.color}", "offsetX": { "value": 0, "unit": "px" }, "offsetY": { "value": 4, "unit": "px" }, "blur": { "value": 6, "unit": "px" }, "spread": { "value": -4, "unit": "px" } }
+      ],
+      "$description": "Forte. Menus, popover, select, combobox, hover card, toast e tooltip do gráfico"
+    },
+    "xl": {
+      "$type": "shadow",
+      "$value": [
+        { "color": "{shadow.color}", "offsetX": { "value": 0, "unit": "px" }, "offsetY": { "value": 20, "unit": "px" }, "blur": { "value": 25, "unit": "px" }, "spread": { "value": -5, "unit": "px" } },
+        { "color": "{shadow.color}", "offsetX": { "value": 0, "unit": "px" }, "offsetY": { "value": 8, "unit": "px" }, "blur": { "value": 10, "unit": "px" }, "spread": { "value": -6, "unit": "px" } }
+      ],
+      "$description": "A mais forte. Dialog, alert dialog, sheet e drawer"
+    },
+    "xl-up": {
+      "$type": "shadow",
+      "$value": [
+        { "color": "{shadow.color}", "offsetX": { "value": 0, "unit": "px" }, "offsetY": { "value": -20, "unit": "px" }, "blur": { "value": 25, "unit": "px" }, "spread": { "value": -5, "unit": "px" } },
+        { "color": "{shadow.color}", "offsetX": { "value": 0, "unit": "px" }, "offsetY": { "value": -8, "unit": "px" }, "blur": { "value": 10, "unit": "px" }, "spread": { "value": -6, "unit": "px" } }
+      ],
+      "$description": "A mais forte, para cima. Drawer empilhado sobre outro"
+    }
+  }
+}
