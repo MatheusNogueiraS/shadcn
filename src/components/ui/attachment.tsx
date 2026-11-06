@@ -12,9 +12,9 @@ const attachmentVariants = cva(
     variants: {
       size: {
         default:
-          "gap-(--gap-sm) text-body-sm has-data-[slot=attachment-content]:px-(--padding-md) has-data-[slot=attachment-content]:py-(--padding-sm) has-data-[slot=attachment-media]:p-(--padding-sm)",
-        sm: "gap-(--gap-md) text-body-xs has-data-[slot=attachment-content]:px-(--padding-sm) has-data-[slot=attachment-content]:py-(--padding-xs) has-data-[slot=attachment-media]:p-(--padding-xs)",
-        xs: "gap-(--gap-xs) rounded-3xl text-body-xs has-data-[slot=attachment-content]:px-(--padding-xs) has-data-[slot=attachment-content]:py-(--padding-2xs) has-data-[slot=attachment-media]:p-(--padding-2xs)",
+          "gap-(--gap-sm) rounded-5xl p-(--padding-lg) text-body-sm data-[orientation=horizontal]:has-data-[slot=attachment-content]:px-(--padding-2xl)",
+        sm: "gap-(--gap-md) p-(--padding-md) text-body-xs data-[orientation=horizontal]:has-data-[slot=attachment-content]:px-(--padding-lg)",
+        xs: "gap-(--gap-xs) rounded-3xl p-(--padding-xs) text-body-xs data-[orientation=horizontal]:has-data-[slot=attachment-content]:px-(--padding-sm)",
       },
       orientation: {
         horizontal: "min-w-40 items-center",
@@ -85,7 +85,7 @@ function AttachmentContent({
     <div
       data-slot="attachment-content"
       className={cn(
-        "max-w-full min-w-0 flex-1 group-data-[orientation=vertical]/attachment:px-(--padding-2xs)",
+        "max-w-full min-w-0 flex-1 group-data-[orientation=vertical]/attachment:px-(--padding-xs)",
         className
       )}
       {...props}

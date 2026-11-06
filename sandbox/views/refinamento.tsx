@@ -1,8 +1,9 @@
 import * as React from "react"
 import { Bar, BarChart, XAxis } from "recharts"
-import { CopyIcon, InboxIcon, MailIcon, PlusIcon, WifiOffIcon } from "lucide-react"
+import { CopyIcon, FileTextIcon, ImageIcon, InboxIcon, MailIcon, PaperclipIcon, PlusIcon, RotateCcwIcon, WifiOffIcon, XIcon } from "lucide-react"
 
 import { Alert, AlertAction, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { Attachment, AttachmentAction, AttachmentActions, AttachmentContent, AttachmentDescription, AttachmentMedia, AttachmentTitle, AttachmentTrigger } from "@/components/ui/attachment"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -16,9 +17,11 @@ import { Label } from "@/components/ui/label"
 import { Menubar, MenubarCheckboxItem, MenubarContent, MenubarMenu, MenubarRadioGroup, MenubarRadioItem, MenubarTrigger } from "@/components/ui/menubar"
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { Spinner } from "@/components/ui/spinner"
 import { Switch } from "@/components/ui/switch"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+import { banner } from "../art"
 
 // Listras na área de padding, como no inspetor do navegador: a camada lisa de cima cobre só o conteúdo.
 const listras = "repeating-linear-gradient(45deg, color-mix(in oklab, var(--bg-brand) 45%, transparent) 0 2px, transparent 2px 6px)"
@@ -91,6 +94,7 @@ export function RefinamentoView() {
           <Exemplo titulo="Raio 2 px" onde="chart.tsx:222 e 313, tooltip.tsx:58" rotulo="rounded-xs · passe o mouse"><ExemploRaio /></Exemplo>
           <Exemplo titulo="Menus · recuo de 38 px" onde="context-menu, dropdown-menu e menubar" rotulo="pl-9.5 · resultado · abra os menus"><ExemploMenus /></Exemplo>
         </div>
+        <Exemplo titulo="Attachment · padding maior" onde="attachment.tsx:14-17 e 88 · tamanhos default, sm e xs" rotulo="Padding maior em todos os tamanhos. Só a imagem e na vertical, o padding é igual em volta: 12, 10 e 6. As listras são o padding de cada chip."><ExemploAttachment /></Exemplo>
       </Realce.Provider>
     </div>
   )
@@ -260,6 +264,75 @@ function ExemploMenus() {
             </MenubarContent>
           </MenubarMenu>
         </Menubar>
+      </div>
+    </div>
+  )
+}
+
+// Medidas de cada tamanho em attachment.tsx; a altura é a do chip com título e descrição.
+const tamanhos = [
+  ["default", "padding 16 × 12 (era 8 × 8) · altura 66 (era 58) · espaço 8 · mídia 40 · raio 24 (era 20) · título 14 px"],
+  ["sm", "padding 12 × 10 (era 6 × 6) · altura 56 (era 48) · espaço 10 · mídia 32 · raio 20 · título 12 px"],
+  ["xs", "padding 8 × 6 (era 4 × 4) · altura 48 (era 44) · espaço 6 · mídia 28 · raio 18 · título 12 px"],
+] as const
+
+type Anexo = { state: React.ComponentProps<typeof Attachment>["state"]; midia: React.ReactNode; titulo: string; descricao: string; acao?: string; icone?: React.ReactNode }
+const anexos: Anexo[] = [
+  { state: "done", midia: <FileTextIcon />, titulo: "extrato.pdf", descricao: "PDF · 1,4 MB", acao: "Remover", icone: <XIcon /> },
+  { state: "uploading", midia: <Spinner />, titulo: "comprovante.pdf", descricao: "Enviando…", acao: "Cancelar envio de", icone: <XIcon /> },
+  { state: "processing", midia: <Spinner />, titulo: "gastos.csv", descricao: "Processando…" },
+  { state: "error", midia: <ImageIcon />, titulo: "foto-documento.jpg", descricao: "Falha no envio", acao: "Tentar enviar de novo", icone: <RotateCcwIcon /> },
+  { state: "idle", midia: <PaperclipIcon />, titulo: "Solte um arquivo", descricao: "Até 10 MB" },
+]
+
+const capa = banner("#fa6300", "#462a71", "")
+
+function ExemploAttachment() {
+  const estilo = useRealce("var(--bg-surface)")
+  return (
+    <div className="space-y-(--gap-3xl)">
+      {tamanhos.map(([size, medidas]) => (
+        <div key={size} className="space-y-(--gap-sm)">
+          <p className="text-label-sm">{size} <span className="text-body-xs text-muted">· {medidas}</span></p>
+          <div className="flex flex-wrap items-center gap-(--gap-lg)">
+            {anexos.map((a) => (
+              <Attachment key={a.state} size={size} state={a.state} style={estilo}>
+                <AttachmentMedia>{a.midia}</AttachmentMedia>
+                <AttachmentContent>
+                  <AttachmentTitle>{a.titulo}</AttachmentTitle>
+                  <AttachmentDescription>{a.descricao}</AttachmentDescription>
+                </AttachmentContent>
+                {a.acao && <AttachmentActions><AttachmentAction aria-label={`${a.acao} ${a.titulo}`}>{a.icone}</AttachmentAction></AttachmentActions>}
+              </Attachment>
+            ))}
+            <Attachment size={size} style={estilo}>
+              <AttachmentMedia variant="image"><img src={capa} alt="" /></AttachmentMedia>
+              <AttachmentContent>
+                <AttachmentTitle>cartao.png</AttachmentTitle>
+                <AttachmentDescription>Imagem · 820 KB</AttachmentDescription>
+              </AttachmentContent>
+            </Attachment>
+            <Attachment size={size} style={estilo}>
+              <AttachmentMedia variant="image"><img src={capa} alt="cartao.png" /></AttachmentMedia>
+            </Attachment>
+          </div>
+        </div>
+      ))}
+      <div className="space-y-(--gap-sm)">
+        <p className="text-label-sm">vertical <span className="text-body-xs text-muted">· nos três tamanhos, clicável e com ação</span></p>
+        <div className="flex flex-wrap items-start gap-(--gap-lg)">
+          {tamanhos.map(([size]) => (
+            <Attachment key={size} size={size} orientation="vertical" style={estilo}>
+              <AttachmentMedia variant="image"><img src={capa} alt="" /></AttachmentMedia>
+              <AttachmentContent>
+                <AttachmentTitle>cartao.png</AttachmentTitle>
+                <AttachmentDescription>{size}</AttachmentDescription>
+              </AttachmentContent>
+              <AttachmentTrigger aria-label={`Abrir cartao.png (${size})`} />
+              <AttachmentActions><AttachmentAction aria-label={`Remover cartao.png (${size})`}><XIcon /></AttachmentAction></AttachmentActions>
+            </Attachment>
+          ))}
+        </div>
       </div>
     </div>
   )
