@@ -42,10 +42,9 @@ export const simular = (seletor: string, pseudo: string, classe: string) =>
   seletor.replace(new RegExp(`(?<!\\\\)${pseudo}(?![\\w-])`, "g"), `:is(.${classe}, .${classe} *)`)
 console.assert(simular(".hover\\:bg-x:hover", ":hover", "s") === ".hover\\:bg-x:is(.s, .s *)", "simular trocou o pseudo errado")
 
-// shortcut: copia as regras uma vez por página; depois de editar o CSS com o Storybook aberto, recarregue a página.
+// Folhas já copiadas. Quando o Vite recompila o CSS, a folha nova chega sem as cópias e é copiada de novo.
+const copiadas = new WeakSet<CSSStyleSheet>()
 function copiarRegras() {
-  if (document.head.dataset.simula) return
-  document.head.dataset.simula = "copiado"
   // A cópia entra logo depois da original, na mesma camada e media query, para perder e ganhar das mesmas regras.
   const visitar = (pai: CSSStyleSheet | CSSGroupingRule) => {
     for (let i = pai.cssRules.length - 1; i >= 0; i--) {
@@ -53,27 +52,33 @@ function copiarRegras() {
       if (regra instanceof CSSStyleRule) {
         for (const [estado, pseudo] of Object.entries(PSEUDOS)) {
           const seletor = simular(regra.selectorText, pseudo, `simula-${estado.toLowerCase()}`)
-          if (seletor !== regra.selectorText) pai.insertRule(`${seletor} { ${regra.style.cssText} }`, i + 1)
+          // Uma cópia recusada (pseudo-elemento seguido de :is()) não pode impedir as outras.
+          if (seletor !== regra.selectorText) try { pai.insertRule(`${seletor} { ${regra.style.cssText} }`, i + 1) } catch { /* fica sem simulação */ }
         }
       } else if (regra instanceof CSSGroupingRule) visitar(regra)
     }
   }
   for (const folha of Array.from(document.styleSheets)) {
+    if (copiadas.has(folha)) continue
+    copiadas.add(folha)
     try { visitar(folha) } catch { /* folha de outra origem: o navegador não deixa ler */ }
   }
 }
+// Recompilação com um estado já simulado na tela.
+import.meta.hot?.on("vite:afterUpdate", copiarRegras)
 
 // `so` põe o estado só no primeiro elemento que casa com o seletor, para um grupo não mostrar duas opções em foco.
 export function Simula({ estado, so, children }: { estado: Interacao; so?: string; children: React.ReactNode }) {
   const caixa = React.useRef<HTMLDivElement>(null)
   const classe = `simula-${estado.toLowerCase()}`
+  // Sem dependências: roda a cada troca de controle, porque a troca pode recriar o elemento (uma `key` que muda).
   React.useEffect(() => {
     if (estado === "Default") return
     copiarRegras()
     const alvo = so ? caixa.current?.querySelector(so) : null
     alvo?.classList.add(classe)
     return () => alvo?.classList.remove(classe)
-  }, [estado, so, classe])
+  })
   if (estado === "Default") return <>{children}</>
   return <div ref={caixa} className={so ? "contents" : `contents ${classe}`}>{children}</div>
 }
