@@ -136,6 +136,10 @@
       "$value": "{color.orange.400}",
       "$description": "Texto e links na cor da marca"
     },
+    "brand-secondary": {
+      "$value": "{color.purple.300}",
+      "$description": "Texto no roxo da marca"
+    },
     "danger": {
       "$value": "{color.red.400}",
       "$description": "Texto de erro"

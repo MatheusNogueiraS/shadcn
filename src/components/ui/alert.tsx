@@ -10,6 +10,10 @@ const alertVariants = cva(
         default: "bg-surface text-default",
         destructive:
           "bg-surface text-danger *:data-[slot=alert-description]:text-danger/90 *:[svg]:text-current",
+        warning: "bg-surface text-warning *:data-[slot=alert-description]:text-warning/90",
+        success: "bg-surface text-success *:data-[slot=alert-description]:text-success/90",
+        brand: "bg-surface text-brand *:data-[slot=alert-description]:text-brand/90",
+        "brand-secondary": "bg-surface text-brand-secondary *:data-[slot=alert-description]:text-brand-secondary/90",
       },
     },
     defaultVariants: {
