@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
-import { ArrowRightIcon, CheckIcon } from "lucide-react"
+import { ArrowRightIcon, ArrowUpRightIcon, CheckIcon } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
+import { Spinner } from "@/components/ui/spinner"
 import { Opcao, Opcoes, Simula, pagina, simulaEstado, vitrine, type Interacao } from "./Opcoes"
 
 const variantes = ["default", "secondary", "destructive", "outline", "ghost", "link"] as const
@@ -57,6 +58,22 @@ export const ComIcone: Story = {
     <Opcoes>
       <Opcao nome="inline-start"><Badge><CheckIcon data-icon="inline-start" /> Pago</Badge></Opcao>
       <Opcao nome="inline-end"><Badge>Ver <ArrowRightIcon data-icon="inline-end" /></Badge></Opcao>
+    </Opcoes>
+  ),
+}
+
+// O exemplo de cores do shadcn usa a paleta; aqui, os fundos suaves e os textos dos tokens. O vermelho é o tipo destructive.
+const cores = [["Info", "bg-info-subtle text-info"], ["Sucesso", "bg-success-subtle text-success"], ["Aviso", "bg-warning-subtle text-warning"]] as const
+
+export const Composicoes: Story = {
+  name: "Composições",
+  parameters: vitrine("Os exemplos do shadcn: cores pelo `className`, o Badge como link (com `render`, quando ganha hover e foco) e com Spinner."),
+  render: () => (
+    <Opcoes>
+      <Opcao nome="Cores"><div className="flex flex-wrap justify-center gap-(--gap-sm)">{cores.map(([nome, classe]) => <Badge key={nome} className={classe}>{nome}</Badge>)}</div></Opcao>
+      <Opcao nome="Como link"><Badge render={<a href="#badge" />}>Abrir <ArrowUpRightIcon data-icon="inline-end" /></Badge></Opcao>
+      <Opcao nome="Como link · Hover"><Simula estado="Hover"><Badge render={<a href="#badge" />}>Abrir <ArrowUpRightIcon data-icon="inline-end" /></Badge></Simula></Opcao>
+      <Opcao nome="Com Spinner"><div className="flex flex-wrap justify-center gap-(--gap-sm)"><Badge variant="destructive"><Spinner data-icon="inline-start" />Excluindo</Badge><Badge variant="secondary">Gerando<Spinner data-icon="inline-end" /></Badge></div></Opcao>
     </Opcoes>
   ),
 }

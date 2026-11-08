@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
-import { BoldIcon } from "lucide-react"
+import { BoldIcon, BookmarkIcon } from "lucide-react"
 import { useArgs } from "storybook/preview-api"
 
 import { Toggle } from "@/components/ui/toggle"
@@ -91,12 +91,13 @@ export const Estados: Story = {
 
 export const Conteudo: Story = {
   name: "Conteúdo",
-  parameters: vitrine("Sem texto visível, o `aria-label` é obrigatório."),
+  parameters: vitrine("Sem texto visível, o `aria-label` é obrigatório. O exemplo do shadcn com marcador preenche o ícone quando o Toggle fica selecionado, com `group-aria-pressed/toggle:fill-current`."),
   render: () => (
     <Opcoes>
       <Opcao nome="Ícone e texto"><Toggle variant="outline"><BoldIcon data-icon="inline-start" /> Negrito</Toggle></Opcao>
       <Opcao nome="Só ícone"><Toggle variant="outline" aria-label="Negrito"><BoldIcon /></Toggle></Opcao>
       <Opcao nome="Só texto"><Toggle variant="outline">Negrito</Toggle></Opcao>
+      <Opcao nome="Ícone que preenche"><Toggle variant="outline" defaultPressed><BookmarkIcon data-icon="inline-start" className="group-aria-pressed/toggle:fill-current" /> Salvo</Toggle></Opcao>
     </Opcoes>
   ),
 }
