@@ -226,6 +226,7 @@
   --text-on-muted: var(--color-neutral-900); /** Texto sobre fundo em destaque */
   --text-on-brand: var(--color-white); /** Texto sobre a marca */
   --text-brand: var(--color-orange-700); /** Texto e links na cor da marca */
+  --text-brand-secondary: var(--color-purple-900); /** Texto no roxo da marca */
   --text-danger: var(--color-red-600); /** Texto de erro */
   --text-inverse: var(--color-white); /** Texto sobre fundo invertido */
   --text-success: var(--color-green-700); /** Texto de sucesso */
@@ -322,6 +323,7 @@
   --text-on-muted: var(--color-neutral-50); /** Texto sobre fundo em destaque */
   --text-on-brand: var(--color-white); /** Texto sobre a marca */
   --text-brand: var(--color-orange-400); /** Texto e links na cor da marca */
+  --text-brand-secondary: var(--color-purple-300); /** Texto no roxo da marca */
   --text-danger: var(--color-red-400); /** Texto de erro */
   --text-inverse: var(--color-neutral-950); /** Texto sobre fundo invertido */
   --text-success: var(--color-green-400); /** Texto de sucesso */
@@ -378,6 +380,7 @@
   --text-color-on-muted: var(--text-on-muted);
   --text-color-on-brand: var(--text-on-brand);
   --text-color-brand: var(--text-brand);
+  --text-color-brand-secondary: var(--text-brand-secondary);
   --text-color-danger: var(--text-danger);
   --text-color-inverse: var(--text-inverse);
   --text-color-success: var(--text-success);
