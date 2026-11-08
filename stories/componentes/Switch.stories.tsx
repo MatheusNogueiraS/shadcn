@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { useArgs } from "storybook/preview-api"
 
+import { Field, FieldContent, FieldDescription, FieldLabel, FieldTitle } from "@/components/ui/field"
 import { Switch } from "@/components/ui/switch"
 import { Opcao, Opcoes, Simula, pagina, simulaEstado, vitrine, type Interacao } from "./Opcoes"
 
@@ -55,6 +56,37 @@ export const Estados: Story = {
       <Opcao nome="Focus"><Simula estado="Focus"><Switch aria-label="Opção" /></Simula></Opcao>
       <Opcao nome="Disabled"><Switch disabled aria-label="Opção" /></Opcao>
       <Opcao nome="Invalid"><Switch aria-invalid aria-label="Opção" /></Opcao>
+    </Opcoes>
+  ),
+}
+
+export const Composicoes: Story = {
+  name: "Composições",
+  parameters: vitrine("Os exemplos do shadcn com o `Field`: nome, descrição e cartão de escolha. Com `data-disabled` ou `data-invalid` no Field, o nome acompanha o Switch."),
+  render: () => (
+    <Opcoes>
+      <Opcao nome="Com nome"><Field orientation="horizontal" className="w-fit"><Switch id="sw-nome" /><FieldLabel htmlFor="sw-nome">Modo avião</FieldLabel></Field></Opcao>
+      <Opcao nome="Com descrição">
+        <Field orientation="horizontal">
+          <FieldContent><FieldLabel htmlFor="sw-descricao">Usar em todos os aparelhos</FieldLabel><FieldDescription>A preferência vale onde você entrar.</FieldDescription></FieldContent>
+          <Switch id="sw-descricao" />
+        </Field>
+      </Opcao>
+      <Opcao nome="Disabled no Field"><Field orientation="horizontal" data-disabled className="w-fit"><Switch id="sw-desabilitado" disabled /><FieldLabel htmlFor="sw-desabilitado">Modo avião</FieldLabel></Field></Opcao>
+      <Opcao nome="Invalid no Field">
+        <Field orientation="horizontal" data-invalid>
+          <FieldContent><FieldLabel htmlFor="sw-invalido">Aceito os termos</FieldLabel><FieldDescription>É preciso aceitar para continuar.</FieldDescription></FieldContent>
+          <Switch id="sw-invalido" aria-invalid />
+        </Field>
+      </Opcao>
+      <Opcao nome="Cartão de escolha">
+        <FieldLabel htmlFor="sw-cartao">
+          <Field orientation="horizontal">
+            <FieldContent><FieldTitle>Usar em todos os aparelhos</FieldTitle><FieldDescription>Desliga quando você sai do app.</FieldDescription></FieldContent>
+            <Switch id="sw-cartao" />
+          </Field>
+        </FieldLabel>
+      </Opcao>
     </Opcoes>
   ),
 }
