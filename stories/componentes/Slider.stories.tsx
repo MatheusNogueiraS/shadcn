@@ -6,7 +6,7 @@ import { Opcao, Opcoes, Simula, estadoDe, pagina, vitrine, type Interacao } from
 
 const orientacoes = ["horizontal", "vertical"] as const
 type Orientacao = (typeof orientacoes)[number]
-const interacoes: Interacao[] = ["Default", "Hover"]
+const interacoes: Interacao[] = ["Default", "Hover", "Focus"]
 const pino = "[data-slot=slider-thumb]"
 // Um número por pino: o Slider desenha um pino para cada valor.
 const valores = { 1: [50], 2: [25, 75], 3: [10, 40, 70] } as const
@@ -26,7 +26,7 @@ const meta = {
   argTypes: {
     orientation: { name: "Orientation", control: "inline-radio", options: orientacoes, description: "No código, `orientation`.", table: { category: "Aparência" } },
     pinos: { name: "Pinos", control: "inline-radio", options: [1, 2, 3], description: "Quantos números o `value` (ou `defaultValue`) recebe, como `[25, 75]`. A trilha pinta do primeiro ao último pino.", table: { category: "Conteúdo" } },
-    estado: { name: "State", control: "inline-radio", options: interacoes, description: "Simulado, no primeiro pino. O foco do teclado não aparece no código.", table: { category: "Estado" } },
+    estado: { name: "State", control: "inline-radio", options: interacoes, description: "Simulado, no primeiro pino.", table: { category: "Estado" } },
     disabled: { name: "Disabled", control: "boolean", description: "`disabled`: impede a mudança e esmaece.", table: { category: "Estado" } },
   },
   args: { orientation: "horizontal", pinos: 1, estado: "Default", disabled: false },
@@ -48,7 +48,7 @@ export const Orientacoes: Story = {
 
 export const Estados: Story = {
   name: "State",
-  parameters: vitrine("Hover simulado."),
+  parameters: vitrine("Hover e Focus simulados."),
   render: () => (
     <Opcoes>
       {interacoes.map((e) => <Opcao key={e} nome={e}>{moldura("horizontal", <Simula estado={e} so={pino}><Slider defaultValue={[50]} aria-label="Volume" /></Simula>)}</Opcao>)}

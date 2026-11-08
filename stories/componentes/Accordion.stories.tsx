@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Opcao, Opcoes, Simula, pagina, vitrine, type Interacao } from "./Opcoes"
 
-const interacoes: Interacao[] = ["Default", "Hover"]
+const interacoes: Interacao[] = ["Default", "Hover", "Focus"]
 const gatilho = "[data-slot=accordion-trigger]"
 
 type Controles = { multiple: boolean; disabled: boolean; estado: Interacao }
@@ -32,7 +32,7 @@ const meta = {
   argTypes: {
     multiple: { name: "Multiple", control: "boolean", description: "`multiple`: várias perguntas abertas ao mesmo tempo. Sem ele, abrir uma fecha a outra.", table: { category: "Comportamento" } },
     disabled: { name: "Disabled", control: "boolean", description: "`disabled` na segunda pergunta: ela não abre e esmaece.", table: { category: "Estado" } },
-    estado: { name: "State", control: "inline-radio", options: interacoes, description: "Simulado, na primeira pergunta. O foco do teclado não aparece no código.", table: { category: "Estado" } },
+    estado: { name: "State", control: "inline-radio", options: interacoes, description: "Simulado, na primeira pergunta.", table: { category: "Estado" } },
   },
   args: { multiple: false, disabled: false, estado: "Default" },
 } satisfies Meta<Controles>
@@ -58,12 +58,13 @@ export const Modelos: Story = {
 
 export const Estados: Story = {
   name: "State",
-  parameters: vitrine("Hover simulado. Aberto, o item ganha fundo e a seta vira para cima. Disabled está na segunda pergunta."),
+  parameters: vitrine("Hover e Focus simulados. Aberto, o item ganha fundo e a seta vira para cima. Disabled está na segunda pergunta."),
   render: () => (
     <Opcoes>
       <Opcao nome="Closed">{lista({ abertos: [] })}</Opcao>
       <Opcao nome="Open">{lista()}</Opcao>
       <Opcao nome="Hover"><Simula estado="Hover" so={gatilho}>{lista({ abertos: [] })}</Simula></Opcao>
+      <Opcao nome="Focus"><Simula estado="Focus" so={gatilho}>{lista({ abertos: [] })}</Simula></Opcao>
       <Opcao nome="Disabled">{lista({ disabled: true, abertos: [] })}</Opcao>
     </Opcoes>
   ),
