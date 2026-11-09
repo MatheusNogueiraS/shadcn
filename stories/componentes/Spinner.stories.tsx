@@ -1,5 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty"
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group"
+import { Item, ItemContent, ItemMedia, ItemTitle } from "@/components/ui/item"
 import { Spinner } from "@/components/ui/spinner"
 import { Opcao, Opcoes, pagina, vitrine } from "./Opcoes"
 
@@ -36,4 +41,33 @@ export const Tamanhos: Story = {
   name: "Size",
   parameters: vitrine("Do menor para o maior."),
   render: () => <Opcoes>{tamanhos.map((t) => <Opcao key={t} nome={rotulos[t]}>{spinner({ tamanho: t })}</Opcao>)}</Opcoes>,
+}
+
+export const Composicoes: Story = {
+  name: "Composições",
+  parameters: vitrine("Os exemplos do shadcn: o Spinner dentro de outros componentes, que definem o tamanho e a cor dele."),
+  render: () => (
+    <Opcoes>
+      <Opcao nome="Em Badge"><Badge><Spinner data-icon="inline-start" />Sincronizando</Badge></Opcao>
+      <Opcao nome="Em Button"><Button size="sm" disabled><Spinner data-icon="inline-start" />Carregando</Button></Opcao>
+      <Opcao nome="Em InputGroup"><InputGroup><InputGroupInput placeholder="Enviar mensagem" disabled aria-label="Mensagem" /><InputGroupAddon align="inline-end"><Spinner /></InputGroupAddon></InputGroup></Opcao>
+      <Opcao nome="Em Item">
+        <Item variant="muted" className="w-full">
+          <ItemMedia><Spinner /></ItemMedia>
+          <ItemContent><ItemTitle>Pagando</ItemTitle></ItemContent>
+          <ItemContent className="flex-none">R$ 100</ItemContent>
+        </Item>
+      </Opcao>
+      <Opcao nome="Em Empty">
+        <Empty>
+          <EmptyHeader>
+            <EmptyMedia variant="icon"><Spinner /></EmptyMedia>
+            <EmptyTitle>Processando o pedido</EmptyTitle>
+            <EmptyDescription>Não atualize a página.</EmptyDescription>
+          </EmptyHeader>
+          <EmptyContent><Button variant="outline" size="sm">Cancelar</Button></EmptyContent>
+        </Empty>
+      </Opcao>
+    </Opcoes>
+  ),
 }
