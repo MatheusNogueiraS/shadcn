@@ -20,7 +20,7 @@ const preview: Preview = {
       }),
     },
     options: {
-      storySort: { order: ["Fundamentos", ["Cores", ["Fundações", "Semânticos"], "Medidas", ["Fundações", "Semânticos"], "Tipografia", ["Fundações", "Estilos"]], "Componentes"] },
+      storySort: { order: ["Fundamentos", ["Cores", ["Fundações", "Semânticos"], "Medidas", ["Fundações", "Semânticos"], "Tipografia", ["Fundações", "Estilos"]], "Componentes", "Em construção"] },
     },
   },
   decorators: [
