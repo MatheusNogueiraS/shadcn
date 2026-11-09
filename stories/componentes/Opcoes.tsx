@@ -5,21 +5,33 @@ import { Badge } from "@/components/ui/badge"
 import { PaginaComponente } from "./PaginaComponente"
 
 // Parâmetros de toda página de componente: amostra fixa no topo, controles na ordem escrita e as opções embaixo.
-export const pagina = (descricao: string) => ({
+// Com `foto`, o Show code troca o endereço longo das imagens geradas (data:) por esse caminho curto.
+export const pagina = (descricao: string, foto?: string) => ({
   controls: { sort: "none" as const, expanded: true },
-  docs: { page: PaginaComponente, description: { component: descricao } },
+  docs: {
+    page: PaginaComponente,
+    description: { component: descricao },
+    ...(foto ? { source: { transform: (codigo: string) => codigo.replace(/src="data:[^"]*"/g, `src="${foto}"`) } } : {}),
+  },
 })
 
 // As histórias de "Todas as opções" são vitrines fixas: quem muda é a amostra do topo.
-export const vitrine = (descricao?: string) => ({
+// Janela, menu e o que mais abre por cima da página ocupariam a tela inteira: com `quadro` (altura em px),
+// a vitrine roda no próprio quadro, e o que abre fica dentro dele. A amostra do topo não usa quadro,
+// porque o Storybook não leva os controles até ele.
+export const vitrine = (descricao?: string, quadro?: number) => ({
   layout: "padded" as const,
   controls: { disable: true },
-  ...(descricao ? { docs: { description: { story: descricao } } } : {}),
+  docs: {
+    ...(descricao ? { description: { story: descricao } } : {}),
+    ...(quadro ? { story: { inline: false, height: `${quadro}px` } } : {}),
+  },
 })
 
 // Uma opção por card, com a etiqueta embaixo, como na documentação do Figma.
-export function Opcoes({ children }: { children: React.ReactNode }) {
-  return <div className="grid w-full grid-cols-[repeat(auto-fill,minmax(13rem,1fr))] gap-(--gap-lg)">{children}</div>
+// `larga` dá mais espaço a cada card, para componentes que não cabem em 13rem (Card, grupos de botões, trilhas).
+export function Opcoes({ larga, children }: { larga?: boolean; children: React.ReactNode }) {
+  return <div className={`grid w-full gap-(--gap-lg) ${larga ? "grid-cols-[repeat(auto-fill,minmax(20rem,1fr))]" : "grid-cols-[repeat(auto-fill,minmax(13rem,1fr))]"}`}>{children}</div>
 }
 
 export function Opcao({ nome, children }: { nome: string; children: React.ReactNode }) {
