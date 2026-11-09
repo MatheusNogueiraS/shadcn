@@ -92,7 +92,7 @@ function botao({ variant, size, texto, iconeEsquerda, iconeDireita, soIcone, lar
 const meta = {
   title: "Componentes/Button",
   render: botao,
-  parameters: pagina("Dispara uma ação. A amostra abaixo fica fixa: use os controles para transformá-la em qualquer botão desta página. Em **Show code** aparece o código real, com as propriedades que o `Button` recebe."),
+  parameters: pagina("Dispara uma ação. A amostra abaixo fica fixa: use os controles para transformá-la em qualquer botão desta página. Em **Show code** aparece o código real, com as propriedades que o `Button` recebe. O modelo Rounded do shadcn é o formato de sempre daqui: o botão já é arredondado."),
   argTypes: {
     variant: { name: "Type", control: "select", options: variantes, description: "Peso visual da ação. No código, a propriedade `variant`.", table: { category: "Aparência" } },
     size: { name: "Size", control: "inline-radio", options: tamanhos, description: "Altura do botão. No código, a propriedade `size`. Com **Só ícone**, vira `icon-xs`, `icon-sm`, `icon` ou `icon-lg`.", table: { category: "Aparência" } },
@@ -162,6 +162,7 @@ export const Estados: Story = {
       {interacoes.map((e) => <Opcao key={e} nome={e}><Simula estado={e}><Button>Button</Button></Simula></Opcao>)}
       <Opcao nome="Disabled"><Button disabled>Button</Button></Opcao>
       <Opcao nome="Loading"><Button disabled><Spinner data-icon="inline-start" /> Button</Button></Opcao>
+      <Opcao nome="Loading · inline-end"><Button disabled>Button <Spinner data-icon="inline-end" /></Button></Opcao>
       <Opcao nome="Invalid"><Button variant="outline" aria-invalid>Button</Button></Opcao>
       <Opcao nome="Expanded"><Button variant="outline" aria-expanded>Button</Button></Opcao>
     </Opcoes>
