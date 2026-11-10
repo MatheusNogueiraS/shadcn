@@ -85,7 +85,7 @@ export function Espessuras() {
             <div className="text-body-xs text-muted">{token.$description}</div>
           </>,
           `unit-${chave} · ${px(chave)}px`,
-          <code>{nome === "none" ? "border-0 · ring-0" : `border-${nome} · ring-${nome} · outline-${nome}`}</code>,
+          <code>{`border-${nome} · ring-${nome} · outline-${nome}`}</code>,
           <div className="h-14 w-24 rounded-2xl border-solid border-brand bg-muted" style={{ borderWidth: `${rem(chave)}rem` }} />,
         ]
       })}

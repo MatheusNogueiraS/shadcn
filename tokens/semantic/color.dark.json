@@ -24,13 +24,6 @@
         "com.designsystem.opacity": "{opacity.15}"
       }
     },
-    "field": {
-      "$value": "{color.white}",
-      "$description": "Campos de formulário",
-      "$extensions": {
-        "com.designsystem.opacity": "{opacity.7-5}"
-      }
-    },
     "divider": {
       "$value": "{color.white}",
       "$description": "Linhas separadoras",
@@ -91,20 +84,12 @@
         "com.designsystem.opacity": "{opacity.20}"
       }
     },
-    "warning": {
-      "$value": "{color.yellow.400}",
-      "$description": "Atenção"
-    },
     "warning-subtle": {
       "$value": "{color.yellow.400}",
       "$description": "Fundo discreto de atenção",
       "$extensions": {
         "com.designsystem.opacity": "{opacity.20}"
       }
-    },
-    "info": {
-      "$value": "{color.purple.400}",
-      "$description": "Informação"
     },
     "info-subtle": {
       "$value": "{color.purple.400}",
@@ -228,18 +213,6 @@
       "$extensions": {
         "com.designsystem.opacity": "{opacity.50}"
       }
-    },
-    "success": {
-      "$value": "{color.green.400}",
-      "$description": "Borda de sucesso"
-    },
-    "warning": {
-      "$value": "{color.yellow.400}",
-      "$description": "Borda de atenção"
-    },
-    "info": {
-      "$value": "{color.purple.400}",
-      "$description": "Borda informativa"
     }
   },
   "data": {

@@ -21,13 +21,6 @@
       "$value": "{color.neutral.200}",
       "$description": "Trilho e fundo de controles"
     },
-    "field": {
-      "$value": "{color.neutral.200}",
-      "$description": "Campos de formulário",
-      "$extensions": {
-        "com.designsystem.opacity": "{opacity.50}"
-      }
-    },
     "divider": {
       "$value": "{color.neutral.200}",
       "$description": "Linhas separadoras"
@@ -85,20 +78,12 @@
         "com.designsystem.opacity": "{opacity.10}"
       }
     },
-    "warning": {
-      "$value": "{color.yellow.500}",
-      "$description": "Atenção"
-    },
     "warning-subtle": {
       "$value": "{color.yellow.500}",
       "$description": "Fundo discreto de atenção",
       "$extensions": {
         "com.designsystem.opacity": "{opacity.10}"
       }
-    },
-    "info": {
-      "$value": "{color.purple.600}",
-      "$description": "Informação"
     },
     "info-subtle": {
       "$value": "{color.purple.600}",
@@ -213,18 +198,6 @@
     "invalid": {
       "$value": "{color.red.600}",
       "$description": "Campo inválido"
-    },
-    "success": {
-      "$value": "{color.green.600}",
-      "$description": "Borda de sucesso"
-    },
-    "warning": {
-      "$value": "{color.yellow.500}",
-      "$description": "Borda de atenção"
-    },
-    "info": {
-      "$value": "{color.purple.600}",
-      "$description": "Borda informativa"
     }
   },
   "data": {

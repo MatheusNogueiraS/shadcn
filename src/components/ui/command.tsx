@@ -53,7 +53,7 @@ function CommandDialog({
       </DialogHeader>
       <DialogContent
         className={cn(
-          "top-1/3 translate-y-0 overflow-hidden rounded-5xl! p-(--padding-none)",
+          "top-1/3 translate-y-0 overflow-hidden rounded-5xl! p-0",
           className
         )}
         showCloseButton={showCloseButton}
@@ -69,7 +69,7 @@ function CommandInput({
   ...props
 }: React.ComponentProps<typeof CommandPrimitive.Input>) {
   return (
-    <div data-slot="command-input-wrapper" className="p-(--padding-2xs) pb-(--padding-none)">
+    <div data-slot="command-input-wrapper" className="p-(--padding-2xs) pb-0">
       <InputGroup className="h-9 bg-control/50">
         <CommandPrimitive.Input
           data-slot="command-input"

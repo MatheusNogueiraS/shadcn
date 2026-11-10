@@ -185,7 +185,7 @@ function Sidebar({
           data-sidebar="sidebar"
           data-slot="sidebar"
           data-mobile="true"
-          className="w-(--sidebar-width) bg-subtle p-(--padding-none) text-default [&>button]:hidden"
+          className="w-(--sidebar-width) bg-subtle p-0 text-default [&>button]:hidden"
           style={
             {
               "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
@@ -305,7 +305,7 @@ function SidebarInset({ className, ...props }: React.ComponentProps<"main">) {
     <main
       data-slot="sidebar-inset"
       className={cn(
-        "relative flex w-full flex-1 flex-col bg-page text-body-md md:peer-data-[variant=inset]:m-(--gap-sm) md:peer-data-[variant=inset]:ml-(--gap-none) md:peer-data-[variant=inset]:rounded-3xl md:peer-data-[variant=inset]:shadow-sm md:peer-data-[variant=inset]:peer-data-[state=collapsed]:ml-(--gap-sm)",
+        "relative flex w-full flex-1 flex-col bg-page text-body-md md:peer-data-[variant=inset]:m-(--gap-sm) md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-3xl md:peer-data-[variant=inset]:shadow-sm md:peer-data-[variant=inset]:peer-data-[state=collapsed]:ml-(--gap-sm)",
         className
       )}
       {...props}
@@ -425,7 +425,7 @@ function SidebarGroupAction({
     props: mergeProps<"button">(
       {
         className: cn(
-          "absolute top-3.5 right-3 flex aspect-square w-5 items-center justify-center rounded-3xl p-(--padding-none) text-label-sm text-default ring-focus-neutral outline-hidden transition-transform group-data-[collapsible=icon]:hidden after:absolute after:-inset-2 hover:bg-muted hover:text-on-muted focus-visible:ring-lg md:after:hidden [&>svg]:size-(--size-md) [&>svg]:shrink-0",
+          "absolute top-3.5 right-3 flex aspect-square w-5 items-center justify-center rounded-3xl p-0 text-label-sm text-default ring-focus-neutral outline-hidden transition-transform group-data-[collapsible=icon]:hidden after:absolute after:-inset-2 hover:bg-muted hover:text-on-muted focus-visible:ring-lg md:after:hidden [&>svg]:size-(--size-md) [&>svg]:shrink-0",
           className
         ),
       },
@@ -487,7 +487,7 @@ const sidebarMenuButtonVariants = cva(
       size: {
         default: "h-9 text-body-sm",
         sm: "h-8 text-body-xs data-active:text-label-xs",
-        lg: "h-14 px-(--padding-lg) text-body-sm group-data-[collapsible=icon]:p-(--padding-none)!",
+        lg: "h-14 px-(--padding-lg) text-body-sm group-data-[collapsible=icon]:p-0!",
       },
     },
     defaultVariants: {
@@ -565,7 +565,7 @@ function SidebarMenuAction({
     props: mergeProps<"button">(
       {
         className: cn(
-          "absolute top-1.5 right-1 flex aspect-square w-5 items-center justify-center rounded-3xl p-(--padding-none) text-label-sm text-default ring-focus-neutral outline-hidden transition-transform group-data-[collapsible=icon]:hidden peer-hover/menu-button:text-on-muted peer-data-[size=default]/menu-button:top-2 peer-data-[size=lg]/menu-button:top-2.5 peer-data-[size=sm]/menu-button:top-1 after:absolute after:-inset-2 hover:bg-muted hover:text-on-muted focus-visible:ring-lg md:after:hidden [&>svg]:size-(--size-md) [&>svg]:shrink-0",
+          "absolute top-1.5 right-1 flex aspect-square w-5 items-center justify-center rounded-3xl p-0 text-label-sm text-default ring-focus-neutral outline-hidden transition-transform group-data-[collapsible=icon]:hidden peer-hover/menu-button:text-on-muted peer-data-[size=default]/menu-button:top-2 peer-data-[size=lg]/menu-button:top-2.5 peer-data-[size=sm]/menu-button:top-1 after:absolute after:-inset-2 hover:bg-muted hover:text-on-muted focus-visible:ring-lg md:after:hidden [&>svg]:size-(--size-md) [&>svg]:shrink-0",
           showOnHover &&
             "group-focus-within/menu-item:opacity-100 group-hover/menu-item:opacity-100 peer-data-active/menu-button:text-on-muted aria-expanded:opacity-100 md:opacity-0",
           className

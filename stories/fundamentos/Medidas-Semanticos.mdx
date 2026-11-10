@@ -44,15 +44,13 @@ Largura e altura iguais, em ícones, avatares, checkbox e botões só com ícone
 
 Como nas cores, um `stroke` vale para qualquer contorno, e a classe diz onde ele é aplicado: `stroke-sm` é usado como `border-sm`, `ring-sm`, `outline-sm` ou em um lado só, como `border-b-sm`.
 
-O `none` serve ao Figma. No código, o zero continua `border-0` e `ring-0`, porque `border-none` e `outline-none` já são classes do Tailwind com outro efeito.
-
 <Unstyled>
   <Espessuras />
 </Unstyled>
 
 ## Tailwind
 
-Os tokens acima são a base para construir componentes, aqui e no Figma. Além deles, os componentes usam outras classes do Tailwind, do jeito que o shadcn as escreveu: alturas como `h-9`, larguras como `min-w-32` e `max-w-sm`, posições como `top-3.5`, deslocamentos como `-translate-y-1/2` e valores escritos na classe, como `pr-[4.5rem]`. Elas ficam como estão para preservar o comportamento do shadcn e não têm variável no Figma.
+Os tokens acima são a base para construir componentes, aqui e no Figma. Além deles, os componentes usam outras classes do Tailwind, do jeito que o shadcn as escreveu: alturas como `h-9`, larguras como `min-w-32` e `max-w-sm`, posições como `top-3.5`, deslocamentos como `-translate-y-1/2`, valores escritos na classe, como `pr-[4.5rem]`, e o zero, como `p-0`, `gap-0`, `border-0` e `rounded-none`. Elas ficam como estão para preservar o comportamento do shadcn e não têm variável no Figma.
 
 No Tailwind, o número da classe vezes 4 dá o valor em px: `h-9` vale 36 px. Se um componente novo pedir uma medida que se repete, ela pode virar token e entrar nas tabelas acima.
 

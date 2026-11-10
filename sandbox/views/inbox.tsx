@@ -93,7 +93,7 @@ export function InboxView() {
   // No celular as colunas ficariam espremidas, então os painéis empilham.
   const orientation = useIsMobile() ? "vertical" : "horizontal"
   return (
-    <Card className="h-[calc(100svh-7rem)] min-h-[1100px] overflow-hidden p-(--padding-none) md:min-h-[640px]">
+    <Card className="h-[calc(100svh-7rem)] min-h-[1100px] overflow-hidden p-0 md:min-h-[640px]">
       <ResizablePanelGroup key={orientation} orientation={orientation}>
         <ResizablePanel defaultSize="32%" minSize="240px">
           <ConversationList selected={selected} onSelect={setSelected} />
@@ -211,7 +211,7 @@ function Thread({ conversation }: { conversation: Conversation }) {
   return (
     <div className="flex h-full flex-col">
       <div className="border-b p-(--padding-2xl)">
-        <Item className="p-(--padding-none)">
+        <Item className="p-0">
           <ItemHeader>
             <ItemTitle className="text-heading-sm">{conversation.subject}</ItemTitle>
             <div className="flex gap-(--gap-2xs)">

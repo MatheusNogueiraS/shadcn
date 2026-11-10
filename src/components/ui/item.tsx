@@ -46,7 +46,7 @@ const itemVariants = cva(
       size: {
         default: "gap-(--gap-xl) px-(--padding-2xl) py-(--padding-xl)",
         sm: "gap-(--gap-xl) px-(--padding-xl) py-(--padding-lg)",
-        xs: "gap-(--gap-md) px-(--padding-lg) py-(--padding-md) in-data-[slot=dropdown-menu-content]:p-(--padding-none)",
+        xs: "gap-(--gap-md) px-(--padding-lg) py-(--padding-md) in-data-[slot=dropdown-menu-content]:p-0",
       },
     },
     defaultVariants: {

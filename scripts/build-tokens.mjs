@@ -18,8 +18,8 @@ const UTILIDADES = {
 const ESPESSURAS = ["--border-width", "--ring-width", "--outline-width"]
 const FUNDACOES = ["color", "opacity", "unit", "font-family", "font-size", "font-weight", "line-height", "letter-spacing"]
 const ESPACOS = ["padding", "gap", "size"]
-// rounded-none e rounded-full são do Tailwind: os valores destes dois no JSON servem ao Figma e à documentação.
-const RAIOS_NATIVOS = ["none", "full"]
+// rounded-full é do Tailwind: o valor dele no JSON serve ao Figma e à documentação.
+const RAIOS_NATIVOS = ["full"]
 
 const referencia = (texto) => `var(--${String(texto).slice(1, -1).replaceAll(".", "-")})`
 const temOpacidade = (token) => token.original.$extensions?.[OPACITY] !== undefined
@@ -109,9 +109,8 @@ const mapeamento = todos
     const [grupo, ...resto] = token.path
     return UTILIDADES[grupo].map((prefixo) => `  ${prefixo}-${resto.join("-")}: var(--${token.name});`)
   })
-// O none fica no JSON para o Figma: registrado, ele mudaria o border-none e o outline-none do Tailwind.
 const espessuras = todos
-  .filter((t) => eEspessura(t) && t.path[1] !== "none")
+  .filter(eEspessura)
   .flatMap((t) => ESPESSURAS.map((prefixo) => `  ${prefixo}-${t.path[1]}: var(--${t.name});`))
 
 // A altura de linha sai como proporção, como no Tailwind, para continuar valendo em um filho com outro tamanho de fonte.

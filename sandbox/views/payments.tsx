@@ -219,7 +219,7 @@ function TransferForm({ amount, setAmount, erro, tipo, setTipo }: { amount: stri
                     <CalendarIcon />
                     {date ? format(date, "PPP", { locale: ptBR }) : <span>Escolha uma data</span>}
                   </PopoverTrigger>
-                  <PopoverContent className="w-auto p-(--padding-none)" align="start">
+                  <PopoverContent className="w-auto p-0" align="start">
                     <Calendar mode="single" locale={ptBR} selected={date} onSelect={setDate} defaultMonth={date} />
                   </PopoverContent>
                 </Popover>

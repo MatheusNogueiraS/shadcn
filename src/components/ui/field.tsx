@@ -132,7 +132,7 @@ function FieldDescription({ className, ...props }: React.ComponentProps<"p">) {
       data-slot="field-description"
       className={cn(
         "text-left text-body-sm text-muted group-has-data-horizontal/field:text-balance [[data-variant=legend]+&]:-mt-(--gap-xs)",
-        "last:mt-(--gap-none) nth-last-2:-mt-(--gap-2xs)",
+        "last:mt-0 nth-last-2:-mt-(--gap-2xs)",
         "[&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-brand",
         className
       )}

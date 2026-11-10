@@ -1,9 +1,6 @@
 {
   "padding": {
     "$type": "dimension",
-    "none": {
-      "$value": "{unit.0}"
-    },
     "3xs": {
       "$value": "{unit.2}"
     },
@@ -40,9 +37,6 @@
   },
   "gap": {
     "$type": "dimension",
-    "none": {
-      "$value": "{unit.0}"
-    },
     "3xs": {
       "$value": "{unit.2}"
     },
