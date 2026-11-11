@@ -276,7 +276,7 @@ function ProposalSummaryCard() {
           {lines.map((l, i) => (
             <React.Fragment key={l.label}>
               {i > 0 && <ItemSeparator aria-hidden />}
-              <Item role="listitem" size="xs" className="p-(--padding-none)">
+              <Item role="listitem" size="xs" className="p-0">
                 <ItemContent>
                   <ItemDescription>{l.label}</ItemDescription>
                   <ItemDescription className="text-body-xs">{l.context}</ItemDescription>

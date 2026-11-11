@@ -1,263 +1,280 @@
 {
-  "bg": {
+  "neutral": {
     "$type": "color",
-    "page": {
-      "$value": "{color.white}",
-      "$description": "Fundo da página"
-    },
-    "surface": {
-      "$value": "{color.white}",
-      "$description": "Cartões, menus e janelas"
-    },
-    "subtle": {
-      "$value": "{color.neutral.50}",
-      "$description": "Áreas de apoio, como a barra lateral"
-    },
-    "muted": {
-      "$value": "{color.neutral.100}",
-      "$description": "Fundos discretos e item em destaque"
-    },
-    "control": {
-      "$value": "{color.neutral.200}",
-      "$description": "Trilho e fundo de controles"
-    },
-    "field": {
-      "$value": "{color.neutral.200}",
-      "$description": "Campos de formulário",
-      "$extensions": {
-        "com.designsystem.opacity": "{opacity.50}"
+    "bg": {
+      "bg-page": {
+        "$value": "{color.white}",
+        "$description": "Fundo da página"
+      },
+      "bg-surface": {
+        "$value": "{color.white}",
+        "$description": "Cartões, menus e janelas"
+      },
+      "bg-subtle": {
+        "$value": "{color.neutral.50}",
+        "$description": "Áreas de apoio, como a barra lateral"
+      },
+      "bg-muted": {
+        "$value": "{color.neutral.100}",
+        "$description": "Fundos discretos e item em destaque"
+      },
+      "bg-control": {
+        "$value": "{color.neutral.200}",
+        "$description": "Trilho e fundo de controles"
+      },
+      "bg-divider": {
+        "$value": "{color.neutral.200}",
+        "$description": "Linhas separadoras"
+      },
+      "bg-inverse": {
+        "$value": "{color.neutral.950}",
+        "$description": "Fundo invertido, como o tooltip"
+      },
+      "bg-overlay": {
+        "$value": "{color.black}",
+        "$description": "Camada atrás de janelas",
+        "$extensions": {
+          "com.designsystem.opacity": "{opacity.30}"
+        }
       }
     },
-    "divider": {
-      "$value": "{color.neutral.200}",
-      "$description": "Linhas separadoras"
-    },
-    "brand": {
-      "$value": "{color.orange.500}",
-      "$description": "Ação principal"
-    },
-    "brand-hover": {
-      "$value": "{color.orange.600}",
-      "$description": "Ação principal com o mouse em cima"
-    },
-    "brand-secondary": {
-      "$value": "{color.purple.900}",
-      "$description": "Ação de apoio"
-    },
-    "brand-secondary-hover": {
-      "$value": "{color.purple.950}",
-      "$description": "Ação de apoio com o mouse em cima"
-    },
-    "on-brand": {
-      "$value": "{color.white}",
-      "$description": "Elemento branco sobre a marca, como o marcador do switch"
-    },
-    "danger": {
-      "$value": "{color.red.600}",
-      "$description": "Ação ou estado de erro"
-    },
-    "danger-subtle": {
-      "$value": "{color.red.600}",
-      "$description": "Fundo discreto de erro",
-      "$extensions": {
-        "com.designsystem.opacity": "{opacity.10}"
+    "text": {
+      "text-default": {
+        "$value": "{color.neutral.950}",
+        "$description": "Texto principal"
+      },
+      "text-muted": {
+        "$value": "{color.neutral.500}",
+        "$description": "Texto de apoio"
+      },
+      "text-on-muted": {
+        "$value": "{color.neutral.900}",
+        "$description": "Texto sobre fundo em destaque"
+      },
+      "text-inverse": {
+        "$value": "{color.white}",
+        "$description": "Texto sobre fundo invertido"
       }
     },
-    "inverse": {
-      "$value": "{color.neutral.950}",
-      "$description": "Fundo invertido, como o tooltip"
-    },
-    "overlay": {
-      "$value": "{color.black}",
-      "$description": "Camada atrás de janelas",
-      "$extensions": {
-        "com.designsystem.opacity": "{opacity.30}"
-      }
-    },
-    "success": {
-      "$value": "{color.green.600}",
-      "$description": "Sucesso"
-    },
-    "success-subtle": {
-      "$value": "{color.green.600}",
-      "$description": "Fundo discreto de sucesso",
-      "$extensions": {
-        "com.designsystem.opacity": "{opacity.10}"
-      }
-    },
-    "warning": {
-      "$value": "{color.yellow.500}",
-      "$description": "Atenção"
-    },
-    "warning-subtle": {
-      "$value": "{color.yellow.500}",
-      "$description": "Fundo discreto de atenção",
-      "$extensions": {
-        "com.designsystem.opacity": "{opacity.10}"
-      }
-    },
-    "info": {
-      "$value": "{color.purple.600}",
-      "$description": "Informação"
-    },
-    "info-subtle": {
-      "$value": "{color.purple.600}",
-      "$description": "Fundo discreto de informação",
-      "$extensions": {
-        "com.designsystem.opacity": "{opacity.10}"
+    "stroke": {
+      "stroke-default": {
+        "$value": "{color.neutral.200}",
+        "$description": "Borda padrão"
+      },
+      "stroke-field": {
+        "$value": "{color.neutral.200}",
+        "$description": "Borda de campos"
+      },
+      "stroke-subtle": {
+        "$value": "{color.neutral.950}",
+        "$description": "Contorno de menus e janelas",
+        "$extensions": {
+          "com.designsystem.opacity": "{opacity.5}"
+        }
+      },
+      "stroke-surface": {
+        "$value": "{color.white}",
+        "$description": "Borda com a cor do cartão"
+      },
+      "stroke-page": {
+        "$value": "{color.white}",
+        "$description": "Borda com a cor da página"
       }
     }
   },
-  "text": {
+  "brand": {
     "$type": "color",
-    "default": {
-      "$value": "{color.neutral.950}",
-      "$description": "Texto principal"
+    "bg": {
+      "bg-brand": {
+        "$value": "{color.orange.500}",
+        "$description": "Ação principal"
+      },
+      "bg-brand-hover": {
+        "$value": "{color.orange.600}",
+        "$description": "Ação principal com o mouse em cima"
+      },
+      "bg-brand-secondary": {
+        "$value": "{color.purple.900}",
+        "$description": "Ação de apoio"
+      },
+      "bg-brand-secondary-hover": {
+        "$value": "{color.purple.950}",
+        "$description": "Ação de apoio com o mouse em cima"
+      },
+      "bg-on-brand": {
+        "$value": "{color.white}",
+        "$description": "Elemento branco sobre a marca, como o marcador do switch"
+      }
     },
-    "muted": {
-      "$value": "{color.neutral.500}",
-      "$description": "Texto de apoio"
+    "text": {
+      "text-brand": {
+        "$value": "{color.orange.700}",
+        "$description": "Texto e links na cor da marca"
+      },
+      "text-brand-secondary": {
+        "$value": "{color.purple.900}",
+        "$description": "Texto no roxo da marca"
+      },
+      "text-on-brand": {
+        "$value": "{color.white}",
+        "$description": "Texto sobre a marca"
+      }
     },
-    "on-muted": {
-      "$value": "{color.neutral.900}",
-      "$description": "Texto sobre fundo em destaque"
-    },
-    "on-brand": {
-      "$value": "{color.white}",
-      "$description": "Texto sobre a marca"
-    },
-    "brand": {
-      "$value": "{color.orange.700}",
-      "$description": "Texto e links na cor da marca"
-    },
-    "brand-secondary": {
-      "$value": "{color.purple.900}",
-      "$description": "Texto no roxo da marca"
-    },
-    "danger": {
-      "$value": "{color.red.600}",
-      "$description": "Texto de erro"
-    },
-    "inverse": {
-      "$value": "{color.white}",
-      "$description": "Texto sobre fundo invertido"
-    },
-    "success": {
-      "$value": "{color.green.700}",
-      "$description": "Texto de sucesso"
-    },
-    "warning": {
-      "$value": "{color.yellow.700}",
-      "$description": "Texto de atenção"
-    },
-    "info": {
-      "$value": "{color.purple.700}",
-      "$description": "Texto informativo"
+    "stroke": {
+      "stroke-brand": {
+        "$value": "{color.orange.500}",
+        "$description": "Borda na cor da marca"
+      }
     }
   },
-  "stroke": {
+  "danger": {
     "$type": "color",
-    "default": {
-      "$value": "{color.neutral.200}",
-      "$description": "Borda padrão"
-    },
-    "field": {
-      "$value": "{color.neutral.200}",
-      "$description": "Borda de campos"
-    },
-    "subtle": {
-      "$value": "{color.neutral.950}",
-      "$description": "Contorno de menus e janelas",
-      "$extensions": {
-        "com.designsystem.opacity": "{opacity.5}"
+    "bg": {
+      "bg-danger": {
+        "$value": "{color.red.600}",
+        "$description": "Ação ou estado de erro"
+      },
+      "bg-danger-subtle": {
+        "$value": "{color.red.600}",
+        "$description": "Fundo discreto de erro",
+        "$extensions": {
+          "com.designsystem.opacity": "{opacity.10}"
+        }
       }
     },
-    "brand": {
-      "$value": "{color.orange.500}",
-      "$description": "Borda na cor da marca"
-    },
-    "surface": {
-      "$value": "{color.white}",
-      "$description": "Borda com a cor do cartão"
-    },
-    "page": {
-      "$value": "{color.white}",
-      "$description": "Borda com a cor da página"
-    },
-    "focus": {
-      "$value": "{color.orange.500}",
-      "$description": "Foco"
-    },
-    "focus-subtle": {
-      "$value": "{color.orange.500}",
-      "$description": "Anel de foco",
-      "$extensions": {
-        "com.designsystem.opacity": "{opacity.30}"
+    "text": {
+      "text-danger": {
+        "$value": "{color.red.600}",
+        "$description": "Texto de erro"
       }
     },
-    "focus-neutral": {
-      "$value": "{color.neutral.400}",
-      "$description": "Foco na barra lateral"
-    },
-    "danger": {
-      "$value": "{color.red.600}",
-      "$description": "Borda de erro"
-    },
-    "danger-subtle": {
-      "$value": "{color.red.600}",
-      "$description": "Anel de erro",
-      "$extensions": {
-        "com.designsystem.opacity": "{opacity.20}"
+    "stroke": {
+      "stroke-danger": {
+        "$value": "{color.red.600}",
+        "$description": "Borda de erro"
+      },
+      "stroke-danger-subtle": {
+        "$value": "{color.red.600}",
+        "$description": "Anel de erro",
+        "$extensions": {
+          "com.designsystem.opacity": "{opacity.20}"
+        }
+      },
+      "stroke-invalid": {
+        "$value": "{color.red.600}",
+        "$description": "Campo inválido"
+      }
+    }
+  },
+  "success": {
+    "$type": "color",
+    "bg": {
+      "bg-success": {
+        "$value": "{color.green.600}",
+        "$description": "Sucesso"
+      },
+      "bg-success-subtle": {
+        "$value": "{color.green.600}",
+        "$description": "Fundo discreto de sucesso",
+        "$extensions": {
+          "com.designsystem.opacity": "{opacity.10}"
+        }
       }
     },
-    "invalid": {
-      "$value": "{color.red.600}",
-      "$description": "Campo inválido"
+    "text": {
+      "text-success": {
+        "$value": "{color.green.700}",
+        "$description": "Texto de sucesso"
+      }
+    }
+  },
+  "warning": {
+    "$type": "color",
+    "bg": {
+      "bg-warning-subtle": {
+        "$value": "{color.yellow.500}",
+        "$description": "Fundo discreto de atenção",
+        "$extensions": {
+          "com.designsystem.opacity": "{opacity.10}"
+        }
+      }
     },
-    "success": {
-      "$value": "{color.green.600}",
-      "$description": "Borda de sucesso"
+    "text": {
+      "text-warning": {
+        "$value": "{color.yellow.700}",
+        "$description": "Texto de atenção"
+      }
+    }
+  },
+  "info": {
+    "$type": "color",
+    "bg": {
+      "bg-info-subtle": {
+        "$value": "{color.purple.600}",
+        "$description": "Fundo discreto de informação",
+        "$extensions": {
+          "com.designsystem.opacity": "{opacity.10}"
+        }
+      }
     },
-    "warning": {
-      "$value": "{color.yellow.500}",
-      "$description": "Borda de atenção"
-    },
-    "info": {
-      "$value": "{color.purple.600}",
-      "$description": "Borda informativa"
+    "text": {
+      "text-info": {
+        "$value": "{color.purple.700}",
+        "$description": "Texto informativo"
+      }
+    }
+  },
+  "focus": {
+    "$type": "color",
+    "stroke": {
+      "stroke-focus": {
+        "$value": "{color.orange.500}",
+        "$description": "Foco"
+      },
+      "stroke-focus-subtle": {
+        "$value": "{color.orange.500}",
+        "$description": "Anel de foco",
+        "$extensions": {
+          "com.designsystem.opacity": "{opacity.30}"
+        }
+      },
+      "stroke-focus-neutral": {
+        "$value": "{color.neutral.400}",
+        "$description": "Foco na barra lateral"
+      }
     }
   },
   "data": {
-    "1": {
+    "$type": "color",
+    "data-1": {
       "$value": "{color.orange.500}",
       "$description": "Série 1"
     },
-    "2": {
+    "data-2": {
       "$value": "{color.purple.900}",
       "$description": "Série 2"
     },
-    "3": {
+    "data-3": {
       "$value": "{color.orange.300}",
       "$description": "Série 3"
     },
-    "4": {
+    "data-4": {
       "$value": "{color.purple.500}",
       "$description": "Série 4"
     },
-    "5": {
+    "data-5": {
       "$value": "{color.orange.700}",
       "$description": "Série 5"
-    },
-    "$type": "color"
+    }
   },
   "shadow": {
-    "color": {
+    "$type": "color",
+    "shadow-color": {
       "$value": "{color.black}",
       "$description": "Cor das sombras e do contorno do controle do slider",
       "$extensions": {
         "com.designsystem.opacity": "{opacity.10}"
       }
-    },
-    "$type": "color"
+    }
   }
 }

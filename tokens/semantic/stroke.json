@@ -1,10 +1,5 @@
 {
   "stroke": {
-    "none": {
-      "$type": "dimension",
-      "$value": "{unit.0}",
-      "$description": "Sem contorno. No código, border-0 e ring-0"
-    },
     "sm": {
       "$type": "dimension",
       "$value": "{unit.1}",

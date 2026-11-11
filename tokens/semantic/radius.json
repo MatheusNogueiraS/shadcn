@@ -1,10 +1,6 @@
 {
   "radius": {
     "$type": "dimension",
-    "none": {
-      "$value": "{unit.0}",
-      "$description": "Sem arredondamento"
-    },
     "xs": {
       "$value": "{unit.2}",
       "$description": "Marcador de cor do gráfico e seta do tooltip"
@@ -13,17 +9,9 @@
       "$value": "{unit.6}",
       "$description": "Checkbox e indicador do menu de navegação"
     },
-    "md": {
-      "$value": "{unit.8}",
-      "$description": "Disponível para novos componentes"
-    },
     "lg": {
       "$value": "{unit.10}",
       "$description": "Kbd e alças de redimensionar"
-    },
-    "xl": {
-      "$value": "{unit.12}",
-      "$description": "Disponível para novos componentes"
     },
     "2xl": {
       "$value": "{unit.16}",

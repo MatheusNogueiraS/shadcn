@@ -1,7 +1,7 @@
 import { Meta, Unstyled } from "@storybook/addon-docs/blocks"
 
-import { Semanticos, Sombras } from "./amostras"
-import { Tailwind } from "./amostras-tailwind"
+import { Semanticos } from "./amostras"
+import { OpacidadePorFuncao, Tailwind } from "./amostras-tailwind"
 
 <Meta title="Fundamentos/Cores/Semânticos" />
 
@@ -11,78 +11,92 @@ Os semânticos dizem para que cada cor serve e apontam para uma fundação difer
 
 Para mudar uma cor, edite os arquivos em `tokens/` e rode `pnpm tokens`: `src/styles/tokens.css` é gerado e não deve ser editado à mão.
 
-## Fundos
+Os semânticos ficam em pastas por papel, como no Figma: `neutral`, `brand`, `danger`, `success`, `warning`, `info`, `focus`, `data` e `shadow`. Dentro de cada papel, uma subpasta por uso: `bg` para fundo, `text` para texto e `stroke` para qualquer contorno. As pastas só organizam: o nome do token é a classe, como `bg-danger-subtle` em `danger/bg`. Um `stroke` vira a classe do lugar onde é aplicado: `stroke-default` é usado como `border-default`, `ring-default` ou `outline-default`.
+## Neutral
+
+Página, superfícies, textos e linhas sem cor, e o tooltip invertido.
 
 <Unstyled>
-  <Semanticos grupo="bg" />
+  <Semanticos pasta="neutral" />
 </Unstyled>
 
-## Textos
+## Brand
+
+O laranja da ação principal, o roxo da ação de apoio e o que fica sobre eles.
 
 <Unstyled>
-  <Semanticos grupo="text" />
+  <Semanticos pasta="brand" />
 </Unstyled>
 
-## Bordas e anéis
+## Danger
 
-Um `stroke` vale para qualquer contorno. No código, a classe diz onde ele é aplicado: `stroke-default` é usado como `border-default`, `ring-default` ou `outline-default`.
+Erro, ação destrutiva e campo inválido.
 
 <Unstyled>
-  <Semanticos grupo="stroke" />
+  <Semanticos pasta="danger" />
 </Unstyled>
 
-## Gráficos
-
-No código, as séries são usadas como `var(--data-1)`, porque a biblioteca de gráficos recebe a cor como valor CSS.
+## Success
 
 <Unstyled>
-  <Semanticos grupo="data" />
+  <Semanticos pasta="success" />
 </Unstyled>
 
-## Sombras
-
-As sombras vão da mais fraca, `shadow-sm`, à mais forte, `shadow-xl`. Para escolher a força, troque a classe, que tem o nome do token: `shadow-lg`. As outras sombras do Tailwind, como `shadow-2xl`, não existem neste projeto.
-
-Todas usam a mesma cor, `shadow-color`. Para deixar todas as sombras de um tema mais fortes ou mais fracas, mude só ela. No Figma, cada sombra é um estilo de efeito com o mesmo nome. A posição, o desfoque e a expansão ficam como número, porque uma expansão negativa não se liga a uma variável.
-
-### Cor
+## Warning
 
 <Unstyled>
-  <Semanticos grupo="shadow" />
+  <Semanticos pasta="warning" />
 </Unstyled>
 
-### Escala
+## Info
 
 <Unstyled>
-  <Sombras />
+  <Semanticos pasta="info" />
+</Unstyled>
+
+## Focus
+
+O contorno e o anel que aparecem quando um controle recebe foco pelo teclado.
+
+<Unstyled>
+  <Semanticos pasta="focus" />
+</Unstyled>
+
+## Data
+
+As séries dos gráficos. No código, são usadas como `var(--data-1)`, porque a biblioteca de gráficos recebe a cor como valor CSS.
+
+<Unstyled>
+  <Semanticos pasta="data" />
+</Unstyled>
+
+## Shadow
+
+A cor de todas as sombras. Para deixar todas as sombras de um tema mais fortes ou mais fracas, mude só ela. A escala, de `shadow-sm` a `shadow-xl`, fica em Medidas/Semânticos.
+
+<Unstyled>
+  <Semanticos pasta="shadow" />
 </Unstyled>
 
 ## Opacidade nos componentes
 
-A opacidade vem depois da barra, como em `bg-control/90`, e lê a escala de opacidade das fundações: `/90` é o `opacity-90`. Use só valores que existem na escala. A tabela lê o código dos componentes e se atualiza sozinha.
+A opacidade vem depois da barra, como em `bg-control/50`, e lê a escala de opacidade das fundações: `/50` é o `opacity-50`. Use só valores que existem na escala.
+
+Os usos ficam agrupados por função, como os semânticos acima ficam por uso. A variante diz o estado: `hover:` é hover, `disabled:` é disabled, `data-open:` é selected. Sem variante, o token diz: `bg-control/50` é o fundo de campo, `bg-divider/50` é separador. Um uso que a tabela não reconhece cai em **sem função**. A tabela lê o código dos componentes e se atualiza sozinha.
 
 <Unstyled>
-  <Tailwind familia="opacidade" />
+  <OpacidadePorFuncao />
 </Unstyled>
 
 ## Escrito na classe
 
-Cores da paleta do Tailwind e sombras escritas na própria classe. Um componente novo do `shadcn add` que trouxer um desses valores aparece aqui.
-
-### Cores da paleta do Tailwind
+Cores da paleta do Tailwind escritas na própria classe. Um componente novo do `shadcn add` que trouxer uma delas aparece aqui.
 
 <Unstyled>
   <Tailwind familia="cor" />
 </Unstyled>
 
-### Sombras escritas na classe
-
-<Unstyled>
-  <Tailwind familia="sombra" />
-</Unstyled>
-
 ## Regras de uso
 
 - **Branco sobre laranja é uma decisão da marca.** O contraste de `orange-500` com branco fica abaixo do mínimo AA de 4,5:1. O painel de acessibilidade vai apontar isso no botão principal, e é uma exceção conhecida.
-- **Feedback ainda não está nos componentes.** `success`, `warning` e `info` existem como tokens para uso futuro.
 - **Nomes do shadcn continuam funcionando.** `bg-primary` e similares são apelidos em `src/styles/legacy-aliases.css`, para que `shadcn add` não traga componentes sem cor. Ao adicionar um componente, troque pelos semânticos.

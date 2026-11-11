@@ -56,7 +56,7 @@ function SeletorDeData() {
       <PopoverTrigger render={<Button variant="outline" className="w-56 justify-start" />}>
         <CalendarIcon data-icon="inline-start" />{data ? format(data, "PPP", { locale: ptBR }) : <span className="text-muted">Escolha uma data</span>}
       </PopoverTrigger>
-      <PopoverContent className="w-auto p-(--padding-none)"><Calendar mode="single" locale={ptBR} selected={data} onSelect={setData} defaultMonth={mes} /></PopoverContent>
+      <PopoverContent className="w-auto p-0"><Calendar mode="single" locale={ptBR} selected={data} onSelect={setData} defaultMonth={mes} /></PopoverContent>
     </Popover>
   )
 }

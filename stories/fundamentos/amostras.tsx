@@ -10,24 +10,29 @@ const OPACITY = "com.designsystem.opacity"
 
 type Cor = { $value: { hex: string } }
 type Semantico = { $value: string; $description?: string; $extensions?: Record<string, string> }
-type Grupo = Record<string, Semantico>
-type Tema = Record<string, Grupo>
+type Pasta = { [nome: string]: Semantico | Pasta }
 
-function resolverCor(caminho: string) {
-  const partes = caminho.split(".").slice(1)
-  let no: unknown = foundations.color
-  for (const parte of partes) no = (no as Record<string, unknown>)[parte]
-  return (no as Cor).$value.hex
+const TEMAS = { claro: light as unknown as Pasta, escuro: dark as unknown as Pasta }
+const eToken = (no: Semantico | Pasta): no is Semantico => "$value" in no
+const filhos = (pasta: Pasta) => Object.entries(pasta).filter(([k]) => !k.startsWith("$"))
+
+function buscar(raiz: unknown, caminho: string) {
+  let no = raiz
+  for (const parte of caminho.split(".")) no = (no as Record<string, unknown>)[parte]
+  return no
 }
 
-function lerToken(token: Semantico) {
+// Uma cor parte de uma fundação ou de outro semântico do mesmo tema.
+function lerToken(token: Semantico, tema: Pasta): { nome: string; numero?: number; css: string } {
   const caminho = token.$value.slice(1, -1)
+  const fundacao = caminho.startsWith("color.")
   const percentual = token.$extensions?.[OPACITY]?.slice(1, -1).split(".")[1]
   const numero = percentual ? Number(percentual.replace("-", ".")) : undefined
+  const base = fundacao ? (buscar(foundations, caminho) as Cor).$value.hex : lerToken(buscar(tema, caminho) as Semantico, tema).css
   return {
-    nome: caminho.replace("color.", "").replace(".", "-"),
+    nome: fundacao ? caminho.replace("color.", "").replace(".", "-") : caminho.split(".").at(-1)!,
     numero,
-    css: numero === undefined ? resolverCor(caminho) : `color-mix(in oklab, ${resolverCor(caminho)} ${numero}%, transparent)`,
+    css: numero === undefined ? base : `color-mix(in oklab, ${base} ${numero}%, transparent)`,
   }
 }
 
@@ -78,17 +83,17 @@ export function Percentuais() {
   )
 }
 
-function Celula({ token, grupo, fundo }: { token: Semantico; grupo: string; fundo: string }) {
-  const { nome, numero, css } = lerToken(token)
+function Celula({ token, tema, uso, fundo }: { token: Semantico; tema: Pasta; uso: string; fundo: string }) {
+  const { nome, numero, css } = lerToken(token, tema)
   const eClaro = fundo === "#ffffff"
   // Cor igual ao fundo da coluna, como branco sobre branco: sem um apoio neutro, a amostra some.
   const apoio = css === fundo ? foundations.color.neutral["500"].$value.hex : undefined
   return (
     <td className="w-[30%] border-l p-(--padding-lg) align-middle" style={{ background: fundo, color: eClaro ? foundations.color.neutral["950"].$value.hex : foundations.color.neutral["50"].$value.hex }}>
       <div className="flex items-center gap-(--gap-md)">
-        {grupo === "text" ? (
+        {uso === "text" ? (
           <span className="w-9 shrink-0 rounded-lg text-center text-heading-md" style={{ color: css, background: apoio }}>Aa</span>
-        ) : grupo === "stroke" ? (
+        ) : uso === "stroke" ? (
           <span className="size-9 shrink-0 rounded-lg border-2" style={{ borderColor: css, background: apoio }} />
         ) : (
           <span className="size-9 shrink-0 rounded-lg" style={{ background: css, boxShadow: `inset 0 0 0 1px ${eClaro ? "#0000001a" : "#ffffff1a"}` }} />
@@ -125,10 +130,15 @@ export function Sombras() {
   )
 }
 
-export function Semanticos({ grupo }: { grupo: "bg" | "text" | "stroke" | "data" | "shadow" }) {
-  const claro = (light as unknown as Tema)[grupo]
-  const escuro = (dark as unknown as Tema)[grupo]
-  const nomes = Object.keys(claro).filter((k) => !k.startsWith("$"))
+// Uma tabela por pasta, como no Figma, com uma linha de título para cada uso: bg, text e stroke.
+export function Semanticos({ pasta }: { pasta: keyof typeof light }) {
+  const raiz = TEMAS.claro[pasta] as Pasta
+  // data e shadow têm um uso só e ficam sem subpasta.
+  const usos: [string | null, Pasta][] = filhos(raiz).some(([, no]) => eToken(no)) ? [[null, raiz]] : (filhos(raiz) as [string, Pasta][])
+  const linhas = usos.flatMap(([uso, grupo]) => [
+    ...(uso ? [{ uso }] : []),
+    ...filhos(grupo).map(([nome]) => ({ nome, caminho: [pasta, uso, nome].filter(Boolean).join(".") })),
+  ])
   return (
     <div className="overflow-x-auto rounded-3xl border font-sans text-body-sm">
       <table className="w-full border-collapse font-sans">
@@ -140,16 +150,27 @@ export function Semanticos({ grupo }: { grupo: "bg" | "text" | "stroke" | "data"
           </tr>
         </thead>
         <tbody>
-          {nomes.map((nome) => (
-            <tr key={nome} className="border-b last:border-b-0">
-              <td className="bg-surface p-(--padding-lg) align-middle text-default">
-                <div className="font-medium">{grupo}-{nome}</div>
-                <div className="text-body-xs text-muted">{claro[nome].$description}</div>
-              </td>
-              <Celula token={claro[nome]} grupo={grupo} fundo="#ffffff" />
-              <Celula token={escuro[nome]} grupo={grupo} fundo={foundations.color.neutral["950"].$value.hex} />
-            </tr>
-          ))}
+          {linhas.map((linha) => {
+            if ("uso" in linha) {
+              return (
+                <tr key={linha.uso} className="border-b bg-subtle text-default">
+                  <td colSpan={3} className="px-(--padding-lg) py-(--padding-2xs) text-label-sm">{linha.uso}</td>
+                </tr>
+              )
+            }
+            const claro = buscar(TEMAS.claro, linha.caminho) as Semantico
+            const escuro = buscar(TEMAS.escuro, linha.caminho) as Semantico
+            return (
+              <tr key={linha.nome} className="border-b last:border-b-0">
+                <td className="bg-surface p-(--padding-lg) align-middle text-default">
+                  <div className="font-medium">{linha.nome}</div>
+                  <div className="text-body-xs text-muted">{claro.$description}</div>
+                </td>
+                <Celula token={claro} tema={TEMAS.claro} uso={linha.nome.split("-")[0]} fundo="#ffffff" />
+                <Celula token={escuro} tema={TEMAS.escuro} uso={linha.nome.split("-")[0]} fundo={foundations.color.neutral["950"].$value.hex} />
+              </tr>
+            )
+          })}
         </tbody>
       </table>
     </div>
