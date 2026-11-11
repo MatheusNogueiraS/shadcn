@@ -5,7 +5,7 @@ import StyleDictionary from "style-dictionary"
 const OPACITY = "com.designsystem.opacity"
 const SAIDA = "src/styles/tokens.css"
 
-// Cada grupo semântico vira as utilidades do Tailwind da sua propriedade. stroke-default vira border-default, ring-default e outline-default.
+// O prefixo do nome de cada semântico de cor vira as utilidades do Tailwind da sua propriedade. stroke-default vira border-default, ring-default e outline-default.
 const UTILIDADES = {
   bg: ["--background-color"],
   text: ["--text-color"],
@@ -23,12 +23,17 @@ const RAIOS_NATIVOS = ["full"]
 
 const referencia = (texto) => `var(--${String(texto).slice(1, -1).replaceAll(".", "-")})`
 const temOpacidade = (token) => token.original.$extensions?.[OPACITY] !== undefined
+// Uma cor parte de uma fundação ({color.red.600}) ou de outro semântico ({neutral.bg.bg-control}), cujo nome é o da folha.
+const referenciaCor = (alias) => (alias.startsWith("{color.") ? referencia(alias) : `var(--${alias.slice(1, -1).split(".").at(-1)})`)
+
+// Os semânticos de cor ficam em pastas por papel (neutral, brand, danger...): a pasta só organiza e o nome é o da folha.
+const eCor = (token) => token.$type === "color" && token.path[0] !== "color"
 
 // O nome é o caminho no JSON: name/kebab transformaria 2xl em 2-xl.
 StyleDictionary.registerTransform({
   name: "name/caminho",
   type: "name",
-  transform: (token) => token.path.join("-"),
+  transform: (token) => (eCor(token) ? token.path.at(-1) : token.path.join("-")),
 })
 
 StyleDictionary.registerTransform({
@@ -46,7 +51,7 @@ StyleDictionary.registerTransform({
   transitive: true,
   filter: temOpacidade,
   transform: (token) => {
-    const cor = referencia(token.original.$value)
+    const cor = referenciaCor(token.original.$value)
     const percentual = referencia(token.original.$extensions[OPACITY])
     return `color-mix(in oklab, ${cor} ${percentual}, transparent)`
   },
@@ -70,8 +75,6 @@ StyleDictionary.registerTransform({
 
 const eFundacao = (token) => FUNDACOES.includes(token.path[0])
 const eEspaco = (token) => ESPACOS.includes(token.path[0])
-// stroke guarda cores e espessuras: o tipo separa uma da outra.
-const eCor = (token) => token.path[0] in UTILIDADES && token.$type === "color"
 const eEspessura = (token) => token.path[0] === "stroke" && token.$type === "dimension"
 const eOpacidade = (token) => token.path[0] === "opacity"
 const eSombra = (token) => token.$type === "shadow"
@@ -103,10 +106,14 @@ const claro = await gerar("light", ":root", (t) => eCor(t) || eEspaco(t) || eEsp
 const escuro = await gerar("dark", ".dark", eCor, true)
 
 const todos = claro.tokens.allTokens
+// A pasta não entra no nome da cor: dois nomes iguais em pastas diferentes virariam a mesma variável, e o começo do nome diz a utilidade.
+const nomesDeCor = todos.filter(eCor).map((t) => t.name)
+const invalidos = nomesDeCor.filter((nome, i) => nomesDeCor.indexOf(nome) !== i || !(nome.split("-")[0] in UTILIDADES))
+if (invalidos.length) throw new Error(`Cor com nome repetido ou que não começa com ${Object.keys(UTILIDADES).join(", ")}: ${invalidos.join(", ")}`)
 const mapeamento = todos
   .filter(eCor)
   .flatMap((token) => {
-    const [grupo, ...resto] = token.path
+    const [grupo, ...resto] = token.name.split("-")
     return UTILIDADES[grupo].map((prefixo) => `  ${prefixo}-${resto.join("-")}: var(--${token.name});`)
   })
 const espessuras = todos
@@ -131,7 +138,7 @@ const utilidadeDoEstilo = (token) => {
 // Cada camada da sombra em CSS: x y desfoque expansão cor.
 const medida = ({ value, unit }) => (value === 0 ? "0" : `${value}${unit}`)
 const camadas = (token) =>
-  token.original.$value.map((c) => [c.offsetX, c.offsetY, c.blur, c.spread].map(medida).concat(referencia(c.color)).join(" ")).join(", ")
+  token.original.$value.map((c) => [c.offsetX, c.offsetY, c.blur, c.spread].map(medida).concat(referenciaCor(c.color)).join(" ")).join(", ")
 // static: estas variáveis também são lidas em valores arbitrários, como [--cell-radius:var(--radius-4xl)].
 const tema = [
   ...todos.filter((t) => t.path[0] === "radius" && !RAIOS_NATIVOS.includes(t.path[1])).map((t) => `  --${t.name}: ${referencia(t.original.$value)};`),

@@ -1,12 +1,14 @@
 import { Meta, Unstyled } from "@storybook/addon-docs/blocks"
 
+import { Sombras } from "./amostras"
 import { Espacos, Espessuras, Raios } from "./amostras-medidas"
+import { Tailwind } from "./amostras-tailwind"
 
 <Meta title="Fundamentos/Medidas/Semânticos" />
 
 # Semânticos
 
-Os semânticos dão nome às medidas: raio para os cantos, padding para o espaço interno, gap para a distância entre elementos, size para largura e altura iguais e stroke para a espessura dos contornos. Os componentes usam **somente estes nomes**.
+Os semânticos dão nome às medidas: raio para os cantos, padding para o espaço interno, gap para a distância entre elementos, size para largura e altura iguais, stroke para a espessura dos contornos e sombra para a elevação. Os componentes usam **somente estes nomes**.
 
 Para mudar uma medida, edite os arquivos em `tokens/` e rode `pnpm tokens`.
 
@@ -46,6 +48,24 @@ Como nas cores, um `stroke` vale para qualquer contorno, e a classe diz onde ele
 
 <Unstyled>
   <Espessuras />
+</Unstyled>
+
+## Sombra
+
+As sombras vão da mais fraca, `shadow-sm`, à mais forte, `shadow-xl`. Para escolher a força, troque a classe, que tem o nome do token: `shadow-lg`. As outras sombras do Tailwind, como `shadow-2xl`, não existem neste projeto.
+
+Todas usam a mesma cor, `shadow-color`, que fica em Cores/Semânticos. No Figma, cada sombra é um estilo de efeito com o mesmo nome. A posição, o desfoque e a expansão ficam como número, porque uma expansão negativa não se liga a uma variável.
+
+<Unstyled>
+  <Sombras />
+</Unstyled>
+
+### Escritas na classe
+
+Sombras escritas na própria classe, entre colchetes. Um componente novo do `shadcn add` que trouxer uma aparece aqui.
+
+<Unstyled>
+  <Tailwind familia="sombra" />
 </Unstyled>
 
 ## Tailwind
