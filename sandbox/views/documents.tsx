@@ -22,6 +22,7 @@ import {
 } from "lucide-react"
 
 import { AspectRatio } from "@/components/ui/aspect-ratio"
+import { Attachment, AttachmentContent, AttachmentDescription, AttachmentGroup, AttachmentMedia, AttachmentTitle, AttachmentTrigger } from "@/components/ui/attachment"
 import { Badge } from "@/components/ui/badge"
 import {
   Breadcrumb,
@@ -71,6 +72,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
 import { Label } from "@/components/ui/label"
 import {
   Menubar,
@@ -102,6 +104,7 @@ import {
 import { toast } from "@/components/ui/toast"
 import { Toggle, toggleVariants } from "@/components/ui/toggle"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
+import { useIsMobile } from "@/hooks/use-mobile"
 import { banner } from "../art"
 import { copiar } from "../copiar"
 
@@ -111,6 +114,13 @@ const pages = [
   { label: "Extrato", from: "#674c96", to: "#462a71" },
   { label: "Tarifas", from: "#ca5008", to: "#462a71" },
 ]
+
+const enviados = [
+  { nome: "rg-frente.jpg", detalhe: "Imagem · 1,2 MB", from: "#fa6300", to: "#a43f04", rotulo: "RG · frente" },
+  { nome: "rg-verso.jpg", detalhe: "Imagem · 1,1 MB", from: "#462a71", to: "#2d194b", rotulo: "RG · verso" },
+  { nome: "comprovante-residencia.pdf", detalhe: "PDF · 340 KB", from: "#674c96", to: "#462a71", rotulo: "Comprovante" },
+]
+type Enviado = (typeof enviados)[number]
 
 const tree = [
   { folder: "Contratos", files: ["abertura-de-conta.pdf", "cartao-de-credito.pdf"] },
@@ -128,6 +138,7 @@ export function DocumentsView() {
         <FileTree />
         <Preview />
       </div>
+      <Enviados />
     </div>
   )
 }
@@ -329,6 +340,60 @@ function ShareDrawer() {
         </div>
       </DrawerContent>
     </Drawer>
+  )
+}
+
+// Simulação: no desktop o preview abre no hover (HoverCard); no celular, no toque (Drawer).
+function Enviados() {
+  const celular = useIsMobile()
+  const [aberto, setAberto] = React.useState<Enviado | null>(null)
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Documentos enviados</CardTitle>
+        <CardDescription>{celular ? "Toque num documento para ver." : "Passe o mouse num documento para ver."}</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <AttachmentGroup>
+          {enviados.map((d) => {
+            const gatilho = <AttachmentTrigger aria-label={`Ver ${d.nome}`} onClick={celular ? () => setAberto(d) : undefined} />
+            const anexo = (
+              <Attachment key={d.nome}>
+                {celular ? gatilho : <HoverCardTrigger render={gatilho} />}
+                <AttachmentMedia variant="image"><img src={banner(d.from, d.to, "")} alt="" /></AttachmentMedia>
+                <AttachmentContent>
+                  <AttachmentTitle>{d.nome}</AttachmentTitle>
+                  <AttachmentDescription>{d.detalhe}</AttachmentDescription>
+                </AttachmentContent>
+              </Attachment>
+            )
+            return celular ? anexo : <HoverCard key={d.nome}>{anexo}<HoverCardContent><Miniatura doc={d} /></HoverCardContent></HoverCard>
+          })}
+        </AttachmentGroup>
+      </CardContent>
+      <Drawer open={aberto !== null} onOpenChange={(o) => !o && setAberto(null)} showSwipeHandle>
+        <DrawerContent>
+          {aberto && (
+            <div className="mx-auto w-full max-w-md">
+              <DrawerHeader>
+                <DrawerTitle>{aberto.nome}</DrawerTitle>
+                <DrawerDescription>{aberto.detalhe}</DrawerDescription>
+              </DrawerHeader>
+              <div className="p-(--padding-2xl)"><Miniatura doc={aberto} /></div>
+              <DrawerFooter><DrawerClose render={<Button variant="outline" />}>Fechar</DrawerClose></DrawerFooter>
+            </div>
+          )}
+        </DrawerContent>
+      </Drawer>
+    </Card>
+  )
+}
+
+function Miniatura({ doc }: { doc: Enviado }) {
+  return (
+    <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-3xl bg-muted">
+      <img src={banner(doc.from, doc.to, doc.rotulo)} alt={doc.rotulo} className="size-full object-cover" />
+    </AspectRatio>
   )
 }
 
