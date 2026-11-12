@@ -5,6 +5,7 @@ import {
   AlignLeftIcon,
   AlignRightIcon,
   BoldIcon,
+  ChevronLeftIcon,
   ChevronRightIcon,
   ChevronsUpDownIcon,
   CopyIcon,
@@ -45,6 +46,7 @@ import {
   useCarousel,
 } from "@/components/ui/carousel"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import {
   Drawer,
   DrawerClose,
@@ -71,7 +73,6 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import {
@@ -343,50 +344,62 @@ function ShareDrawer() {
   )
 }
 
-// Simulação: no desktop o hover mostra a prévia (HoverCard); o clique ou toque abre o Drawer em qualquer tela.
+// Simulação: no desktop a prévia abre numa janela central (Dialog) com setas; no celular, na gaveta (Drawer).
 function Enviados() {
   const celular = useIsMobile()
-  // O documento fica guardado depois de fechar, para o Drawer não esvaziar durante a animação de saída.
-  const [aberto, setAberto] = React.useState<Enviado | null>(null)
+  // O índice continua guardado depois de fechar, para o conteúdo não sumir durante a animação de saída.
+  const [indice, setIndice] = React.useState(0)
   const [mostrar, setMostrar] = React.useState(false)
+  const doc = enviados[indice]
   return (
     <Card>
       <CardHeader>
         <CardTitle>Documentos enviados</CardTitle>
-        <CardDescription>{celular ? "Toque num documento para ver." : "Passe o mouse num documento para ver; clique para abrir."}</CardDescription>
+        <CardDescription>{celular ? "Toque num documento para ver." : "Clique num documento para ver."}</CardDescription>
       </CardHeader>
       <CardContent>
         <AttachmentGroup>
-          {enviados.map((d) => {
-            const gatilho = <AttachmentTrigger aria-label={`Ver ${d.nome}`} onClick={() => { setAberto(d); setMostrar(true) }} />
-            const anexo = (
-              <Attachment key={d.nome}>
-                {celular ? gatilho : <HoverCardTrigger render={gatilho} />}
-                <AttachmentMedia variant="image"><img src={banner(d.from, d.to, "")} alt="" /></AttachmentMedia>
-                <AttachmentContent>
-                  <AttachmentTitle>{d.nome}</AttachmentTitle>
-                  <AttachmentDescription>{d.detalhe}</AttachmentDescription>
-                </AttachmentContent>
-              </Attachment>
-            )
-            return celular ? anexo : <HoverCard key={d.nome}>{anexo}<HoverCardContent><Miniatura doc={d} /></HoverCardContent></HoverCard>
-          })}
+          {enviados.map((d, i) => (
+            <Attachment key={d.nome}>
+              <AttachmentTrigger aria-label={`Ver ${d.nome}`} onClick={() => { setIndice(i); setMostrar(true) }} />
+              <AttachmentMedia variant="image"><img src={banner(d.from, d.to, "")} alt="" /></AttachmentMedia>
+              <AttachmentContent>
+                <AttachmentTitle>{d.nome}</AttachmentTitle>
+                <AttachmentDescription>{d.detalhe}</AttachmentDescription>
+              </AttachmentContent>
+            </Attachment>
+          ))}
         </AttachmentGroup>
       </CardContent>
-      <Drawer open={mostrar} onOpenChange={setMostrar} showSwipeHandle>
-        <DrawerContent>
-          {aberto && (
+      {celular ? (
+        <Drawer open={mostrar} onOpenChange={setMostrar} showSwipeHandle>
+          <DrawerContent>
             <div className="mx-auto w-full max-w-md">
               <DrawerHeader>
-                <DrawerTitle>{aberto.nome}</DrawerTitle>
-                <DrawerDescription>{aberto.detalhe}</DrawerDescription>
+                <DrawerTitle>{doc.nome}</DrawerTitle>
+                <DrawerDescription>{doc.detalhe}</DrawerDescription>
               </DrawerHeader>
-              <div className="p-(--padding-2xl)"><Miniatura doc={aberto} /></div>
+              <div className="p-(--padding-2xl)"><Miniatura doc={doc} /></div>
               <DrawerFooter><DrawerClose render={<Button variant="outline" />}>Fechar</DrawerClose></DrawerFooter>
             </div>
-          )}
-        </DrawerContent>
-      </Drawer>
+          </DrawerContent>
+        </Drawer>
+      ) : (
+        <Dialog open={mostrar} onOpenChange={setMostrar}>
+          <DialogContent className="sm:max-w-3xl">
+            <DialogHeader>
+              <DialogTitle>{doc.nome}</DialogTitle>
+              <DialogDescription>{doc.detalhe}</DialogDescription>
+            </DialogHeader>
+            <Miniatura doc={doc} />
+            <div className="flex items-center justify-between">
+              <Button variant="outline" size="icon-sm" aria-label="Documento anterior" onClick={() => setIndice((i) => (i - 1 + enviados.length) % enviados.length)}><ChevronLeftIcon /></Button>
+              <span className="text-muted">{indice + 1} de {enviados.length}</span>
+              <Button variant="outline" size="icon-sm" aria-label="Próximo documento" onClick={() => setIndice((i) => (i + 1) % enviados.length)}><ChevronRightIcon /></Button>
+            </div>
+          </DialogContent>
+        </Dialog>
+      )}
     </Card>
   )
 }
