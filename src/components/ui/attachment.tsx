@@ -26,13 +26,13 @@ const attachmentVariants = cva(
 
 function Attachment({
   className,
-  state = "done",
+  state = "ready",
   size = "default",
   orientation = "horizontal",
   ...props
 }: React.ComponentProps<"div"> &
   VariantProps<typeof attachmentVariants> & {
-    state?: "idle" | "uploading" | "processing" | "error" | "done" | "success"
+    state?: "idle" | "uploading" | "processing" | "error" | "ready" | "success"
   }) {
   return (
     <div
@@ -53,7 +53,7 @@ const attachmentMediaVariants = cva(
       variant: {
         icon: "",
         image:
-          "opacity-60 group-data-[state=done]/attachment:opacity-100 group-data-[state=idle]/attachment:opacity-100 group-data-[state=success]/attachment:opacity-100 *:[img]:aspect-square *:[img]:w-full *:[img]:object-cover",
+          "opacity-60 group-data-[state=ready]/attachment:opacity-100 group-data-[state=idle]/attachment:opacity-100 group-data-[state=success]/attachment:opacity-100 *:[img]:aspect-square *:[img]:w-full *:[img]:object-cover",
       },
     },
     defaultVariants: {

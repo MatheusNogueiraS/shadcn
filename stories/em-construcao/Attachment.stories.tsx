@@ -10,9 +10,9 @@ const tamanhos = ["default", "sm", "xs"] as const
 type Tamanho = (typeof tamanhos)[number]
 const orientacoes = ["horizontal", "vertical"] as const
 type Orientacao = (typeof orientacoes)[number]
-const estados = ["idle", "uploading", "processing", "error", "done", "success"] as const
+const estados = ["idle", "uploading", "processing", "error", "ready", "success"] as const
 type Estado = (typeof estados)[number]
-const descricoes: Record<Estado, string> = { idle: "Solte o arquivo aqui", uploading: "Enviando... 45%", processing: "Lendo o arquivo...", error: "Arquivo grande demais", done: "PDF · 2 MB", success: "Documento aprovado" }
+const descricoes: Record<Estado, string> = { idle: "Solte o arquivo aqui", uploading: "Enviando... 45%", processing: "Lendo o arquivo...", error: "Arquivo grande demais", ready: "PDF · 2 MB", success: "Documento aprovado" }
 
 type Controles = { size: Tamanho; orientation: Orientacao; state: Estado; imagem: boolean; conteudo: boolean; remover: boolean; gatilho: boolean; interacao?: Interacao }
 
@@ -20,7 +20,7 @@ const anexo = ({ size, orientation, state, imagem, conteudo, remover, gatilho }:
   const carregando = state === "uploading" || state === "processing"
   const Icone = state === "error" ? TriangleAlertIcon : state === "success" ? CircleCheckIcon : state === "idle" ? UploadIcon : FileTextIcon
   return (
-    <Attachment size={size === "default" ? undefined : size} orientation={orientation === "horizontal" ? undefined : orientation} state={state === "done" ? undefined : state}>
+    <Attachment size={size === "default" ? undefined : size} orientation={orientation === "horizontal" ? undefined : orientation} state={state === "ready" ? undefined : state}>
       {gatilho && <AttachmentTrigger aria-label="Abrir o arquivo" />}
       <AttachmentMedia variant={imagem ? "image" : undefined}>
         {imagem ? <img src={banner("#fa6300", "#462a71", "")} alt="" /> : carregando ? <Spinner /> : <Icone />}
@@ -36,7 +36,7 @@ const anexo = ({ size, orientation, state, imagem, conteudo, remover, gatilho }:
   )
 }
 
-const base: Controles = { size: "default", orientation: "horizontal", state: "done", imagem: false, conteudo: true, remover: true, gatilho: false }
+const base: Controles = { size: "default", orientation: "horizontal", state: "ready", imagem: false, conteudo: true, remover: true, gatilho: false }
 
 const meta = {
   title: "Em construção/Attachment",
@@ -45,7 +45,7 @@ const meta = {
   argTypes: {
     size: { name: "Size", control: "inline-radio", options: tamanhos, description: "No código, `size`: diminui o recuo, a mídia e o texto.", table: { category: "Aparência" } },
     orientation: { name: "Orientation", control: "inline-radio", options: orientacoes, description: "No código, `orientation`. `vertical` põe a mídia em cima, ocupando a largura, e a ação no canto.", table: { category: "Aparência" } },
-    state: { name: "State", control: "inline-radio", options: estados, description: "No código, `state`. `idle` tracejado, à espera do arquivo; `uploading` e `processing` brilham o nome e esmaecem a imagem; `error` pinta a borda, a mídia e a descrição de vermelho; `done` é o padrão, neutro; `success` pinta a borda e a mídia de verde, para o que foi concluído.", table: { category: "Estado" } },
+    state: { name: "State", control: "inline-radio", options: estados, description: "No código, `state`. `idle` tracejado, à espera do arquivo; `uploading` e `processing` brilham o nome e esmaecem a imagem; `error` pinta a borda, a mídia e a descrição de vermelho; `ready` é o padrão, neutro; `success` pinta a borda e a mídia de verde, para o que foi concluído.", table: { category: "Estado" } },
     imagem: { name: "Imagem", control: "boolean", description: "`variant=\"image\"` no `AttachmentMedia`, para uma miniatura no lugar do ícone. Durante o envio, o Spinner fica no lugar do ícone.", table: { category: "Conteúdo" } },
     conteudo: { name: "Nome e detalhes", control: "boolean", description: "`AttachmentContent` com `AttachmentTitle` e `AttachmentDescription`. Sem ele, sobra só a mídia.", table: { category: "Conteúdo" } },
     remover: { name: "Remover", control: "boolean", description: "`AttachmentActions` com um `AttachmentAction`: um `Button` `ghost` `icon-xs`.", table: { category: "Conteúdo" } },
@@ -82,7 +82,7 @@ export const Orientacoes: Story = {
 
 export const Estados: Story = {
   name: "State",
-  parameters: vitrine("No código, `state`. Sem a propriedade, o Attachment é `done`. No fim, o hover simulado de um anexo clicável (`AttachmentTrigger`)."),
+  parameters: vitrine("No código, `state`. Sem a propriedade, o Attachment é `ready`. No fim, o hover simulado de um anexo clicável (`AttachmentTrigger`)."),
   render: () => (
     <Opcoes larga>
       {estados.map((e) => <Opcao key={e} nome={e}>{anexo({ ...base, state: e, remover: e !== "idle" })}</Opcao>)}
