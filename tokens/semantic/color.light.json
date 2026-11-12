@@ -107,14 +107,6 @@
       }
     },
     "text": {
-      "text-brand": {
-        "$value": "{color.orange.700}",
-        "$description": "Texto e links na cor da marca"
-      },
-      "text-brand-secondary": {
-        "$value": "{color.purple.900}",
-        "$description": "Texto no roxo da marca"
-      },
       "text-on-brand": {
         "$value": "{color.white}",
         "$description": "Texto sobre a marca"

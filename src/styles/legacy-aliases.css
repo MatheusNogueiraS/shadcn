@@ -12,7 +12,6 @@
   --primary: var(--bg-brand);
   --primary-foreground: var(--text-on-brand);
   --primary-hover: var(--bg-brand-hover);
-  --primary-text: var(--text-brand);
   --secondary: var(--bg-brand-secondary);
   --secondary-foreground: var(--text-on-brand);
   --secondary-hover: var(--bg-brand-secondary-hover);
@@ -49,7 +48,6 @@
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary-hover: var(--primary-hover);
-  --color-primary-text: var(--primary-text);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-secondary-hover: var(--secondary-hover);
