@@ -116,6 +116,7 @@
   --bg-success: var(--color-green-600); /** Sucesso */
   --bg-success-subtle: color-mix(in oklab, var(--color-green-600) var(--opacity-10), transparent); /** Fundo discreto de sucesso */
   --text-success: var(--color-green-700); /** Texto de sucesso */
+  --stroke-success: var(--color-green-600); /** Borda de sucesso */
   --bg-warning-subtle: color-mix(in oklab, var(--color-yellow-500) var(--opacity-10), transparent); /** Fundo discreto de atenção */
   --text-warning: var(--color-yellow-700); /** Texto de atenção */
   --bg-info-subtle: color-mix(in oklab, var(--color-purple-600) var(--opacity-10), transparent); /** Fundo discreto de informação */
@@ -204,6 +205,7 @@
   --bg-success: var(--color-green-400); /** Sucesso */
   --bg-success-subtle: color-mix(in oklab, var(--color-green-400) var(--opacity-20), transparent); /** Fundo discreto de sucesso */
   --text-success: var(--color-green-400); /** Texto de sucesso */
+  --stroke-success: var(--color-green-400); /** Borda de sucesso */
   --bg-warning-subtle: color-mix(in oklab, var(--color-yellow-400) var(--opacity-20), transparent); /** Fundo discreto de atenção */
   --text-warning: var(--color-yellow-400); /** Texto de atenção */
   --bg-info-subtle: color-mix(in oklab, var(--color-purple-400) var(--opacity-20), transparent); /** Fundo discreto de informação */
@@ -273,6 +275,9 @@
   --background-color-success: var(--bg-success);
   --background-color-success-subtle: var(--bg-success-subtle);
   --text-color-success: var(--text-success);
+  --border-color-success: var(--stroke-success);
+  --ring-color-success: var(--stroke-success);
+  --outline-color-success: var(--stroke-success);
   --background-color-warning-subtle: var(--bg-warning-subtle);
   --text-color-warning: var(--text-warning);
   --background-color-info-subtle: var(--bg-info-subtle);

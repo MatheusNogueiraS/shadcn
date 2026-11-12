@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Bar, BarChart, XAxis } from "recharts"
-import { CopyIcon, FileTextIcon, ImageIcon, InboxIcon, MailIcon, PaperclipIcon, PlusIcon, RotateCcwIcon, WifiOffIcon, XIcon } from "lucide-react"
+import { CircleCheckIcon, CopyIcon, FileTextIcon, ImageIcon, InboxIcon, MailIcon, PaperclipIcon, PlusIcon, RotateCcwIcon, WifiOffIcon, XIcon } from "lucide-react"
 
 import { Alert, AlertAction, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Attachment, AttachmentAction, AttachmentActions, AttachmentContent, AttachmentDescription, AttachmentMedia, AttachmentTitle, AttachmentTrigger } from "@/components/ui/attachment"
@@ -282,6 +282,7 @@ const anexos: Anexo[] = [
   { state: "uploading", midia: <Spinner />, titulo: "comprovante.pdf", descricao: "Enviando…", acao: "Cancelar envio de", icone: <XIcon /> },
   { state: "processing", midia: <Spinner />, titulo: "gastos.csv", descricao: "Processando…" },
   { state: "error", midia: <ImageIcon />, titulo: "foto-documento.jpg", descricao: "Falha no envio", acao: "Tentar enviar de novo", icone: <RotateCcwIcon /> },
+  { state: "success", midia: <CircleCheckIcon />, titulo: "rg-frente.jpg", descricao: "Documento aprovado" },
   { state: "idle", midia: <PaperclipIcon />, titulo: "Solte um arquivo", descricao: "Até 10 MB" },
 ]
 

@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 
 const attachmentVariants = cva(
-  "group/attachment relative flex w-fit max-w-full min-w-0 shrink-0 flex-wrap rounded-4xl border-sm bg-surface text-default transition-colors focus-within:ring-sm focus-within:ring-focus-subtle has-[>a,>button]:hover:bg-muted/50 data-[state=error]:border-danger/30 data-[state=idle]:border-dashed",
+  "group/attachment relative flex w-fit max-w-full min-w-0 shrink-0 flex-wrap rounded-4xl border-sm bg-surface text-default transition-colors focus-within:ring-sm focus-within:ring-focus-subtle has-[>a,>button]:hover:bg-muted/50 data-[state=error]:border-danger/30 data-[state=success]:border-success/30 data-[state=idle]:border-dashed",
   {
     variants: {
       size: {
@@ -32,7 +32,7 @@ function Attachment({
   ...props
 }: React.ComponentProps<"div"> &
   VariantProps<typeof attachmentVariants> & {
-    state?: "idle" | "uploading" | "processing" | "error" | "done"
+    state?: "idle" | "uploading" | "processing" | "error" | "done" | "success"
   }) {
   return (
     <div
@@ -47,13 +47,13 @@ function Attachment({
 }
 
 const attachmentMediaVariants = cva(
-  "relative flex aspect-square w-10 shrink-0 items-center justify-center overflow-hidden rounded-3xl bg-muted text-default group-data-[orientation=vertical]/attachment:w-full group-data-[size=sm]/attachment:w-8 group-data-[size=xs]/attachment:w-7 group-data-[size=xs]/attachment:rounded-2xl group-data-[state=error]/attachment:bg-danger/10 group-data-[state=error]/attachment:text-danger group-data-[orientation=vertical]/attachment:*:data-[slot=spinner]:size-(--size-xl)! [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-(--size-md) group-data-[orientation=vertical]/attachment:[&_svg:not([class*='size-'])]:size-(--size-xl) group-data-[size=xs]/attachment:[&_svg:not([class*='size-'])]:size-(--size-sm)",
+  "relative flex aspect-square w-10 shrink-0 items-center justify-center overflow-hidden rounded-3xl bg-muted text-default group-data-[orientation=vertical]/attachment:w-full group-data-[size=sm]/attachment:w-8 group-data-[size=xs]/attachment:w-7 group-data-[size=xs]/attachment:rounded-2xl group-data-[state=error]/attachment:bg-danger/10 group-data-[state=error]/attachment:text-danger group-data-[state=success]/attachment:bg-success/10 group-data-[state=success]/attachment:text-success group-data-[orientation=vertical]/attachment:*:data-[slot=spinner]:size-(--size-xl)! [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-(--size-md) group-data-[orientation=vertical]/attachment:[&_svg:not([class*='size-'])]:size-(--size-xl) group-data-[size=xs]/attachment:[&_svg:not([class*='size-'])]:size-(--size-sm)",
   {
     variants: {
       variant: {
         icon: "",
         image:
-          "opacity-60 group-data-[state=done]/attachment:opacity-100 group-data-[state=idle]/attachment:opacity-100 *:[img]:aspect-square *:[img]:w-full *:[img]:object-cover",
+          "opacity-60 group-data-[state=done]/attachment:opacity-100 group-data-[state=idle]/attachment:opacity-100 group-data-[state=success]/attachment:opacity-100 *:[img]:aspect-square *:[img]:w-full *:[img]:object-cover",
       },
     },
     defaultVariants: {
