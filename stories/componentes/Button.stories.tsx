@@ -59,11 +59,10 @@ type Controles = {
   carregando: boolean
   invalido: boolean
   expandido: boolean
-  comoLink: boolean
 }
 
 // Devolve o próprio Button, e não um componente intermediário: é isso que faz o Show code mostrar o código real.
-function botao({ variant, size, texto, iconeEsquerda, iconeDireita, soIcone, largura, alinhamento, disabled, carregando, invalido, expandido, comoLink }: Controles) {
+function botao({ variant, size, texto, iconeEsquerda, iconeDireita, soIcone, largura, alinhamento, disabled, carregando, invalido, expandido }: Controles) {
   const preenche = largura === "Preenche"
   const Esquerda = iconeEsquerda === "Nenhum" ? null : ICONES[iconeEsquerda]
   const Direita = iconeDireita === "Nenhum" ? null : ICONES[iconeDireita]
@@ -79,7 +78,6 @@ function botao({ variant, size, texto, iconeEsquerda, iconeDireita, soIcone, lar
       aria-invalid={invalido || undefined}
       aria-expanded={expandido || undefined}
       aria-label={soIcone ? NOMES[sozinho] : undefined}
-      {...(comoLink ? { render: <a href="#exemplo" />, nativeButton: false } : {})}
     >
       {soIcone && (carregando ? <Spinner /> : <Sozinho />)}
       {!soIcone && (carregando ? <Spinner data-icon="inline-start" /> : Esquerda && <Esquerda data-icon="inline-start" />)}
@@ -107,7 +105,6 @@ const meta = {
     carregando: { name: "Loading", control: "boolean", description: "Mostra o `Spinner` no lugar do ícone e desabilita o botão.", table: { category: "Estado" } },
     invalido: { name: "Invalid", control: "boolean", description: "`aria-invalid`: borda de erro, para botões que abrem um campo, como um seletor de data.", table: { category: "Estado" } },
     expandido: { name: "Expanded", control: "boolean", description: "`aria-expanded`: o menu ou painel que o botão abre está aberto. Muda o fundo em `outline` e `ghost`. É o mais perto de um \"selected\" no Button; o selecionado de verdade é o `Toggle`.", table: { category: "Estado" } },
-    comoLink: { name: "Como link", control: "boolean", description: "Renderiza um `<a>`, com `render` e `nativeButton={false}`.", table: { category: "Elemento" } },
   },
   args: {
     variant: "default",
@@ -123,7 +120,6 @@ const meta = {
     carregando: false,
     invalido: false,
     expandido: false,
-    comoLink: false,
   },
 } satisfies Meta<Controles>
 

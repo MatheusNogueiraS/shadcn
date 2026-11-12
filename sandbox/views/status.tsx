@@ -34,7 +34,7 @@ function ReceiptToasts() {
   return toasts.map((item) => (
     <Toast key={item.id} toast={item}>
       <ToastContent>
-        <ReceiptIcon className="size-4 shrink-0 text-brand" aria-hidden="true" />
+        <ReceiptIcon className="size-4 shrink-0" aria-hidden="true" />
         <div className="flex min-w-0 flex-1 flex-col gap-(--gap-2xs)">
           <ToastTitle />
           <ToastDescription />
@@ -162,7 +162,7 @@ function SpinnersCard() {
       </CardHeader>
       <CardContent className="flex flex-wrap items-center gap-(--gap-lg)">
         <Spinner />
-        <Spinner className="size-6 text-brand" />
+        <Spinner className="size-6" />
         <Button disabled><Spinner /> Salvando</Button>
         <Badge variant="secondary"><Spinner /> Sincronizando</Badge>
       </CardContent>

@@ -103,8 +103,6 @@
   --bg-brand-secondary: var(--color-purple-900); /** Ação de apoio */
   --bg-brand-secondary-hover: var(--color-purple-950); /** Ação de apoio com o mouse em cima */
   --bg-on-brand: var(--color-white); /** Elemento branco sobre a marca, como o marcador do switch */
-  --text-brand: var(--color-orange-700); /** Texto e links na cor da marca */
-  --text-brand-secondary: var(--color-purple-900); /** Texto no roxo da marca */
   --text-on-brand: var(--color-white); /** Texto sobre a marca */
   --stroke-brand: var(--color-orange-500); /** Borda na cor da marca */
   --bg-danger: var(--color-red-600); /** Ação ou estado de erro */
@@ -192,8 +190,6 @@
   --bg-brand-secondary: var(--color-purple-600); /** Ação de apoio */
   --bg-brand-secondary-hover: var(--color-purple-700); /** Ação de apoio com o mouse em cima */
   --bg-on-brand: var(--color-white); /** Elemento branco sobre a marca, como o marcador do switch */
-  --text-brand: var(--color-orange-400); /** Texto e links na cor da marca */
-  --text-brand-secondary: var(--color-purple-300); /** Texto no roxo da marca */
   --text-on-brand: var(--color-white); /** Texto sobre a marca */
   --stroke-brand: var(--color-orange-500); /** Borda na cor da marca */
   --bg-danger: var(--color-red-400); /** Ação ou estado de erro */
@@ -254,8 +250,6 @@
   --background-color-brand-secondary: var(--bg-brand-secondary);
   --background-color-brand-secondary-hover: var(--bg-brand-secondary-hover);
   --background-color-on-brand: var(--bg-on-brand);
-  --text-color-brand: var(--text-brand);
-  --text-color-brand-secondary: var(--text-brand-secondary);
   --text-color-on-brand: var(--text-on-brand);
   --border-color-brand: var(--stroke-brand);
   --ring-color-brand: var(--stroke-brand);

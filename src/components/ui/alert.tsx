@@ -9,11 +9,9 @@ const alertVariants = cva(
       variant: {
         default: "bg-surface text-default",
         destructive:
-          "bg-surface text-danger *:data-[slot=alert-description]:text-danger/90 *:[svg]:text-current",
-        warning: "bg-surface text-warning *:data-[slot=alert-description]:text-warning/90",
-        success: "bg-surface text-success *:data-[slot=alert-description]:text-success/90",
-        brand: "bg-surface text-brand *:data-[slot=alert-description]:text-brand/90",
-        "brand-secondary": "bg-surface text-brand-secondary *:data-[slot=alert-description]:text-brand-secondary/90",
+          "border-transparent bg-danger-subtle text-danger *:data-[slot=alert-description]:text-danger",
+        warning: "border-transparent bg-warning-subtle text-warning *:data-[slot=alert-description]:text-warning",
+        success: "border-transparent bg-success-subtle text-success *:data-[slot=alert-description]:text-success",
       },
     },
     defaultVariants: {
@@ -42,7 +40,7 @@ function AlertTitle({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="alert-title"
       className={cn(
-        "text-label-sm group-has-[>svg]/alert:col-start-2 [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-default",
+        "text-label-sm group-has-[>svg]/alert:col-start-2 [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:decoration-2",
         className
       )}
       {...props}
@@ -58,7 +56,7 @@ function AlertDescription({
     <div
       data-slot="alert-description"
       className={cn(
-        "text-body-sm text-balance text-muted md:text-pretty [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-default [&_p:not(:last-child)]:mb-(--gap-2xl)",
+        "text-body-sm text-balance text-muted md:text-pretty [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:decoration-2 [&_p:not(:last-child)]:mb-(--gap-2xl)",
         className
       )}
       {...props}
