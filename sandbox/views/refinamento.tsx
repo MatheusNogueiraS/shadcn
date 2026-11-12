@@ -278,7 +278,7 @@ const tamanhos = [
 
 type Anexo = { state: React.ComponentProps<typeof Attachment>["state"]; midia: React.ReactNode; titulo: string; descricao: string; acao?: string; icone?: React.ReactNode }
 const anexos: Anexo[] = [
-  { state: "done", midia: <FileTextIcon />, titulo: "extrato.pdf", descricao: "PDF · 1,4 MB", acao: "Remover", icone: <XIcon /> },
+  { state: "ready", midia: <FileTextIcon />, titulo: "extrato.pdf", descricao: "PDF · 1,4 MB", acao: "Remover", icone: <XIcon /> },
   { state: "uploading", midia: <Spinner />, titulo: "comprovante.pdf", descricao: "Enviando…", acao: "Cancelar envio de", icone: <XIcon /> },
   { state: "processing", midia: <Spinner />, titulo: "gastos.csv", descricao: "Processando…" },
   { state: "error", midia: <ImageIcon />, titulo: "foto-documento.jpg", descricao: "Falha no envio", acao: "Tentar enviar de novo", icone: <RotateCcwIcon /> },
