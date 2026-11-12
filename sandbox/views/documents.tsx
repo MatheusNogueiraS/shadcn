@@ -71,8 +71,8 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
+import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import {
   Menubar,
@@ -343,20 +343,22 @@ function ShareDrawer() {
   )
 }
 
-// Simulação: no desktop o preview abre no hover (HoverCard); no celular, no toque (Drawer).
+// Simulação: no desktop o hover mostra a prévia (HoverCard); o clique ou toque abre o Drawer em qualquer tela.
 function Enviados() {
   const celular = useIsMobile()
+  // O documento fica guardado depois de fechar, para o Drawer não esvaziar durante a animação de saída.
   const [aberto, setAberto] = React.useState<Enviado | null>(null)
+  const [mostrar, setMostrar] = React.useState(false)
   return (
     <Card>
       <CardHeader>
         <CardTitle>Documentos enviados</CardTitle>
-        <CardDescription>{celular ? "Toque num documento para ver." : "Passe o mouse num documento para ver."}</CardDescription>
+        <CardDescription>{celular ? "Toque num documento para ver." : "Passe o mouse num documento para ver; clique para abrir."}</CardDescription>
       </CardHeader>
       <CardContent>
         <AttachmentGroup>
           {enviados.map((d) => {
-            const gatilho = <AttachmentTrigger aria-label={`Ver ${d.nome}`} onClick={celular ? () => setAberto(d) : undefined} />
+            const gatilho = <AttachmentTrigger aria-label={`Ver ${d.nome}`} onClick={() => { setAberto(d); setMostrar(true) }} />
             const anexo = (
               <Attachment key={d.nome}>
                 {celular ? gatilho : <HoverCardTrigger render={gatilho} />}
@@ -371,7 +373,7 @@ function Enviados() {
           })}
         </AttachmentGroup>
       </CardContent>
-      <Drawer open={aberto !== null} onOpenChange={(o) => !o && setAberto(null)} showSwipeHandle>
+      <Drawer open={mostrar} onOpenChange={setMostrar} showSwipeHandle>
         <DrawerContent>
           {aberto && (
             <div className="mx-auto w-full max-w-md">
