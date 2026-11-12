@@ -1,23 +1,23 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { Fragment } from "react"
-import { ChevronDownIcon, SlashIcon } from "lucide-react"
+import { ChevronDownIcon, FolderIcon, HomeIcon, LayoutDashboardIcon, SettingsIcon, UserIcon } from "lucide-react"
 
 import { Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Opcao, Opcoes, Simula, pagina, vitrine, type Interacao } from "../componentes/Opcoes"
 
 const caminho = ["Início", "Pagamentos", "Pix", "Agendados", "Detalhes"]
-const separadores = ["Chevron", "Barra"] as const
-type Separador = (typeof separadores)[number]
+const icones = { Home: HomeIcon, Folder: FolderIcon, Dashboard: LayoutDashboardIcon, Settings: SettingsIcon, User: UserIcon }
+type NomeIcone = keyof typeof icones
 const interacoes: Interacao[] = ["Default", "Hover"]
 
-type Controles = { niveis: number; separador: Separador; reticencias: boolean; estado: Interacao }
+type Controles = { niveis: number; comIcone: boolean; icone: NomeIcone; reticencias: boolean; estado: Interacao }
 
 // Com reticências, os níveis do meio somem e só ficam o primeiro e os dois últimos.
-const trilha = ({ niveis, separador, reticencias }: Omit<Controles, "estado">) => {
+const trilha = ({ niveis, comIcone, icone, reticencias }: Omit<Controles, "estado">) => {
   const nomes = caminho.slice(0, niveis)
   const visiveis = reticencias && nomes.length > 3 ? [nomes[0], null, ...nomes.slice(-2)] : nomes
-  const sep = <BreadcrumbSeparator>{separador === "Barra" ? <SlashIcon /> : undefined}</BreadcrumbSeparator>
+  const Icone = icones[icone]
   return (
     <Breadcrumb>
       <BreadcrumbList>
@@ -26,9 +26,10 @@ const trilha = ({ niveis, separador, reticencias }: Omit<Controles, "estado">) =
           return (
             <Fragment key={nome ?? "reticencias"}>
               <BreadcrumbItem>
+                {i === 0 && comIcone && <Icone className="size-(--size-md)" />}
                 {nome === null ? <BreadcrumbEllipsis /> : ultimo ? <BreadcrumbPage>{nome}</BreadcrumbPage> : <BreadcrumbLink href={`#${nome}`}>{nome}</BreadcrumbLink>}
               </BreadcrumbItem>
-              {!ultimo && sep}
+              {!ultimo && <BreadcrumbSeparator />}
             </Fragment>
           )
         })}
@@ -37,7 +38,7 @@ const trilha = ({ niveis, separador, reticencias }: Omit<Controles, "estado">) =
   )
 }
 
-const base = { niveis: 3, separador: "Chevron" as Separador, reticencias: false }
+const base = { niveis: 3, comIcone: false, icone: "Home" as NomeIcone, reticencias: false }
 
 const meta = {
   title: "Em construção/Breadcrumb",
@@ -45,7 +46,8 @@ const meta = {
   parameters: pagina("Mostra onde a página está dentro do site, do início até ela. Os níveis anteriores são links; o último é a página atual, sem link. Não tem Type nem Size."),
   argTypes: {
     niveis: { name: "Níveis", control: { type: "range", min: 2, max: 5, step: 1 }, description: "Quantos `BreadcrumbItem` a trilha tem.", table: { category: "Conteúdo" } },
-    separador: { name: "Separador", control: "inline-radio", options: separadores, description: "Sem filhos, o `BreadcrumbSeparator` mostra o chevron. Qualquer ícone dentro dele o substitui, como a barra do exemplo do shadcn.", table: { category: "Conteúdo" } },
+    comIcone: { name: "Ícone inicial", control: "boolean", description: "Um ícone dentro do primeiro `BreadcrumbItem`, antes do link. O item já separa os filhos com `gap-(--gap-xs)`; o tamanho vem no ícone.", table: { category: "Conteúdo" } },
+    icone: { name: "Ícone", control: "select", options: Object.keys(icones), description: "Qual ícone aparece no começo da trilha.", if: { arg: "comIcone" }, table: { category: "Conteúdo" } },
     reticencias: { name: "Reticências", control: "boolean", description: "`BreadcrumbEllipsis` no lugar dos níveis do meio, a partir de 4 níveis.", table: { category: "Conteúdo" } },
     estado: { name: "State", control: "inline-radio", options: interacoes, description: "Simulado, no primeiro link: o hover escurece o texto.", table: { category: "Estado" } },
   },
@@ -73,10 +75,10 @@ export const Estados: Story = {
 
 export const Conteudo: Story = {
   name: "Conteúdo",
-  parameters: vitrine("Os exemplos do shadcn: separador personalizado e reticências no lugar dos níveis do meio."),
+  parameters: vitrine("Ícone no começo da trilha e reticências no lugar dos níveis do meio."),
   render: () => (
     <Opcoes larga>
-      <Opcao nome="Barra">{trilha({ ...base, separador: "Barra" })}</Opcao>
+      <Opcao nome="Ícone inicial">{trilha({ ...base, comIcone: true })}</Opcao>
       <Opcao nome="Reticências">{trilha({ ...base, niveis: 5, reticencias: true })}</Opcao>
     </Opcoes>
   ),
