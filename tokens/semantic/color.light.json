@@ -186,6 +186,12 @@
         "$value": "{color.green.700}",
         "$description": "Texto de sucesso"
       }
+    },
+    "stroke": {
+      "stroke-success": {
+        "$value": "{color.green.600}",
+        "$description": "Borda de sucesso"
+      }
     }
   },
   "warning": {

@@ -201,6 +201,12 @@
         "$value": "{color.green.400}",
         "$description": "Texto de sucesso"
       }
+    },
+    "stroke": {
+      "stroke-success": {
+        "$value": "{color.green.400}",
+        "$description": "Borda de sucesso"
+      }
     }
   },
   "warning": {

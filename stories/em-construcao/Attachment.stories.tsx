@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
-import { FileTextIcon, TriangleAlertIcon, UploadIcon, XIcon } from "lucide-react"
+import { CircleCheckIcon, FileTextIcon, TriangleAlertIcon, UploadIcon, XIcon } from "lucide-react"
 
 import { Attachment, AttachmentAction, AttachmentActions, AttachmentContent, AttachmentDescription, AttachmentGroup, AttachmentMedia, AttachmentTitle, AttachmentTrigger } from "@/components/ui/attachment"
 import { Spinner } from "@/components/ui/spinner"
@@ -10,15 +10,15 @@ const tamanhos = ["default", "sm", "xs"] as const
 type Tamanho = (typeof tamanhos)[number]
 const orientacoes = ["horizontal", "vertical"] as const
 type Orientacao = (typeof orientacoes)[number]
-const estados = ["idle", "uploading", "processing", "error", "done"] as const
+const estados = ["idle", "uploading", "processing", "error", "done", "success"] as const
 type Estado = (typeof estados)[number]
-const descricoes: Record<Estado, string> = { idle: "Solte o arquivo aqui", uploading: "Enviando... 45%", processing: "Lendo o arquivo...", error: "Arquivo grande demais", done: "PDF · 2 MB" }
+const descricoes: Record<Estado, string> = { idle: "Solte o arquivo aqui", uploading: "Enviando... 45%", processing: "Lendo o arquivo...", error: "Arquivo grande demais", done: "PDF · 2 MB", success: "Documento aprovado" }
 
 type Controles = { size: Tamanho; orientation: Orientacao; state: Estado; imagem: boolean; conteudo: boolean; remover: boolean; gatilho: boolean; interacao?: Interacao }
 
 const anexo = ({ size, orientation, state, imagem, conteudo, remover, gatilho }: Controles) => {
   const carregando = state === "uploading" || state === "processing"
-  const Icone = state === "error" ? TriangleAlertIcon : state === "idle" ? UploadIcon : FileTextIcon
+  const Icone = state === "error" ? TriangleAlertIcon : state === "success" ? CircleCheckIcon : state === "idle" ? UploadIcon : FileTextIcon
   return (
     <Attachment size={size === "default" ? undefined : size} orientation={orientation === "horizontal" ? undefined : orientation} state={state === "done" ? undefined : state}>
       {gatilho && <AttachmentTrigger aria-label="Abrir o arquivo" />}
@@ -45,7 +45,7 @@ const meta = {
   argTypes: {
     size: { name: "Size", control: "inline-radio", options: tamanhos, description: "No código, `size`: diminui o recuo, a mídia e o texto.", table: { category: "Aparência" } },
     orientation: { name: "Orientation", control: "inline-radio", options: orientacoes, description: "No código, `orientation`. `vertical` põe a mídia em cima, ocupando a largura, e a ação no canto.", table: { category: "Aparência" } },
-    state: { name: "State", control: "inline-radio", options: estados, description: "No código, `state`. `idle` tracejado, à espera do arquivo; `uploading` e `processing` brilham o nome e esmaecem a imagem; `error` pinta a borda, a mídia e a descrição de vermelho; `done` é o padrão.", table: { category: "Estado" } },
+    state: { name: "State", control: "inline-radio", options: estados, description: "No código, `state`. `idle` tracejado, à espera do arquivo; `uploading` e `processing` brilham o nome e esmaecem a imagem; `error` pinta a borda, a mídia e a descrição de vermelho; `done` é o padrão, neutro; `success` pinta a borda e a mídia de verde, para o que foi concluído.", table: { category: "Estado" } },
     imagem: { name: "Imagem", control: "boolean", description: "`variant=\"image\"` no `AttachmentMedia`, para uma miniatura no lugar do ícone. Durante o envio, o Spinner fica no lugar do ícone.", table: { category: "Conteúdo" } },
     conteudo: { name: "Nome e detalhes", control: "boolean", description: "`AttachmentContent` com `AttachmentTitle` e `AttachmentDescription`. Sem ele, sobra só a mídia.", table: { category: "Conteúdo" } },
     remover: { name: "Remover", control: "boolean", description: "`AttachmentActions` com um `AttachmentAction`: um `Button` `ghost` `icon-xs`.", table: { category: "Conteúdo" } },
