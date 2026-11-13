@@ -2,6 +2,7 @@ import * as React from "react"
 import type { Decorator } from "@storybook/react-vite"
 
 import { Badge } from "@/components/ui/badge"
+import { cn } from "@/lib/utils"
 import { PaginaComponente } from "./PaginaComponente"
 
 // Parâmetros de toda página de componente: amostra fixa no topo, controles na ordem escrita e as opções embaixo.
@@ -29,8 +30,8 @@ export const vitrine = (descricao?: string, quadro?: number) => ({
 })
 
 // Marca a região de conteúdo livre de um componente: ali entra qualquer componente, como no slot do Figma.
-export function Slot() {
-  return <div className="flex min-h-24 items-center justify-center rounded-2xl border-sm border-dashed border-default bg-muted/50 text-body-sm text-muted">Slot</div>
+export function Slot({ className }: { className?: string }) {
+  return <div className={cn("flex min-h-24 items-center justify-center rounded-2xl border-sm border-dashed border-default bg-muted/50 text-body-sm text-muted", className)}>Slot</div>
 }
 
 // Uma opção por card, com a etiqueta embaixo, como na documentação do Figma.
