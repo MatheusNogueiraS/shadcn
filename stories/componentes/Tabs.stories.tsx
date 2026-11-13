@@ -55,7 +55,7 @@ export const Padrao: Story = {
 
 export const Tipos: Story = {
   name: "Type",
-  parameters: vitrine("No código, `variant`. Sem a propriedade, o TabsList é `default`. No `line`, a aba ativa ganha um traço embaixo."),
+  parameters: vitrine("No código, `variant`. Sem a propriedade, o TabsList é `default`. No `line`, a aba ativa ganha um traço embaixo, e a aba sob o mouse, o mesmo traço mais claro."),
   render: () => <Opcoes>{variantes.map((v) => <Opcao key={v} nome={v}>{abas({ variant: v })}</Opcao>)}</Opcoes>,
 }
 
