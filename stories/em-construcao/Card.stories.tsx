@@ -80,7 +80,7 @@ export const Conteudo: Story = {
 
 export const Composicoes: Story = {
   name: "Composições",
-  parameters: vitrine("Os exemplos do shadcn, cada um com outro componente no lugar do slot. **Login**: formulário com `Field` no conteúdo, link na ação e botões que preenchem o rodapé. **Pequeno**: `size=\"sm\"` com uma lista. **Imagem**: capa no topo e um `Badge` na ação. **Borda a borda**: o texto rola numa faixa que desfaz o recuo lateral, com `-mx-(--padding-3xl)`, o recuo do size `default` (no `sm`, `-mx-(--padding-2xl)`)."),
+  parameters: vitrine("Os exemplos do shadcn, cada um com outro componente no lugar do slot. **Login**: formulário com `Field` no conteúdo, link na ação e botões que preenchem o rodapé. **Pequeno**: `size=\"sm\"` com uma lista. **Imagem**: capa no topo e um `Badge` na ação. **Borda a borda**: o texto rola numa faixa com `scroll-fade`, que esmaece a borda enquanto há mais texto, e que desfaz o recuo lateral, com `-mx-(--padding-3xl)`, o recuo do size `default` (no `sm`, `-mx-(--padding-2xl)`)."),
   render: () => (
     <Opcoes larga>
       <Opcao nome="Login">
@@ -127,7 +127,7 @@ export const Composicoes: Story = {
         <Card className="w-full">
           <CardHeader><CardTitle>Termos de uso</CardTitle><CardDescription>Leia os termos antes de aceitar.</CardDescription></CardHeader>
           <CardContent>
-            <div tabIndex={0} className="no-scrollbar -mx-(--padding-3xl) flex max-h-48 flex-col gap-(--gap-2xl) overflow-y-auto border-t-sm bg-muted/50 px-(--padding-3xl) py-(--padding-2xl)">
+            <div tabIndex={0} className="no-scrollbar scroll-fade -mx-(--padding-3xl) flex max-h-48 flex-col gap-(--gap-2xl) overflow-y-auto border-t-sm bg-muted/50 px-(--padding-3xl) py-(--padding-2xl)">
               <p>Estes termos valem para o uso do espaço de trabalho, incluindo documentos, arquivos e ferramentas compartilhadas.</p>
               <p>Você responde pelo que envia e por dar ao time as permissões certas para ver ou editar.</p>
               <p>Recursos e limites podem mudar. Quando a mudança afetar o seu trabalho, avisamos quem administra a conta.</p>
