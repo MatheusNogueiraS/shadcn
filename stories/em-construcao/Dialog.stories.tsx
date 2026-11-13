@@ -89,14 +89,14 @@ export const FecharPersonalizado: Story = {
 }
 
 const textoLongo = (
-  <div tabIndex={0} className="no-scrollbar -mx-(--padding-3xl) flex max-h-[50vh] flex-col gap-(--gap-2xl) overflow-y-auto px-(--padding-3xl)">
+  <div className="no-scrollbar scroll-fade -mx-(--padding-3xl) flex max-h-[50vh] flex-col gap-(--gap-2xl) overflow-y-auto px-(--padding-3xl)">
     {Array.from({ length: 10 }, (_, i) => <p key={i}>Cláusula {i + 1}. O pagamento é feito por Pix, boleto ou cartão. O recibo chega por e-mail e fica salvo na sua conta. Dá para cancelar a qualquer momento, sem multa.</p>)}
   </div>
 )
 
 export const RodapeFixo: Story = {
   name: "Rodapé fixo",
-  parameters: vitrine("O exemplo Sticky footer do shadcn: só o texto rola, com `max-h-[50vh]` e `overflow-y-auto`, e o rodapé fica sempre à vista. O Close é o `showCloseButton` do `DialogFooter`: o mesmo `DialogClose` em `outline` que o shadcn escreve à mão.", 460),
+  parameters: vitrine("O exemplo Sticky footer do shadcn: só o texto rola, com `max-h-[50vh]` e `overflow-y-auto`; o `scroll-fade` esmaece a borda enquanto há mais texto, e o rodapé fica sempre à vista. O Close é o `showCloseButton` do `DialogFooter`: o mesmo `DialogClose` em `outline` que o shadcn escreve à mão.", 460),
   render: () => (
     <Dialog defaultOpen>
       <DialogTrigger render={<Button variant="outline" />}>Termos</DialogTrigger>
