@@ -28,6 +28,11 @@ export const vitrine = (descricao?: string, quadro?: number) => ({
   },
 })
 
+// Marca a região de conteúdo livre de um componente: ali entra qualquer componente, como no slot do Figma.
+export function Slot() {
+  return <div className="flex min-h-24 items-center justify-center rounded-2xl border-sm border-dashed border-default bg-muted/50 text-body-sm text-muted">Slot</div>
+}
+
 // Uma opção por card, com a etiqueta embaixo, como na documentação do Figma.
 // `larga` dá mais espaço a cada card, para componentes que não cabem em 13rem (Card, grupos de botões, trilhas).
 export function Opcoes({ larga, children }: { larga?: boolean; children: React.ReactNode }) {
