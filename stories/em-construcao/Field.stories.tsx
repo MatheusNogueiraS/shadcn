@@ -8,14 +8,15 @@ import { Switch } from "@/components/ui/switch"
 import { Textarea } from "@/components/ui/textarea"
 import { Opcao, Opcoes, pagina, vitrine } from "../componentes/Opcoes"
 
-const orientacoes = ["vertical", "horizontal", "responsive"] as const
+// Input e Textarea escolhem entre vertical e responsive; Switch e Checkbox são sempre horizontal.
+const orientacoes = ["vertical", "responsive"] as const
 type Orientacao = (typeof orientacoes)[number]
 const controles = ["Input", "Textarea", "Switch", "Checkbox"] as const
 type Controle = (typeof controles)[number]
 
-type Controles = { orientation: Orientacao; controle: Controle; rotulo: string; descricao: boolean; invalido: boolean; disabled: boolean }
+type Controles = { orientation: Orientacao; controle: Controle; nomeVisivel: boolean; rotulo: string; descricao: boolean; invalido: boolean; disabled: boolean }
 
-const campo = ({ orientation, controle, rotulo, descricao, invalido, disabled }: Controles, id = "field-amostra") => {
+const campo = ({ orientation, controle, nomeVisivel, rotulo, descricao, invalido, disabled }: Controles, id = "field-amostra") => {
   const comum = { id, disabled: disabled || undefined, "aria-invalid": invalido || undefined }
   const entrada = {
     Input: <Input {...comum} placeholder="voce@exemplo.com" />,
@@ -24,40 +25,43 @@ const campo = ({ orientation, controle, rotulo, descricao, invalido, disabled }:
     Checkbox: <Checkbox {...comum} />,
   }[controle]
   const marcador = controle === "Switch" || controle === "Checkbox"
-  const texto = descricao && <FieldDescription>Usamos só para mandar o recibo.</FieldDescription>
+  // Os dois vão juntos no código; com o FieldError na tela, o Field esconde a descrição.
+  const texto = <>{descricao && <FieldDescription>Usamos só para mandar o recibo.</FieldDescription>}{invalido && <FieldError>Confira o que foi digitado.</FieldError>}</>
+  // Sem o nome visível, o FieldLabel continua para o leitor de tela, com sr-only.
+  const nome = <FieldLabel htmlFor={id} className={nomeVisivel ? undefined : "sr-only"}>{rotulo}</FieldLabel>
   // Com Switch e Checkbox, o FieldContent junta o nome e a descrição ao lado do controle.
   return (
-    <Field orientation={orientation === "vertical" ? undefined : orientation} data-invalid={invalido || undefined} data-disabled={disabled || undefined}>
+    <Field orientation={marcador ? "horizontal" : orientation === "vertical" ? undefined : orientation} data-invalid={invalido || undefined} data-disabled={disabled || undefined}>
       {marcador ? (
         <>
           {controle === "Checkbox" && entrada}
-          <FieldContent><FieldLabel htmlFor={id}>{rotulo}</FieldLabel>{texto}</FieldContent>
+          <FieldContent>{nome}{texto}</FieldContent>
           {controle === "Switch" && entrada}
         </>
       ) : (
         <>
-          <FieldLabel htmlFor={id}>{rotulo}</FieldLabel>
+          {nome}
           {entrada}
           {texto}
         </>
       )}
-      {invalido && <FieldError>Confira o que foi digitado.</FieldError>}
     </Field>
   )
 }
 
-const base: Controles = { orientation: "vertical", controle: "Input", rotulo: "E-mail", descricao: true, invalido: false, disabled: false }
+const base: Controles = { orientation: "vertical", controle: "Input", nomeVisivel: true, rotulo: "E-mail", descricao: true, invalido: false, disabled: false }
 
 const meta = {
   title: "Em construção/Field",
   render: (args) => campo(args),
   parameters: pagina("Junta o nome, o controle, a descrição e o erro de um campo de formulário, com os espaços certos entre eles. O `FieldLabel` liga o nome ao controle pelo `htmlFor`. `FieldSet` e `FieldGroup` organizam vários campos."),
   argTypes: {
-    orientation: { name: "Orientation", control: "inline-radio", options: orientacoes, description: "No código, `orientation`. `horizontal` põe o nome ao lado do controle; `responsive` empilha no estreito e alinha lado a lado quando o `FieldGroup` passa de 448 px.", table: { category: "Aparência" } },
-    controle: { name: "Controle", control: "inline-radio", options: controles, description: "O que vai dentro. Com Switch ou Checkbox, o nome e a descrição entram num `FieldContent` ao lado.", table: { category: "Conteúdo" } },
+    orientation: { name: "Orientation", control: "inline-radio", options: orientacoes, description: "No código, `orientation`, para Input e Textarea. `responsive` empilha no estreito e alinha lado a lado quando o `FieldGroup` passa de 448 px. Switch e Checkbox usam sempre `horizontal`, então este controle não muda nada neles.", table: { category: "Aparência" } },
+    controle: { name: "Controle", control: "inline-radio", options: controles, description: "O que vai dentro. Com Switch ou Checkbox, o Field é `horizontal`: o controle mantém o próprio tamanho, e o nome e a descrição entram num `FieldContent` ao lado.", table: { category: "Conteúdo" } },
+    nomeVisivel: { name: "Nome visível", control: "boolean", description: "Desligado, o `FieldLabel` ganha `className=\"sr-only\"`: some da tela, mas o leitor de tela continua anunciando o nome do campo.", table: { category: "Conteúdo" } },
     rotulo: { name: "Nome", control: "text", description: "`FieldLabel`.", table: { category: "Conteúdo" } },
     descricao: { name: "Descrição", control: "boolean", description: "`FieldDescription`.", table: { category: "Conteúdo" } },
-    invalido: { name: "Invalid", control: "boolean", description: "`data-invalid` no `Field` pinta o nome de vermelho; `aria-invalid` no controle, a borda; o `FieldError` mostra a mensagem.", table: { category: "Estado" } },
+    invalido: { name: "Invalid", control: "boolean", description: "`data-invalid` no `Field` pinta o nome de vermelho; `aria-invalid` no controle, a borda; o `FieldError` mostra a mensagem. Com o `FieldError` na tela, o Field esconde o `FieldDescription`, e o erro ocupa o lugar dela.", table: { category: "Estado" } },
     disabled: { name: "Disabled", control: "boolean", description: "`data-disabled` no `Field` esmaece o nome; `disabled` no controle o desliga.", table: { category: "Estado" } },
   },
   args: base,
@@ -73,19 +77,25 @@ export const Padrao: Story = {
 
 export const Orientacoes: Story = {
   name: "Orientation",
-  parameters: vitrine("No código, `orientation`. Sem a propriedade, o Field é `vertical`. O `responsive` aqui está estreito, então empilha."),
-  render: () => <Opcoes larga>{orientacoes.map((o) => <Opcao key={o} nome={o}><FieldGroup>{campo({ ...base, orientation: o }, `field-${o}`)}</FieldGroup></Opcao>)}</Opcoes>,
+  parameters: vitrine("No código, `orientation`. Sem a propriedade, o Field é `vertical`. O `horizontal` é o do Switch e do Checkbox, com o nome ao lado. O `responsive` aqui fica estreito, com até 320 px, então empilha como o vertical."),
+  render: () => (
+    <Opcoes larga>
+      <Opcao nome="vertical"><FieldGroup className="max-w-80">{campo(base, "field-o-vertical")}</FieldGroup></Opcao>
+      <Opcao nome="horizontal"><FieldGroup className="max-w-80">{campo({ ...base, controle: "Switch", rotulo: "Avisos por e-mail" }, "field-o-horizontal")}</FieldGroup></Opcao>
+      <Opcao nome="responsive"><FieldGroup className="max-w-80">{campo({ ...base, orientation: "responsive" }, "field-o-responsive")}</FieldGroup></Opcao>
+    </Opcoes>
+  ),
 }
 
 export const TiposDeControle: Story = {
   name: "Controle",
-  parameters: vitrine("Com Input e Textarea, o nome fica em cima. Com Switch e Checkbox, ele fica ao lado, num `FieldContent` com a descrição."),
-  render: () => <Opcoes larga>{controles.map((c) => <Opcao key={c} nome={c}><FieldGroup>{campo({ ...base, controle: c, orientation: c === "Input" || c === "Textarea" ? "vertical" : "horizontal", rotulo: c === "Switch" ? "Avisos por e-mail" : c === "Checkbox" ? "Aceito os termos" : "E-mail" }, `field-c-${c}`)}</FieldGroup></Opcao>)}</Opcoes>,
+  parameters: vitrine("Com Input e Textarea, o nome fica em cima. Com Switch e Checkbox, ele fica ao lado, num `FieldContent` com a descrição, e o controle mantém o próprio tamanho."),
+  render: () => <Opcoes larga>{controles.map((c) => <Opcao key={c} nome={c}><FieldGroup>{campo({ ...base, controle: c, rotulo: c === "Switch" ? "Avisos por e-mail" : c === "Checkbox" ? "Aceito os termos" : "E-mail" }, `field-c-${c}`)}</FieldGroup></Opcao>)}</Opcoes>,
 }
 
 export const Estados: Story = {
   name: "State",
-  parameters: vitrine("Invalid pinta o nome e a borda e mostra o `FieldError`; Disabled esmaece o nome e desliga o controle."),
+  parameters: vitrine("Invalid pinta o nome e a borda e mostra o `FieldError` no lugar da descrição; Disabled esmaece o nome e desliga o controle."),
   render: () => (
     <Opcoes larga>
       <Opcao nome="Default"><FieldGroup>{campo(base, "field-e1")}</FieldGroup></Opcao>
@@ -130,9 +140,25 @@ export const Conjuntos: Story = {
   ),
 }
 
+export const SemNomeVisivel: Story = {
+  name: "Sem nome visível",
+  parameters: vitrine("Formulário com o nome dentro do campo, como placeholder. O `FieldLabel` continua em cada campo com `className=\"sr-only\"`: some da tela, mas o leitor de tela anuncia o nome, que o placeholder sozinho não garante."),
+  render: () => (
+    <FieldGroup className="w-md">
+      <Field><FieldLabel htmlFor="snv-rua" className="sr-only">Rua</FieldLabel><Input id="snv-rua" placeholder="Rua" /></Field>
+      <div className="grid grid-cols-2 gap-(--gap-lg)">
+        <Field><FieldLabel htmlFor="snv-numero" className="sr-only">Número</FieldLabel><Input id="snv-numero" placeholder="Número" /></Field>
+        <Field><FieldLabel htmlFor="snv-complemento" className="sr-only">Complemento</FieldLabel><Input id="snv-complemento" placeholder="Complemento" /></Field>
+      </div>
+      <Field><FieldLabel htmlFor="snv-cep" className="sr-only">CEP</FieldLabel><Input id="snv-cep" placeholder="CEP" /><FieldDescription>Só os números.</FieldDescription></Field>
+      <Field><FieldLabel htmlFor="snv-cidade" className="sr-only">Cidade</FieldLabel><Input id="snv-cidade" placeholder="Cidade" /></Field>
+    </FieldGroup>
+  ),
+}
+
 export const Composicoes: Story = {
   name: "Composições",
-  parameters: vitrine("O exemplo do shadcn de formulário de pagamento: dois `FieldSet`, campos lado a lado num grid, um separador e os botões num `Field` horizontal. O cartão de escolha (`FieldLabel` em volta de um `Field`) está nas páginas do Checkbox, do Radio Group e do Switch."),
+  parameters: vitrine("O exemplo do shadcn de formulário de pagamento: um `FieldSet` com título, campos lado a lado num grid, um separador, um comentário e os botões num `Field` horizontal. O `FieldLegend` é título de seção; o nome de cada campo é sempre um `FieldLabel`, do mesmo tamanho em todos. O cartão de escolha (`FieldLabel` em volta de um `Field`) está nas páginas do Checkbox, do Radio Group e do Switch."),
   render: () => (
     <form className="w-md" onSubmit={(e) => e.preventDefault()}>
       <FieldGroup>
@@ -149,10 +175,7 @@ export const Composicoes: Story = {
           </FieldGroup>
         </FieldSet>
         <FieldSeparator />
-        <FieldSet>
-          <FieldLegend>Comentário</FieldLegend>
-          <Field><FieldLabel htmlFor="pg-obs" className="sr-only">Comentário</FieldLabel><Textarea id="pg-obs" placeholder="Algo que devemos saber?" /></Field>
-        </FieldSet>
+        <Field><FieldLabel htmlFor="pg-obs">Comentário</FieldLabel><Textarea id="pg-obs" placeholder="Algo que devemos saber?" /></Field>
         <Field orientation="horizontal"><Button type="submit">Pagar</Button><Button variant="outline" type="button">Cancelar</Button></Field>
       </FieldGroup>
     </form>
